@@ -1,0 +1,26 @@
+{
+    "name": "Dragonfly",
+    "version": "0.1.0",
+    "description": "A flexible and light ui framework",
+    "main": "main",
+    "maintainers": [
+        {
+            "name": "ricky",
+            "email": "hyenasa@gmail.com"
+        }
+    ],
+    "contributors": [
+        {
+            "name": "shanggqm",
+            "email": "gmqhust@126.com"
+        }
+    ],
+    "dependencies": {
+        "underscore": ">=1.6.x"
+    },
+    "repository": {
+    	"type" : "git",
+		"url" : "https://github.com/bizdevfe/Dragonfly.git"
+	},
+	"license": "MIT"
+}
