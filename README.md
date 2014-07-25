@@ -1,5 +1,4 @@
 #Dragonfly
----
 Dragonfly 是一个灵活轻便的UI框架。
 
 ##安装
@@ -10,11 +9,11 @@ Dragonfly 依赖于：
 请确保在加载 Dragonfly 之前加载 underscorejs，例如：
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
-    <script src="https://raw.github.com/bizdevfe/Dragonfly/master/dragonfly.js"></script>
+    <script src="https://github.com/bizdevfe/Dragonfly/raw/master/output/dragonfly.js"></script>
 
 并且在 &lt;head&gt; 里引入 dragonfly.css：
 
-    <link type="text/css" rel="stylesheet" href="https://raw.github.com/bizdevfe/Dragonfly/master/dragonfly.css" />
+    <link type="text/css" rel="stylesheet" href="https://github.com/bizdevfe/Dragonfly/raw/master/output/css/dragonfly.css" />
 
 ##API
 请参考：[Dragonfly API Reference](https://github.com/bizdevfe/Dragonfly)
