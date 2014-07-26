@@ -1,42 +1,42 @@
 #Dragonfly
-Dragonfly 是一个灵活轻便的UI框架。
+Dragonfly is a flexible and light ui framework.
 
 <img src="demo/img/logo.png" />
 
-##安装
-Dragonfly 依赖于：
+##Installation
+Dragonfly has one dependency：
 
-* [underscorejs](http://underscorejs.org/) 1.6.x 及之后的版本
+* [underscorejs](http://underscorejs.org/) 1.6.x or later
 
-请确保在加载 dragonfly.js 之前加载 underscorejs，例如：
+just ensure that you load underscore before dragonfly, for example:
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="https://github.com/bizdevfe/Dragonfly/raw/master/output/dragonfly.js"></script>
 
-并且在 &lt;head&gt; 里引入 dragonfly.css：
+and include dragonfly.css before the &lt;/head&gt; tag:
 
     <link type="text/css" rel="stylesheet" href="https://github.com/bizdevfe/Dragonfly/raw/master/output/css/dragonfly.css" />
 
-##API
-请参考：[Dragonfly API Reference](http://bizdevfe.github.io/api/dragonfly)
+##API Reference
+see：[Dragonfly API Reference](http://bizdevfe.github.io/api/dragonfly)
 
-##编译
-Dragonfly 遵循 [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) 标准，使用 [almond](https://github.com/jrburke/almond) 作为内部模块加载器，使用 [r.js](https://github.com/jrburke/r.js) 作为 build 工具。
+##Build
+Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) specification，and use [almond](https://github.com/jrburke/almond) as internal module loader，also use [r.js](https://github.com/jrburke/r.js) as build tool.
 
-1.首先安装 requirejs（假设你已经安装了node.js）
+1.install requirejs（suppose you have installed node.js already）
 
     npm install -g requirejs
 
-2.将 r.js 拷贝到 tool 文件夹下，并执行
+2.copy r.js to ./tool，then
 
     node r.js -o build-js.js
     node r.js -o build-css.js
 
-3.dragonfly.js 和 dragonfly.css 将在 output 文件夹中生成
+3.dragonfly.js and dragonfly.css will be generated in the ./output folder
 
-详细的参数设置请见：[example.build.js](https://github.com/jrburke/r.js/blob/master/build/example.build.js)
+for more parameter settings, see：[example.build.js](https://github.com/jrburke/r.js/blob/master/build/example.build.js)
 
-##命名空间
-Dragonfly 默认的命名空间是 d，如果你想修改此命名空间，可以在 src/loader/start.frag 中修改：
+##Namespace
+Dragonfly's default namespace is d，change the ./src/loader/start.frag if you want to define your own:
 
     root.d = factory();
