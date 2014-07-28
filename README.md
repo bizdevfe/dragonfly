@@ -4,11 +4,11 @@ Dragonfly is a flexible and light ui framework.
 <img src="demo/img/logo.png" />
 
 ##Installation
-Dragonfly has one dependency:
+undercore has been the sole dependency for dragonfly, but if you prefer lodash, that's ok.
 
-* [underscorejs](http://underscorejs.org/) 1.6.x or later
+* [underscorejs](http://underscorejs.org/) ^1.6.x
 
-just ensure that you load underscore before dragonfly, for example:
+anyway, if you choose underscore, just ensure that you load underscore before dragonfly, for example:
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="https://github.com/bizdevfe/dragonfly/raw/master/output/dragonfly.js"></script>
