@@ -20,7 +20,7 @@
     },
     "repository": {
     	"type" : "git",
-		"url" : "https://github.com/bizdevfe/Dragonfly.git"
+		"url" : "https://github.com/bizdevfe/dragonfly.git"
 	},
     "license": "MIT"
 }

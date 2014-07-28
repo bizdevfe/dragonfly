@@ -1,19 +1,17 @@
 /**
- * Dragonfly
- * © 2014 Sogou Inc. All rights reserved.
+ * 按钮样式
  * 
- * @file 按钮样式
+ * @ignore
  * @author Ricky
  */
-
 define('Button', ['require'], function (require) {
-    
+    /**
+     * Button类
+     * 
+     * @constructor
+     */
     function Button() {
-        this.name = 'Button';
-    };
-    
-    Button.prototype.init = function() {
-        console.log('Button.init');
+        
     };
     
     return Button;

@@ -1,10 +1,9 @@
 /**
- * Dragonfly
+ * Dragonfly 0.1.0
  * A flexible and light ui framework
  * (c) 2014 Sogou Inc. All rights reserved.
  * https://github.com/bizdevfe/Dragonfly
  */
-
 define('main', ['require', './Button'], function (require) {
     
     var d = {};
