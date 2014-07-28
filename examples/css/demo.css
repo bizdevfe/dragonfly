@@ -1,5 +1,5 @@
 body {
-    font-family: Arial;
+    font-family: Verdana;
 }
 h1 {
     color: #666
@@ -8,4 +8,10 @@ h1 {
     width: 187px;
     height: 131px;
     background: url(../img/logo.png);
+}
+.list {
+    margin-top: 20px;
+}
+.list a {
+    color: #06c
 }
