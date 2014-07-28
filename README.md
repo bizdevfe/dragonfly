@@ -11,11 +11,11 @@ Dragonfly has one dependency:
 just ensure that you load underscore before dragonfly, for example:
 
     <script src="http://underscorejs.org/underscore-min.js"></script>
-    <script src="https://github.com/bizdevfe/Dragonfly/raw/master/output/dragonfly.js"></script>
+    <script src="https://github.com/bizdevfe/dragonfly/raw/master/output/dragonfly.js"></script>
 
 and include dragonfly.css before the &lt;/head&gt; tag:
 
-    <link type="text/css" rel="stylesheet" href="https://github.com/bizdevfe/Dragonfly/raw/master/output/css/dragonfly.css" />
+    <link type="text/css" rel="stylesheet" href="https://github.com/bizdevfe/dragonfly/raw/master/output/css/dragonfly.css" />
 
 ##API Reference
 see: [Dragonfly API Reference](http://bizdevfe.github.io/api/dragonfly)

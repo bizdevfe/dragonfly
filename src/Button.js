@@ -1,5 +1,5 @@
 /**
- * 按钮样式
+ * 按钮
  * 
  * @ignore
  * @author Ricky

@@ -2,7 +2,7 @@
  * Dragonfly 0.1.0
  * A flexible and light ui framework
  * (c) 2014 Sogou Inc. All rights reserved.
- * https://github.com/bizdevfe/Dragonfly
+ * https://github.com/bizdevfe/dragonfly
  */
 define('main', ['require', './Button'], function (require) {
     
