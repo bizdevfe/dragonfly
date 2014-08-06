@@ -1,43 +1,50 @@
 #Dragonfly
+
 Dragonfly is a flexible and light ui framework.
 
-<img src="examples/img/logo.png" />
+<img src="examples/asset/img/logo.png" />
 
-##Installation
-Dragonfly has some dependencies:
+##Features
 
-* [underscore](http://underscorejs.org/) (the alternative is [lodash](http://lodash.com/))
-* to add
-
-just ensure that you load them before dragonfly, for example:
-
-    <script src="http://underscorejs.org/underscore-min.js"></script>
-    <script src="https://github.com/bizdevfe/dragonfly/raw/master/output/dragonfly.js"></script>
-
-and include dragonfly.css before the &lt;/head&gt; tag:
-
-    <link type="text/css" rel="stylesheet" href="https://github.com/bizdevfe/dragonfly/raw/master/output/css/dragonfly.css" />
+##Browser Support
 
 ##API Documentation
+
 see: [Dragonfly API Documentation](http://bizdevfe.github.io/api/dragonfly)
 
-##Modular Dragonfly
-Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) specification, and use [almond](https://github.com/jrburke/almond) as internal module loader, also use [r.js](https://github.com/jrburke/r.js) as build tool.
+##Modular Development
 
-1.install requirejs (suppose you have installed node.js already)
+###Dynamic Loading
+
+Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) specification, you can use any js file as a AMD module and load it with a AMD loader, for example:
+
+    require(['Button'], function(Button) {
+        var button = new Button();
+        button.render();
+    });
+
+###Optimization
+
+If you want to optimize all the modules into one file, follow the steps below:
+
+step1. install [RequireJS](http://requirejs.org/)
 
     npm install -g requirejs
 
-2.copy r.js to ./tool, then
+step2. copy `r.js` to the `./tool` folder, and then
 
     node r.js -o build-js.js
     node r.js -o build-css.js
 
-3.dragonfly.js and dragonfly.css will be generated in the ./output folder
+The optimized files will be created in the `./output` folder. For more settings about optimization, see：[example.build.js](https://github.com/jrburke/r.js/blob/master/build/example.build.js).
 
-for more settings about build, see：[example.build.js](https://github.com/jrburke/r.js/blob/master/build/example.build.js)
+###Namespace
+You can use the optimized file as a AMD module like before.
 
-##Namespace
-Dragonfly's default namespace is d, change the [start.frag](https://github.com/bizdevfe/dragonfly/blob/master/src/loader/start.frag) if you want to define your own:
+If you don't have an AMD loader like RequireJS, Dragonfly will export a global API entry called "D", change the [start.frag](https://github.com/bizdevfe/dragonfly/blob/master/src/loader/start.frag) if you want to define your own namespace:
 
-    root.d = factory();
+    root.D = factory();
+
+or call the noConflic() method to get the reference to the Dragonfly object:
+
+    var myD = D.noConflict();
