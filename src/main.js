@@ -1,18 +1,47 @@
-/**
+/*
  * Dragonfly 0.1.0
  * A flexible and light ui framework
  * (c) 2014 Sogou Inc. All rights reserved.
  * https://github.com/bizdevfe/dragonfly
  */
-define('main', ['require', './Button'], function (require) {
+
+/**
+ * @ignore
+ * @author Ricky
+ */
+define(function (require) {
+    var _ = require('underscore');
     
-    var d = {};
+    /**
+     * 种子模块
+     * 
+     * @class main
+     * @singleton
+     */
+    var main = {};
     
-    d.init = function() {
-        console.log('d.init');
+    /**
+     * @property {String} version 版本号
+     * @readonly
+     */
+    main.version = "0.1.0";
+    
+    var previousD = window.D;
+    
+    /**
+     * 无冲突处理
+     * 
+     * @return {Object} Dragonfly
+     */
+    main.noConflict = function() {
+        window.D = previousD;
+        return this;
     };
     
-    d.Button = require('Button');
+    _.extend(main, {
+        Button: require('Button'),
+        Table: require('Table')
+    });
     
-    return d;
+    return main;
 });

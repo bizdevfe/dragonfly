@@ -1,5 +1,6 @@
 body {
     font-family: Verdana;
+    margin: 30px;
 }
 h1 {
     color: #666
@@ -12,6 +13,13 @@ h1 {
 .list {
     margin-top: 20px;
 }
-.list a {
+a {
     color: #06c
+}
+pre {
+    padding: 20px;
+    font-family: Consolas;
+    background: #f7f7f7;
+    border-radius: 3px;
+    border:1px #ccc solid;
 }

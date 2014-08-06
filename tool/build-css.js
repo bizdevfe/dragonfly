@@ -1,6 +1,6 @@
 ({
     baseUrl: '.',
-    cssIn: '../src/css/main.css',
+    cssIn: '../src/asset/default/main.css',
     out: '../output/css/dragonfly.css',
     optimizeCss: 'standard.keepLines'
 })

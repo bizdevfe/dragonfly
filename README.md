@@ -18,10 +18,10 @@ and include dragonfly.css before the &lt;/head&gt; tag:
 
     <link type="text/css" rel="stylesheet" href="https://github.com/bizdevfe/dragonfly/raw/master/output/css/dragonfly.css" />
 
-##API Reference
-see: [Dragonfly API Reference](http://bizdevfe.github.io/api/dragonfly)
+##API Documentation
+see: [Dragonfly API Documentation](http://bizdevfe.github.io/api/dragonfly)
 
-##Build
+##Modular Dragonfly
 Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) specification, and use [almond](https://github.com/jrburke/almond) as internal module loader, also use [r.js](https://github.com/jrburke/r.js) as build tool.
 
 1.install requirejs (suppose you have installed node.js already)

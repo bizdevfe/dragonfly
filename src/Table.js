@@ -1,5 +1,5 @@
 /**
- * 按钮
+ * 表格
  * 
  * @ignore
  */
@@ -8,16 +8,16 @@ define(function (require) {
         Widget = require('Widget');
     
     /**
-     * 按钮
+     * 表格
      * 
      * @extends Widget
      * @constructor
      */
-    function Button() {
+    function Table() {
         
     }
     
-    base.inherit(Button, Widget);
+    base.inherit(Table, Widget);
     
-    return Button;
+    return Table;
 });

@@ -8,6 +8,6 @@
     } else {
         //Browser globals case. Just assign the
         //result to a property on the global.
-        root.d = factory();
+        root.D = factory();
     }
 }(this, function () {

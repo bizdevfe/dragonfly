@@ -1,9 +1,11 @@
 ({
     baseUrl: '../src',
+    paths: {
+        'underscore': 'dep/underscore'
+    },
     name: 'loader/almond',
     include: [
-        'main',
-        'Button'
+        'main'
     ],
     out: '../output/dragonfly.js',
     wrap: {
