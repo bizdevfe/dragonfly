@@ -4,6 +4,9 @@
  * @ignore
  */
 define(function (require) {
+    var base = require('base/base'),
+        Event = require('Event');
+    
     /**
      * 控件基类
      * 
@@ -38,6 +41,9 @@ define(function (require) {
             
         }
     };
+    
+    //获取事件功能
+    base.inherit(Widget, Event);
     
     return Widget;
 });
