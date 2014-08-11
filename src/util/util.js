@@ -4,7 +4,7 @@
  * @ignore
  */
 define(function (require) {
-    var _ = require('underscore');
+    var _ = require('underscore').noConflict();
     
     /**
      * 工具模块

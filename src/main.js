@@ -10,7 +10,7 @@
  * @author Ricky
  */
 define(function (require) {
-    var _ = require('underscore');
+    var _ = require('underscore').noConflict();
     
     /**
      * 种子模块
@@ -24,7 +24,7 @@ define(function (require) {
      * @property {String} version 版本号
      * @readonly
      */
-    main.version = "0.1.0";
+    main.version = '0.1.0';
     
     var previousD = window.D;
     
@@ -39,7 +39,15 @@ define(function (require) {
     };
     
     _.extend(main, {
+        /**
+         * Button构造器，参见{@link Button}
+         * @method Button
+         */
         Button: require('Button'),
+        /**
+         * Table构造器，参见{@link Table}
+         * @method Table
+         */
         Table: require('Table')
     });
     

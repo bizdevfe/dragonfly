@@ -4,6 +4,8 @@
  * @ignore
  */
 define(function (require) {
+    var _ = require('underscore').noConflict();
+    
     /**
      * 类支持
      * 
