@@ -2,14 +2,16 @@
  * 控件基类
  * 
  * @ignore
+ * @author Ricky
  */
 define(function (require) {
     var base = require('base/base'),
-        Event = require('Event');
+        EventTarget = require('Event').EventTarget;
     
     /**
      * 控件基类
      * 
+     * @extends EventTarget
      * @constructor
      */
     function Widget() {
@@ -42,8 +44,8 @@ define(function (require) {
         }
     };
     
-    //获取事件功能
-    base.inherit(Widget, Event);
+    //获得事件处理功能
+    base.inherit(Widget, EventTarget);
     
     return Widget;
 });

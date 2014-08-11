@@ -2,6 +2,7 @@
  * 表格
  * 
  * @ignore
+ * @author Ricky
  */
 define(function (require) {
     var base = require('base/base'),
