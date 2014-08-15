@@ -58,6 +58,7 @@ define(function (require) {
          * 创建元素
          * 
          * @protected
+         * @override
          */
         initElements: function() {
             this.main.innerHTML = this.get('content');
@@ -67,6 +68,7 @@ define(function (require) {
          * 绑定事件
          * 
          * @protected
+         * @override
          */
         initEvents: function() {
             this.addFiredDOMEvent(this.main, 'click');
@@ -76,7 +78,7 @@ define(function (require) {
          * 解绑事件
          * 
          * @protected
-         * @abstract
+         * @override
          */
         destroyEvents: function() {
             this.removeDOMEvent(this.main);
