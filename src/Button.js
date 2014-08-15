@@ -5,7 +5,8 @@
  * @author Ricky
  */
 define(function (require) {
-    var base = require('base/base'),
+    var _ = require('underscore').noConflict(),
+        base = require('base/base'),
         Widget = require('Widget');
     
     /**
@@ -13,10 +14,74 @@ define(function (require) {
      * 
      * @extends Widget
      * @constructor
+     * @param {Object} [options] 初始化参数
+     * 
+     *     @example
+     *     //默认
+     *     {
+     *         content: '',     //按钮文字
+     *         disabled: false  //是否禁用
+     *     }
      */
-    function Button() {
-        
+    function Button(options) {
+        Widget.call(this, options);
     }
+    
+    Button.prototype = {
+        /**
+         * 创建主元素
+         * 
+         * @protected
+         * @override
+         */
+        createMain: function() {
+            var div = document.createElement('div');
+                div.innerHTML = '<button type="button"></button>';
+            return div.firstChild;
+        },
+        
+        /**
+         * 初始化参数
+         * 
+         * @param {Object} [options] 初始化参数
+         * @protected
+         * @override
+         */
+        initOptions: function(options) {
+            this.options = _.extend({
+                content: '',
+                disabled: false
+            }, options || {});
+        },
+        
+        /**
+         * 创建元素
+         * 
+         * @protected
+         */
+        initElements: function() {
+            this.main.innerHTML = this.get('content');
+        },
+        
+        /**
+         * 绑定事件
+         * 
+         * @protected
+         */
+        initEvents: function() {
+            this.addFiredDOMEvent(this.main, 'click');
+        },
+        
+        /**
+         * 解绑事件
+         * 
+         * @protected
+         * @abstract
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+        }
+    };
     
     base.inherit(Button, Widget);
     

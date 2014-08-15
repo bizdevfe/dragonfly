@@ -9,12 +9,80 @@
 
 <body>
 <h1>Button</h1>
+<div id="container"></div>
+<h3>Methods:</h3>
+<button type="button" id="render">render</button>
+<button type="button" id="disable">disable</button>
+<button type="button" id="enable">enable</button>
+<button type="button" id="hide">hide</button>
+<button type="button" id="show">show</button>
+<button type="button" id="toggle">toggle</button>
+<button type="button" id="setContent">setContent</button>
+<button type="button" id="getContent">getContent</button>
+<button type="button" id="destroy">destroy</button>
+
 <script type="text/javascript" src="asset/js/require.js"></script>
 <script type="text/javascript" src="asset/js/config.js"></script>
 <script type="text/javascript">
 require(['Button'], function(Button) {
-    var button = new Button();
-    console.log(button);
+    var button = new Button({
+        content: "Hello World"
+    });
+    button.on('beforerender', function() {
+        console.log('beforerender');
+    })
+    .on('afterrender', function() {
+        console.log('afterrender');
+    })
+    .on('click', function(e) {
+        console.log('click', e, this);
+    })
+    .once('click', function(e) {
+        console.log('click_once', e, this);
+    });
+    button.onbeforedestroy = function() {
+        console.log('beforedestroy');
+    };
+    button.onafterdestroy = function() {
+        console.log('afterdestroy');
+    };
+    
+    document.getElementById('render').onclick = function() {
+        button.render("container");
+    };
+    
+    document.getElementById('disable').onclick = function() {
+        button.disable();
+    };
+    
+    document.getElementById('enable').onclick = function() {
+        button.enable();
+    };
+    
+    document.getElementById('hide').onclick = function() {
+        button.hide();
+    };
+    
+    document.getElementById('show').onclick = function() {
+        button.show();
+    };
+    
+    document.getElementById('toggle').onclick = function() {
+        button.toggle();
+    };
+    
+    document.getElementById('setContent').onclick = function() {
+        button.set('content', 'I changed');
+    };
+    
+    document.getElementById('getContent').onclick = function() {
+        alert(button.get('content'));
+    };
+    
+    document.getElementById('destroy').onclick = function() {
+        button.destroy();
+        console.log(button);
+    };
 });
 </script>
 </body>

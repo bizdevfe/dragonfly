@@ -4,6 +4,8 @@
  * @ignore
  */
 define(function (require) {
+    var _ = require('underscore').noConflict();
+    
     /**
      * DOM操作
      * 
@@ -14,11 +16,16 @@ define(function (require) {
     var dom = {};
     
     /**
-     * 获取第一个子节点
+     * 获取元素
      * 
+     * @param {HTMLElement|String} DOM元素或其id
+     * @return {HTMLElement|null} 获取的元素
      */
-    dom.first = function() {
-        
+    dom.g = function(id) {
+        if (!id) {
+            return null;
+        }
+        return _.isString(id) ? document.getElementById(id) : id;
     };
     
     return dom;
