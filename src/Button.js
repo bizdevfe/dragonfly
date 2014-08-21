@@ -55,13 +55,23 @@ define(function (require) {
         },
         
         /**
-         * 创建元素
+         * 初始化绘制函数
          * 
          * @protected
          * @override
          */
-        initElements: function() {
-            this.main.innerHTML = this.get('content');
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    this.main.style.display = hidden ? 'none' : '';
+                },
+                disabled: function(disabled) {
+                    this.main.disabled = disabled;
+                },
+                content: function(content) {
+                    this.main.innerHTML = content;
+                }
+            };
         },
         
         /**
@@ -71,6 +81,10 @@ define(function (require) {
          * @override
          */
         initEvents: function() {
+            /**
+             * 点击
+             * @event click
+             */
             this.addFiredDOMEvent(this.main, 'click');
         },
         
@@ -82,6 +96,24 @@ define(function (require) {
          */
         destroyEvents: function() {
             this.removeDOMEvent(this.main);
+        },
+        
+        /**
+         * 设置按钮文字
+         * 
+         * @param {String} content 按钮文字
+         */
+        setContent: function(content) {
+            this.set('content', content);
+        },
+        
+        /**
+         * 获取按钮文字
+         * 
+         * @return {String} 按钮文字
+         */
+        getContent: function() {
+            return this.get('content');
         }
     };
     

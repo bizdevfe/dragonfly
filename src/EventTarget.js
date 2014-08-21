@@ -6,8 +6,11 @@
  */
 define(function (require) {
     var _ = require('underscore').noConflict(),
+        base = require('base/base'),
         Event = require('Event'),
         EventQueue = require('EventQueue');
+    
+    var EVENT_GUID = 'df-event-guid';
     
     /**
      * 接收事件的对象
@@ -18,12 +21,12 @@ define(function (require) {
     
     EventTarget.prototype = {
         /**
-         * 注册自定义事件
+         * 添加自定义事件
          * 
          * @param {String} type 事件类型
          * @param {Function} handler 事件处理函数
          * @param {Boolean} [once] 仅执行一次
-         * @return {EventTarget} 组件实例
+         * @return {EventTarget} 控件实例
          */
         on: function(type, handler, once) {
             if (!this.eventQueue) {
@@ -40,11 +43,11 @@ define(function (require) {
         },
         
         /**
-         * 注册仅执行一次的自定义事件
+         * 添加仅执行一次的自定义事件
          * 
          * @param {String} type 事件类型
          * @param {Function} handler 事件处理函数
-         * @return {EventTarget} 组件实例
+         * @return {EventTarget} 控件实例
          * @chainable
          */
         once: function(type, handler) {
@@ -52,23 +55,23 @@ define(function (require) {
         },
         
         /**
-         * 注销自定义事件
+         * 移除自定义事件
          * 
          * @param {String} [type] 事件类型
          * @param {Function} [handler] 事件处理函数
-         * @return {EventTarget} 组件实例
+         * @return {EventTarget} 控件实例
          */
         off: function(type, handler) {
             if (arguments.length == 0) {
-                //注销所有事件
+                //移除所有事件
                 if (this.eventQueue) {
-                    _.each(this.eventQueue, function(queue, type) {
+                    _.each(this.eventQueue, function(queue, eventType) {
                         queue.destroy();
                     });
                     delete this.eventQueue;
                 }
             } else if (_.isString(type)) {
-                //注销指定类型事件
+                //移除指定类型事件
                 if (this.eventQueue && this.eventQueue[type]) {
                     var queue = this.eventQueue[type];
                     queue.remove(handler);
@@ -101,7 +104,7 @@ define(function (require) {
         },
         
         /**
-         * 注册DOM事件
+         * 添加DOM事件
          * 
          * @param {HTMLElement} element DOM元素
          * @param {String} type 事件类型
@@ -113,18 +116,30 @@ define(function (require) {
                 this.domEventQueue = {};
             }
             
-            var queue = this.domEventQueue[type];
+            var guid = element[EVENT_GUID];
+            if (!guid) {
+                guid = element[EVENT_GUID] = base.guid();
+            }
+            
+            var events = this.domEventQueue[guid];
+            if (!events) {
+                events = this.domEventQueue[guid] = {};
+            }
+            
+            var queue = events[type];
             if (!queue) {
-                queue = this.domEventQueue[type] = new EventQueue();
+                queue = events[type] = new EventQueue();
                 
                 /*
-                 * 每类DOM事件只有一个事件处理函数executor，负责执行domEventQueue
-                 * 此处屏蔽绑定事件和事件对象的浏览器兼容性，并指定回调中的this为控件实例
+                 * 每个元素的每类DOM事件只有一个事件处理函数executor，负责执行events队列
+                 * 此处屏蔽添加事件和事件对象的浏览器兼容性，并指定回调中的this为控件实例
                  */
-                queue.executor = _.bind(function(e) {
-                    var event = new Event(e);
-                    this.domEventQueue[event.type].execute(this, event);
-                }, this);
+                queue.executor = _.bind(function(element, e) {
+                    var event = new Event(e),
+                        myQueue = this.domEventQueue[element[EVENT_GUID]][event.type];
+                    myQueue.execute(this, event);
+                }, this, element);
+                
                 Event.on(element, type, queue.executor);
             }
             
@@ -132,7 +147,7 @@ define(function (require) {
         },
         
         /**
-         * 注册DOM事件（触发同类型自定义事件）
+         * 添加DOM事件（触发同类型自定义事件）
          * 
          * @param {HTMLElement} element DOM元素
          * @param {String} type 事件类型
@@ -145,7 +160,7 @@ define(function (require) {
         },
         
         /**
-         * 注销DOM事件
+         * 移除DOM事件
          * 
          * @param {HTMLElement} element DOM元素
          * @param {String} [type] 事件类型
@@ -153,19 +168,30 @@ define(function (require) {
          * @protected
          */
         removeDOMEvent: function(element, type, handler) {
+            if (!this.domEventQueue) {
+                return;
+            }
+            var guid = element[EVENT_GUID];
+            if (!guid) {
+                return;
+            }
+            var events = this.domEventQueue[guid];
+            if (!events) {
+                return;
+            }
+            
             if (arguments.length == 1) {
-                //注销所有事件
-                if (this.domEventQueue) {
-                    _.each(this.domEventQueue, function(queue, eventType) {
-                        queue.destroy();
-                        Event.off(element, eventType, queue.executor);
-                    });
-                    delete this.domEventQueue;
-                }
+                //移除所有事件
+                _.each(events, function(queue, eventType) {
+                    Event.off(element, eventType, queue.executor);
+                    queue.destroy();
+                    queue.executor = null;
+                });
+                delete this.domEventQueue[guid];
             } else if (_.isString(type)) {
-                //注销指定类型事件
-                if (this.domEventQueue && this.domEventQueue[type]) {
-                    var queue = this.domEventQueue[type];
+                //移除指定类型事件
+                if (events[type]) {
+                    var queue = events[type];
                     queue.remove(handler);
                 }
             }

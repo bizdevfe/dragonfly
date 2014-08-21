@@ -16,6 +16,16 @@ define(function (require) {
     var dom = {};
     
     /**
+     * 生成guid
+     * 
+     * @return {String} guid
+     */
+    var count = 0;
+    dom.guid = function() {
+        return 'DRAGONFLY' + count++;
+    };
+    
+    /**
      * 获取元素
      * 
      * @param {HTMLElement|String} DOM元素或其id

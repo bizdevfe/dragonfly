@@ -17,9 +17,9 @@ define(function (require) {
         domEvent = domEvent || window.event;
         
         //复制属性
-        _.each(domEvent, function(prop, key) {
-            if (!_.isFunction(prop)) {
-                this[key] = prop;
+        _.each(domEvent, function(value, key) {
+            if (!_.isFunction(value)) {
+                this[key] = value;
             };
         }, this);
         
@@ -40,7 +40,7 @@ define(function (require) {
          * @property {HTMLElement} relatedTarget target关联结点
          * @readonly
          */
-        this.relatedTarget = domEvent.relatedTarget || domEvent[(this.type == 'mouseover' ? 'from' : 'to') + 'Element'];
+        this.relatedTarget = domEvent.relatedTarget || domEvent[(this.type === 'mouseover' ? 'from' : 'to') + 'Element'];
         
         /**
          * @property {Number} keyCode 键码
@@ -63,7 +63,7 @@ define(function (require) {
          * @readonly
          */
         var doc = domEvent.target.ownerDocument || document,
-            root = document.compatMode == 'BackCompat' ? doc.body : doc.documentElement;
+            root = document.compatMode === 'BackCompat' ? doc.body : doc.documentElement;
         this.pageX = domEvent.pageX || domEvent.clientX + (root && root.scrollLeft || 0) - (root && root.clientLeft || 0);
         this.pageY = domEvent.pageY || domEvent.clientY + (root && root.scrollTop || 0) - (root && root.clientTop || 0);
     }
@@ -95,7 +95,7 @@ define(function (require) {
     };
     
     /**
-     * 绑定事件
+     * 添加事件
      * 
      * @param {HTMLElement} element DOM元素
      * @param {String} type 事件类型
@@ -111,7 +111,7 @@ define(function (require) {
     };
     
     /**
-     * 解绑事件
+     * 移除事件
      * 
      * @param {HTMLElement} element DOM元素
      * @param {String} type 事件类型

@@ -32,6 +32,10 @@ define(function (require) {
         //初始化参数
         this.initOptions(options);
         
+        //初始化绘制函数
+        this.painters = {};
+        this.initPainters();
+        
         this.inited = true;
     }
     
@@ -72,6 +76,16 @@ define(function (require) {
         },
         
         /**
+         * 初始化绘制函数（子类重写）
+         * 
+         * @protected
+         * @abstract
+         */
+        initPainters: function() {
+            this.painters = {};
+        },
+        
+        /**
          * 渲染
          * 
          * @param {HTMLElement|String} [target] HTML元素或其id
@@ -88,10 +102,12 @@ define(function (require) {
                 
                 //将主元素插入文档
                 this.appendMain(target);
-                //创建其他元素
+                //创建其他元素（子类实现）
                 this.initElements();
-                //绑定事件
+                //绑定事件（子类实现）
                 this.initEvents();
+                //渲染
+                this.repaint(this.options);
                 
                 this.rendered = true;
                 
@@ -133,20 +149,33 @@ define(function (require) {
         /**
          * 重绘
          * 
+         * @param {Object} changes 更改的属性
          * @protected
          */
-        repaint: function() {
-            console.log("repaint");
+        repaint: function(changes) {
+            _.each(_.extend({}, changes), function(value, key) {
+                var painter = this.painters[key];
+                painter && painter.call(this, value);
+            }, this);
         },
         
         /**
-         * 设置参数
+         * 设置配置项
          * 
          * @param {Object} options 参数
          * @protected
          */
         setOptions: function(options) {
-            this.repaint();
+            var changes = {};
+            _.each(options, function(value, key) {
+                if (value !== this.options[key]) {
+                    changes[key] = this.options[key] = value;
+                }
+            }, this);
+            
+            if (!_.isEmpty(changes)) {
+                this.repaint(changes);
+            }
         },
         
         /**
@@ -237,16 +266,46 @@ define(function (require) {
         
         /**
          * 显示控件
+         * 
+         * @fires beforeshow
+         * @fires aftershow
          */
         show: function() {
+            /**
+             * 显示前
+             * @event beforeshow
+             */
+            this.fire('beforeshow');
+            
             this.removeState('hidden');
+            
+            /**
+             * 显示后
+             * @event aftershow
+             */
+            this.fire('aftershow');
         },
         
         /**
          * 隐藏控件
+         * 
+         * @fires beforehide
+         * @fires afterhide
          */
         hide: function() {
+            /**
+             * 隐藏前
+             * @event beforehide
+             */
+            this.fire('beforehide');
+            
             this.addState('hidden');
+            
+            /**
+             * 隐藏后
+             * @event afterhide
+             */
+            this.fire('afterhide');
         },
         
         /**
@@ -279,15 +338,17 @@ define(function (require) {
                  */
                 this.fire('beforedestroy');
                 
-                //解绑事件
+                //解绑事件（子类实现）
                 this.destroyEvents();
                 //移除主元素
                 this.removeMain();
-                //移除其他元素
+                //移除其他元素（子类实现）
                 this.removeElements();
+                
                 //删除属性
                 delete this.options;
                 delete this.states;
+                delete this.painters;
                 delete this.main;
                 
                 this.destroyed = true;
@@ -302,8 +363,8 @@ define(function (require) {
                 this.off();
                 
                 //清除直接挂载的事件
-                _.each(this, function(prop, key) {
-                    if (_.isFunction(prop)) {
+                _.each(this, function(value, key) {
+                    if (_.isFunction(value)) {
                         this[key] = null;
                         delete this[key];
                     }
