@@ -23,3 +23,9 @@ pre {
     border-radius: 3px;
     border:1px #ccc solid;
 }
+#container {
+    width: 300px;
+    height: 100px;
+    border: 1px #ccc solid;
+    background: #efefef;
+}

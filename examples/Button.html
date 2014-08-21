@@ -10,15 +10,17 @@
 <body>
 <h1>Button</h1>
 <div id="container"></div>
+<button type="button" id="view">view instance</button>
 <h3>Methods:</h3>
-<button type="button" id="render">render</button>
+<button type="button" id="render">render</button><br />
 <button type="button" id="disable">disable</button>
 <button type="button" id="enable">enable</button>
 <button type="button" id="hide">hide</button>
 <button type="button" id="show">show</button>
-<button type="button" id="toggle">toggle</button>
+<button type="button" id="toggle">toggle</button><br />
 <button type="button" id="setContent">setContent</button>
-<button type="button" id="getContent">getContent</button>
+<input type="text" id="content" placeholder="content" />
+<button type="button" id="getContent">getContent</button><br />
 <button type="button" id="destroy">destroy</button>
 
 <script type="text/javascript" src="asset/js/require.js"></script>
@@ -26,7 +28,8 @@
 <script type="text/javascript">
 require(['Button'], function(Button) {
     var button = new Button({
-        content: "Hello World"
+        content: 'Hello World',
+        disabled: false
     });
     button.on('beforerender', function() {
         console.log('beforerender');
@@ -34,11 +37,23 @@ require(['Button'], function(Button) {
     .on('afterrender', function() {
         console.log('afterrender');
     })
+    .on('beforeshow', function() {
+        console.log('beforeshow');
+    })
+    .on('aftershow', function() {
+        console.log('aftershow');
+    })
+    .on('beforehide', function() {
+        console.log('beforehide');
+    })
+    .on('afterhide', function() {
+        console.log('afterhide');
+    })
     .on('click', function(e) {
         console.log('click', e, this);
     })
     .once('click', function(e) {
-        console.log('click_once', e, this);
+        console.log('click once', e, this);
     });
     button.onbeforedestroy = function() {
         console.log('beforedestroy');
@@ -48,7 +63,7 @@ require(['Button'], function(Button) {
     };
     
     document.getElementById('render').onclick = function() {
-        button.render("container");
+        button.render('container');
     };
     
     document.getElementById('disable').onclick = function() {
@@ -72,15 +87,19 @@ require(['Button'], function(Button) {
     };
     
     document.getElementById('setContent').onclick = function() {
-        button.set('content', 'I changed');
+        var content = document.getElementById('content').value;
+        button.setContent(content);
     };
     
     document.getElementById('getContent').onclick = function() {
-        alert(button.get('content'));
+        alert(button.getContent());
     };
     
     document.getElementById('destroy').onclick = function() {
         button.destroy();
+    };
+    
+    document.getElementById('view').onclick = function() {
         console.log(button);
     };
 });

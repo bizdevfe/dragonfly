@@ -10,17 +10,18 @@
   <script type="text/javascript" src="lib/jasmine-2.0.1/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-2.0.1/jasmine-html.js"></script>
   <script type="text/javascript" src="lib/jasmine-2.0.1/boot.js"></script>
-
-  <!-- include source files here... -->
-  <script type="text/javascript" src="src/Player.js"></script>
-  <script type="text/javascript" src="src/Song.js"></script>
-
-  <!-- include spec files here... -->
-  <script type="text/javascript" src="spec/SpecHelper.js"></script>
-  <script type="text/javascript" src="spec/PlayerSpec.js"></script>
+  <script type="text/javascript" src="lib/require.js"></script>
+  <script type="text/javascript" src="lib/config.js"></script>
 
 </head>
 
 <body>
+<h3>Button</h3>
+<div id="button-container" class="container"></div>
+<script type="text/javascript">
+require([
+    '../test/spec/Button'
+], function() {});
+</script>
 </body>
 </html>
