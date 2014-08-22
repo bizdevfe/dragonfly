@@ -57,10 +57,10 @@ define(function (require) {
          */
         initStates: function(options) {
             this.states = {};
-            if (options && typeof options.disabled != 'undefined') {
+            if (options && typeof options.disabled !== 'undefined') {
                 this.states.disabled = options.disabled;
             }
-            if (options && typeof options.hidden != 'undefined') {
+            if (options && typeof options.hidden !== 'undefined') {
                 this.states.hidden = options.hidden;
             }
         },

@@ -62,10 +62,10 @@ define(function (require) {
          * @return {EventTarget} 控件实例
          */
         off: function(type, handler) {
-            if (arguments.length == 0) {
+            if (arguments.length === 0) {
                 //移除所有事件
                 if (this.eventQueue) {
-                    _.each(this.eventQueue, function(queue, eventType) {
+                    _.each(this.eventQueue, function(queue) {
                         queue.destroy();
                     });
                     delete this.eventQueue;
@@ -180,7 +180,7 @@ define(function (require) {
                 return;
             }
             
-            if (arguments.length == 1) {
+            if (arguments.length === 1) {
                 //移除所有事件
                 _.each(events, function(queue, eventType) {
                     Event.off(element, eventType, queue.executor);
