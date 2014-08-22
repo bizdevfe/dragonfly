@@ -39,7 +39,7 @@
 ##代码检查
 使用 [code climate](https://codeclimate.com/github/bizdevfe/dragonfly) 关联 Github 账号，提交后自动做代码检查。
 
-保证代码 GPA 分数为绿色，如： [![Code Climate](https://codeclimate.com/github/bizdevfe/dragonfly/badges/gpa.svg)](https://codeclimate.com/github/bizdevfe/dragonfly)，并且单个文件分数至少为 A 或 B。
+保证代码 GPA 分数为绿色，如： [![Code Climate](https://codeclimate.com/github/bizdevfe/dragonfly/badges/gpa.svg?v=4.0)](https://codeclimate.com/github/bizdevfe/dragonfly)，并且单个文件分数至少为 A 或 B。
 
 ##文档生成
 文档生成要与开发并行，这样能够时刻关注继承关系、数据类型、输入输出等重要信息，有利于时刻规范自己的代码，减少错误，并留下良好的注释。
