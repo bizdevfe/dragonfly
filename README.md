@@ -1,8 +1,10 @@
 #Dragonfly
 
-Dragonfly is a flexible and light ui framework.
+[![Code Climate](https://codeclimate.com/github/bizdevfe/dragonfly/badges/gpa.svg)](https://codeclimate.com/github/bizdevfe/dragonfly)
 
 <img src="examples/asset/img/logo.png" />
+
+Dragonfly is a flexible and light ui framework.
 
 ##Features
 
