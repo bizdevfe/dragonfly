@@ -23,6 +23,7 @@
 <button type="button" id="getContent">getContent</button><br />
 <button type="button" id="destroy">destroy</button>
 
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="asset/js/require.js"></script>
 <script type="text/javascript" src="asset/js/config.js"></script>
 <script type="text/javascript">
@@ -62,46 +63,46 @@ require(['Button'], function(Button) {
         console.log('afterdestroy');
     };
     
-    document.getElementById('render').onclick = function() {
+    $('#render').click(function() {
         button.render('container');
-    };
+    });
     
-    document.getElementById('disable').onclick = function() {
+    $('#disable').click(function() {
         button.disable();
-    };
+    });
     
-    document.getElementById('enable').onclick = function() {
+    $('#enable').click(function() {
         button.enable();
-    };
+    });
     
-    document.getElementById('hide').onclick = function() {
+    $('#hide').click(function() {
         button.hide();
-    };
+    });
     
-    document.getElementById('show').onclick = function() {
+    $('#show').click(function() {
         button.show();
-    };
+    });
     
-    document.getElementById('toggle').onclick = function() {
+    $('#toggle').click(function() {
         button.toggle();
-    };
+    });
     
-    document.getElementById('setContent').onclick = function() {
-        var content = document.getElementById('content').value;
+    $('#setContent').click(function() {
+        var content = $('#content').value;
         button.setContent(content);
-    };
+    });
     
-    document.getElementById('getContent').onclick = function() {
+    $('#getContent').click(function() {
         alert(button.getContent());
-    };
+    });
     
-    document.getElementById('destroy').onclick = function() {
+    $('#destroy').click(function() {
         button.destroy();
-    };
+    });
     
-    document.getElementById('view').onclick = function() {
+    $('#view').click(function() {
         console.log(button);
-    };
+    });
 });
 </script>
 </body>
