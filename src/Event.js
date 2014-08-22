@@ -20,7 +20,7 @@ define(function (require) {
         _.each(domEvent, function(value, key) {
             if (!_.isFunction(value)) {
                 this[key] = value;
-            };
+            }
         }, this);
         
         /**
