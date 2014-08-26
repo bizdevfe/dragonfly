@@ -188,6 +188,9 @@ define(function (require) {
                     queue.executor = null;
                 });
                 delete this.domEventQueue[guid];
+                if (_.isEmpty(this.domEventQueue)) {
+                    delete this.domEventQueue;
+                }
             } else if (_.isString(type)) {
                 //移除指定类型事件
                 if (events[type]) {

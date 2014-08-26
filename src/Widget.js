@@ -33,7 +33,6 @@ define(function (require) {
         this.initOptions(options);
         
         //初始化绘制函数
-        this.painters = {};
         this.initPainters();
         
         this.inited = true;
@@ -46,7 +45,7 @@ define(function (require) {
          * @protected
          */
         createMain: function() {
-            return document.addElement('div');
+            return document.createElement('div');
         },
         
         /**
@@ -108,6 +107,8 @@ define(function (require) {
                 this.initEvents();
                 //渲染
                 this.repaint(this.options);
+                //初始化扩展
+                this.initExtensions();
                 
                 this.rendered = true;
                 
@@ -155,7 +156,26 @@ define(function (require) {
         repaint: function(changes) {
             _.each(_.extend({}, changes), function(value, key) {
                 var painter = this.painters[key];
-                painter && painter.call(this, value);
+                if (painter) {
+                    painter.call(this, value);
+                }
+            }, this);
+        },
+        
+        /**
+         * 初始化扩展
+         * 
+         * @protected
+         */
+        initExtensions: function() {
+            var extensions = this.options.extensions;
+            if (!_.isArray(extensions)) {
+                extensions = this.options.extensions = [];
+            }
+            
+            _.each(extensions, function(extension) {
+                extension.target = this;
+                extension.init();
             }, this);
         },
         
@@ -340,6 +360,8 @@ define(function (require) {
                 
                 //解绑事件（子类实现）
                 this.destroyEvents();
+                //销毁扩展
+                this.destroyExtensions();
                 //移除主元素
                 this.removeMain();
                 //移除其他元素（子类实现）
@@ -373,15 +395,25 @@ define(function (require) {
         },
         
         /**
+         * 销毁扩展
+         * 
+         * @protected
+         */
+        destroyExtensions: function() {
+            var extensions = this.options.extensions;
+            _.each(extensions, function(extension, index) {
+                extension.destroy();
+                extensions[index] = null;
+            });
+        },
+        
+        /**
          * 移除主元素
          * 
          * @protected
          */
         removeMain: function() {
-            var parent = this.main.parentNode;
-            if (parent) {
-                parent.removeChild(this.main);
-            }
+            base.remove(this.main);
         },
         
         /**

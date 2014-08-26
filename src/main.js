@@ -48,7 +48,13 @@ define(function (require) {
          * Table构造器，参见{@link Table}
          * @method Table
          */
-        Table: require('Table')
+        Table: require('Table'),
+        
+        /**
+         * DropdownButton构造器，参见{@link DropdownButton}
+         * @method DropdownButton
+         */
+        DropdownButton: require('extension/DropdownButton')
     });
     
     return main;

@@ -27,10 +27,11 @@
 <script type="text/javascript" src="asset/js/require.js"></script>
 <script type="text/javascript" src="asset/js/config.js"></script>
 <script type="text/javascript">
-require(['Button'], function(Button) {
+require(['Button', 'extension/DropdownButton'], function(Button, DropdownButton) {
     var button = new Button({
         content: 'Hello World',
-        disabled: false
+        disabled: false,
+        extensions: [new DropdownButton()]
     });
     button.on('beforerender', function() {
         console.log('beforerender');
@@ -88,7 +89,7 @@ require(['Button'], function(Button) {
     });
     
     $('#setContent').click(function() {
-        var content = $('#content').value;
+        var content = $('#content').val();
         button.setContent(content);
     });
     

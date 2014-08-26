@@ -38,5 +38,17 @@ define(function (require) {
         return _.isString(id) ? document.getElementById(id) : id;
     };
     
+    /**
+     * 移除元素
+     * 
+     * @param {HTMLElement|String} DOM元素或其id
+     */
+    dom.remove = function(element) {
+        var parent = dom.g(element).parentNode;
+        if (parent) {
+            parent.removeChild(element);
+        }
+    };
+    
     return dom;
 });
