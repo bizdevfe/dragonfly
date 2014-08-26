@@ -84,3 +84,11 @@ Github项目已经关联了 [code climate](https://codeclimate.com/github/bizdev
 3. **Commit x N (coding with API docs, examples and specs)**
 4. **Push (after jshint and build)**
 5. Pull Request
+
+##附件
+
+###控件生命周期
+<img src="examples/asset/img/life.png" />
+
+###事件队列
+<img src="examples/asset/img/event.png" />

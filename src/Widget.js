@@ -373,8 +373,6 @@ define(function (require) {
                 delete this.painters;
                 delete this.main;
                 
-                this.destroyed = true;
-                
                 /**
                  * 销毁后
                  * @event afterdestroy
@@ -391,6 +389,8 @@ define(function (require) {
                         delete this[key];
                     }
                 }, this);
+                
+                this.destroyed = true;
             }
         },
         
