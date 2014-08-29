@@ -30,6 +30,12 @@ define(function (require) {
         this.originalEvent = domEvent;
         
         /**
+         * @property {String} type 事件类型
+         * @readonly
+         */
+        this.type = domEvent.type;
+        
+        /**
          * @property {HTMLElement} target 当前事件的目标对象
          * @readonly
          */

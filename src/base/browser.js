@@ -39,35 +39,42 @@ define(function (require) {
     /**
      * IE版本
      * 
-     * @property {Number} ie
+     * @property {Number|undefined} ie
      */
     browser.ie = document.documentMode;
     
     /**
+     * IE6/7
+     * 
+     * @property {Boolean} badie
+     */
+    browser.badie = browser.ie === 6 || browser.ie === 7;
+    
+    /**
      * Chrome版本
      * 
-     * @property {Number} chrome
+     * @property {Number|undefined} chrome
      */
     browser.chrome = /chrome\/(\d+\.\d+)/i.test(ua) ? + RegExp.$1 : undefined;
     
     /**
      * Firefox版本
      * 
-     * @property {Number} firefox
+     * @property {Number|undefined} firefox
      */
     browser.firefox = /firefox\/(\d+\.\d+)/i.test(ua) ? + RegExp.$1 : undefined;
     
     /**
      * Safari版本
      * 
-     * @property {Number} safari
+     * @property {Number|undefined} safari
      */
     browser.safari = /(\d+\.\d+)(\.\d)?\ssafari/i.test(ua) ? + RegExp.$1 : undefined;
     
     /**
      * Opera版本
      * 
-     * @property {Number} opera
+     * @property {Number|undefined} opera
      */
     browser.opera = /opr\/(\d+\.\d+)/i.test(ua) ? + RegExp.$1 : undefined;
     

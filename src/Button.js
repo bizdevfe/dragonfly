@@ -17,7 +17,7 @@ define(function (require) {
      * @param {Object} [options] 初始化参数
      * 
      *     @example
-     *     //默认
+     *     //默认参数
      *     {
      *         content: '',     //按钮文字
      *         disabled: false  //是否禁用
