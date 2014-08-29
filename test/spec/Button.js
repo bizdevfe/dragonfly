@@ -1,16 +1,12 @@
 define(function (require) {
-    var Button = require('Button'),
-        _ = require('underscore').noConflict();
-    var containerId = 'button-container';
+    var Button = require('Button');
+    
+    var button = new Button({
+            content: 'Hello'
+        }),
+        containerId = 'button-container';
     
     describe('Button', function () {
-        var button;
-        beforeEach(function() {
-            button = new Button({
-                content: 'Hello'
-            });
-        });
-        
         it('should be inited', function () {
             expect(button.inited).toBeTruthy();
             expect(button.rendered).toBeFalsy();
@@ -37,17 +33,6 @@ define(function (require) {
             button.render(containerId);
             button.hide();
             expect(button.isHidden()).toBeTruthy();
-        });
-        
-        it('should trigger callback when clicked', function () {
-            button.render(containerId);
-            var clicked = false;
-            button.on('click', function(e) {
-                clicked = true;
-                console.log(e, this);
-            });
-            button.main.click();
-            expect(clicked).toBeTruthy();
         });
         
         it('should be destroyed', function () {
