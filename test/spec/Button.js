@@ -1,5 +1,5 @@
 define(function (require) {
-    var Button = require('Button');
+    var Button = require('ui/Button');
     
     var button = new Button({
             content: 'Hello'

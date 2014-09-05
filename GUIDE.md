@@ -73,10 +73,12 @@ case应基本覆盖例子中的功能。
 Github项目已经关联了 [code climate](https://codeclimate.com/github/bizdevfe/dragonfly) ，它会在每次提交后自动做代码检查，并给出 GPA 评分。请确认分值为绿色，并且每个文件的分数均为A。
 
 ##编译
-最后别忘记提供编译版本的js和css：
 
+    $ cd tool
     $ node r.js -o build-js.js
     $ node r.js -o build-css.js
+
+注意：编译的代码不提交。
 
 ##工作流
 1. Fork Dragonfly

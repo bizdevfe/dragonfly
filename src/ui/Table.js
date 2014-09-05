@@ -6,7 +6,7 @@
  */
 define(function (require) {
     var base = require('base/base'),
-        Widget = require('Widget');
+        Widget = require('ui/Widget');
     
     /**
      * 表格

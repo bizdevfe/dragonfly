@@ -43,12 +43,12 @@ define(function (require) {
          * Button构造器，参见{@link Button}
          * @method Button
          */
-        Button: require('Button'),
+        Button: require('ui/Button'),
         /**
          * Table构造器，参见{@link Table}
          * @method Table
          */
-        Table: require('Table'),
+        Table: require('ui/Table'),
         
         /**
          * DropdownButton构造器，参见{@link DropdownButton}

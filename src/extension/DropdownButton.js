@@ -7,7 +7,7 @@
 define(function (require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
-        Extension = require('Extension');
+        Extension = require('extension/Extension');
     
     /**
      * 下拉按钮

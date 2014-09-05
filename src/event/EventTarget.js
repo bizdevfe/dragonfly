@@ -7,8 +7,8 @@
 define(function (require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
-        Event = require('Event'),
-        EventQueue = require('EventQueue');
+        Event = require('event/Event'),
+        EventQueue = require('event/EventQueue');
     
     var EVENT_GUID = 'df-event-guid';
     

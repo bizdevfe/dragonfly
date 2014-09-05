@@ -7,8 +7,8 @@
 define(function (require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
-        Event = require('Event'),
-        EventTarget = require('EventTarget');
+        Event = require('event/Event'),
+        EventTarget = require('event/EventTarget');
     
     /**
      * 控件基类
@@ -127,7 +127,7 @@ define(function (require) {
          * @protected
          */
         appendMain: function(target) {
-            var container = base.g(target) || document.body;
+            var container = base.$(target) || document.body;
             container.appendChild(this.main);
         },
         

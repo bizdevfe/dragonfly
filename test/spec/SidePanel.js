@@ -1,5 +1,5 @@
 define(function (require) {
-    var SidePanel = require('SidePanel');
+    var SidePanel = require('ui/SidePanel');
     
     var sidepanel = new SidePanel({
             title: 'Hello'

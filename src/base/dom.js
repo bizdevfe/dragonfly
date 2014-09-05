@@ -31,7 +31,7 @@ define(function (require) {
      * @param {HTMLElement|String} DOM元素或其id
      * @return {HTMLElement|null} 获取的元素
      */
-    dom.g = function(id) {
+    dom.$ = function(id) {
         if (!id) {
             return null;
         }
@@ -44,7 +44,7 @@ define(function (require) {
      * @param {HTMLElement|String} DOM元素或其id
      */
     dom.remove = function(element) {
-        var parent = dom.g(element).parentNode;
+        var parent = dom.$(element).parentNode;
         if (parent) {
             parent.removeChild(element);
         }

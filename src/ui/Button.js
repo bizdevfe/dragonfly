@@ -7,7 +7,7 @@
 define(function (require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
-        Widget = require('Widget');
+        Widget = require('ui/Widget');
     
     /**
      * 按钮
