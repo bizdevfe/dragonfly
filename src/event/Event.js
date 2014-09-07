@@ -107,6 +107,7 @@ define(function (require) {
      * @param {String} type 事件类型
      * @param {Function} listener 事件处理函数
      * @param {Boolean} capture 捕获模式
+     * @return {Function} listener
      * @static
      */
     Event.on = function (element, type, listener, capture) {
@@ -115,6 +116,7 @@ define(function (require) {
         } else if (element.attachEvent) {
             element.attachEvent('on' + type, listener);
         }
+        return listener;
     };
 
     /**
@@ -123,6 +125,7 @@ define(function (require) {
      * @param {String} type 事件类型
      * @param {Function} listener 事件处理函数
      * @param {Boolean} capture 捕获模式
+     * @return {Function} listener
      * @static
      */
     Event.off = function (element, type, listener, capture) {
@@ -131,6 +134,7 @@ define(function (require) {
         } else if (element.attachEvent) {
             element.detachEvent('on' + type, listener);
         }
+        return listener;
     };
 
     return Event;
