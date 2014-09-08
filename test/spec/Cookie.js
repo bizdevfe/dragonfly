@@ -10,6 +10,11 @@ define(function(require) {
       document.cookie = '_dragon_test_3=';
       document.cookie = '_dragon_test_4[t]=xxx';
 
+      // Cookie.set('_dragon_test_1', 'fly')
+      // Cookie.set('_dragon_test_2', '')
+      // Cookie.set('_dragon_test_3', '')
+      // Cookie.set('_dragon_test_4[t]', 'xxx')
+
 
       it('should return the cookie value for the given name.', function() {
         expect(Cookie.get('_dragon_test_1')).toBe('fly');
