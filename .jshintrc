@@ -2,5 +2,8 @@
   "-W100": true,
   "globals": {
     "define": true
-  }
+  },
+  "culy": true,
+  "trailing": true,
+  "indent": 4
 }
