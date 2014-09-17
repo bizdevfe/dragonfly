@@ -106,14 +106,17 @@ define(function(require) {
      * @param {HTMLElement} element DOM元素
      * @param {String} type 事件类型
      * @param {Function} listener 事件处理函数
+     * @param {Boolean} capture 捕获模式
+     * @return {Function} listener
      * @static
      */
-    Event.on = function(element, type, listener) {
+    Event.on = function(element, type, listener, capture) {
         if (element.addEventListener) {
-            element.addEventListener(type, listener, false);
+            element.addEventListener(type, listener, capture || false);
         } else if (element.attachEvent) {
             element.attachEvent('on' + type, listener);
         }
+        return listener;
     };
 
     /**
@@ -122,14 +125,17 @@ define(function(require) {
      * @param {HTMLElement} element DOM元素
      * @param {String} type 事件类型
      * @param {Function} listener 事件处理函数
+     * @param {Boolean} capture 捕获模式
+     * @return {Function} listener
      * @static
      */
-    Event.off = function(element, type, listener) {
+    Event.off = function(element, type, listener, capture) {
         if (element.addEventListener) {
-            element.removeEventListener(type, listener, false);
+            element.removeEventListener(type, listener, capture || false);
         } else if (element.attachEvent) {
             element.detachEvent('on' + type, listener);
         }
+        return listener;
     };
 
     return Event;
