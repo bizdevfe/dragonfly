@@ -19,7 +19,7 @@ define(function(require) {
         base,
         require('base/string'),
         require('base/browser'),
-        require('base/class'),
+        require('base/oo'),
         require('base/dom')
     );
 

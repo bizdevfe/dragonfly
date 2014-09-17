@@ -10,11 +10,11 @@ define(function(require) {
     /**
      * 类支持
      *
-     * @class clazz
+     * @class oo
      * @extends base
      * @singleton
      */
-    var clazz = {};
+    var oo = {};
 
     /**
      * 继承
@@ -23,7 +23,7 @@ define(function(require) {
      * @param {Function} superclass 父类构造器
      * @return {Function} 子类
      */
-    clazz.inherit = function(subclass, superclass) {
+    oo.inherit = function(subclass, superclass) {
         function Empty() {}
         Empty.prototype = superclass.prototype;
 
@@ -38,5 +38,5 @@ define(function(require) {
         return subclass;
     };
 
-    return clazz;
+    return oo;
 });
