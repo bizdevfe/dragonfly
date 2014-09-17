@@ -1,18 +1,18 @@
 /**
  * 控件基类
- * 
+ *
  * @ignore
  * @author Ricky
  */
-define(function (require) {
+define(function(require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
         Event = require('event/Event'),
         EventTarget = require('event/EventTarget');
-    
+
     /**
      * 控件基类
-     * 
+     *
      * @extends EventTarget
      * @constructor
      * @param {Object} [options] 初始化参数
@@ -22,35 +22,35 @@ define(function (require) {
         this.inited = false;
         this.rendered = false;
         this.destroyed = false;
-        
+
         //主元素
         this.main = this.createMain();
-        
+
         //初始化状态
         this.initStates(options);
-        
+
         //初始化参数
         this.initOptions(options);
-        
+
         //初始化绘制函数
         this.initPainters();
-        
+
         this.inited = true;
     }
-    
+
     Widget.prototype = {
         /**
          * 创建主元素（子类重写）
-         * 
+         *
          * @protected
          */
         createMain: function() {
             return document.createElement('div');
         },
-        
+
         /**
          * 初始化控件状态
-         * 
+         *
          * @param {Object} [options] 初始化参数
          * @protected
          */
@@ -63,30 +63,30 @@ define(function (require) {
                 this.states.hidden = options.hidden;
             }
         },
-        
+
         /**
          * 初始化参数（子类重写）
-         * 
+         *
          * @param {Object} [options] 初始化参数
          * @protected
          */
         initOptions: function(options) {
             this.options = _.extend({}, options || {});
         },
-        
+
         /**
          * 初始化绘制函数（子类重写）
-         * 
+         *
          * @protected
          * @abstract
          */
         initPainters: function() {
             this.painters = {};
         },
-        
+
         /**
          * 渲染
-         * 
+         *
          * @param {HTMLElement|String} [target] HTML元素或其id
          * @fires beforerender
          * @fires afterrender
@@ -98,7 +98,7 @@ define(function (require) {
                  * @event beforerender
                  */
                 this.fire('beforerender');
-                
+
                 //将主元素插入文档
                 this.appendMain(target);
                 //创建其他元素（子类实现）
@@ -109,9 +109,9 @@ define(function (require) {
                 this.repaint(this.options);
                 //初始化扩展
                 this.initExtensions();
-                
+
                 this.rendered = true;
-                
+
                 /**
                  * 初次渲染后
                  * @event afterrender
@@ -119,10 +119,10 @@ define(function (require) {
                 this.fire('afterrender');
             }
         },
-        
+
         /**
          * 将主元素插入文档
-         * 
+         *
          * @param {HTMLElement|String} [target] HTML元素或其id
          * @protected
          */
@@ -130,26 +130,26 @@ define(function (require) {
             var container = base.$(target) || document.body;
             container.appendChild(this.main);
         },
-        
+
         /**
          * 创建其他元素（子类实现）
-         * 
+         *
          * @protected
          * @abstract
          */
         initElements: function() {},
-        
+
         /**
          * 绑定事件（子类实现）
-         * 
+         *
          * @protected
          * @abstract
          */
         initEvents: function() {},
-        
+
         /**
          * 重绘
-         * 
+         *
          * @param {Object} changes 更改的属性
          * @protected
          */
@@ -161,10 +161,10 @@ define(function (require) {
                 }
             }, this);
         },
-        
+
         /**
          * 初始化扩展
-         * 
+         *
          * @protected
          */
         initExtensions: function() {
@@ -172,16 +172,16 @@ define(function (require) {
             if (!_.isArray(extensions)) {
                 extensions = this.options.extensions = [];
             }
-            
+
             _.each(extensions, function(extension) {
                 extension.target = this;
                 extension.init();
             }, this);
         },
-        
+
         /**
          * 设置配置项
-         * 
+         *
          * @param {Object} options 参数
          * @protected
          */
@@ -192,12 +192,12 @@ define(function (require) {
                     changes[key] = this.options[key] = value;
                 }
             }, this);
-            
+
             if (!_.isEmpty(changes)) {
                 this.repaint(changes);
             }
         },
-        
+
         /**
          * 获取控件参数值
          *
@@ -207,7 +207,7 @@ define(function (require) {
         get: function(name) {
             return this.options[name];
         },
-        
+
         /**
          * 设置控件参数值
          *
@@ -219,25 +219,25 @@ define(function (require) {
             option[name] = value;
             this.setOptions(option);
         },
-        
+
         /**
          * 是否处于某状态
-         * 
+         *
          * @param {String} state 状态名
          * @return {Boolean}
          * @protected
          */
-        hasState: function (state) {
+        hasState: function(state) {
             return !!this.states[state];
         },
-        
+
         /**
          * 添加控件状态
-         * 
+         *
          * @param {String} state 状态名
          * @protected
          */
-        addState: function (state) {
+        addState: function(state) {
             if (!this.hasState(state)) {
                 this.states[state] = true;
                 var option = {};
@@ -245,14 +245,14 @@ define(function (require) {
                 this.setOptions(option);
             }
         },
-        
+
         /**
          * 移除控件状态
-         * 
+         *
          * @param {String} state 状态名
          * @protected
          */
-        removeState: function (state) {
+        removeState: function(state) {
             if (this.hasState(state)) {
                 this.states[state] = false;
                 var option = {};
@@ -260,33 +260,33 @@ define(function (require) {
                 this.setOptions(option);
             }
         },
-        
+
         /**
          * 启用控件
          */
         enable: function() {
             this.removeState('disabled');
         },
-        
+
         /**
          * 禁用控件
          */
         disable: function() {
             this.addState('disabled');
         },
-        
+
         /**
          * 控件是否禁用
-         * 
+         *
          * @return {Boolean}
          */
-        isDisabled: function () {
+        isDisabled: function() {
             return this.hasState('disabled');
         },
-        
+
         /**
          * 显示控件
-         * 
+         *
          * @fires beforeshow
          * @fires aftershow
          */
@@ -296,19 +296,19 @@ define(function (require) {
              * @event beforeshow
              */
             this.fire('beforeshow');
-            
+
             this.removeState('hidden');
-            
+
             /**
              * 显示后
              * @event aftershow
              */
             this.fire('aftershow');
         },
-        
+
         /**
          * 隐藏控件
-         * 
+         *
          * @fires beforehide
          * @fires afterhide
          */
@@ -318,35 +318,35 @@ define(function (require) {
              * @event beforehide
              */
             this.fire('beforehide');
-            
+
             this.addState('hidden');
-            
+
             /**
              * 隐藏后
              * @event afterhide
              */
             this.fire('afterhide');
         },
-        
+
         /**
          * 切换控件显隐状态
          */
         toggle: function() {
             this[this.isHidden() ? 'show' : 'hide']();
         },
-        
+
         /**
          * 控件是否隐藏
-         * 
+         *
          * @return {Boolean}
          */
         isHidden: function() {
             return this.hasState('hidden');
         },
-        
+
         /**
          * 销毁
-         * 
+         *
          * @fires beforedestroy
          * @fires afterdestroy
          */
@@ -357,7 +357,7 @@ define(function (require) {
                  * @event beforedestroy
                  */
                 this.fire('beforedestroy');
-                
+
                 //解绑事件（子类实现）
                 this.destroyEvents();
                 //销毁扩展
@@ -366,22 +366,22 @@ define(function (require) {
                 this.removeMain();
                 //移除其他元素（子类实现）
                 this.removeElements();
-                
+
                 //删除属性
                 delete this.options;
                 delete this.states;
                 delete this.painters;
                 delete this.main;
-                
+
                 /**
                  * 销毁后
                  * @event afterdestroy
                  */
                 this.fire('afterdestroy');
-                
+
                 //销毁事件队列
                 this.off();
-                
+
                 //清除直接挂载的事件
                 _.each(this, function(value, key) {
                     if (_.isFunction(value)) {
@@ -389,14 +389,14 @@ define(function (require) {
                         delete this[key];
                     }
                 }, this);
-                
+
                 this.destroyed = true;
             }
         },
-        
+
         /**
          * 销毁扩展
-         * 
+         *
          * @protected
          */
         destroyExtensions: function() {
@@ -406,35 +406,35 @@ define(function (require) {
                 extensions[index] = null;
             });
         },
-        
+
         /**
          * 移除主元素
-         * 
+         *
          * @protected
          */
         removeMain: function() {
             base.remove(this.main);
         },
-        
+
         /**
          * 移除其他元素（子类实现）
-         * 
+         *
          * @protected
          * @abstract
          */
         removeElements: function() {},
-        
+
         /**
          * 解绑事件（子类实现）
-         * 
+         *
          * @protected
          * @abstract
          */
         destroyEvents: function() {}
     };
-    
+
     //获得事件处理功能
     base.inherit(Widget, EventTarget);
-    
+
     return Widget;
 });
