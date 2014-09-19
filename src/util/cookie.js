@@ -2,13 +2,15 @@
  * Cookie操作
  *
  * @ignore
+ * @author heatroom
  * Thanks to:
  * https://github.com/aralejs/cookie
  * https://github.com/component/cookie
  */
-define(function (require) {
-    var encode = encodeURIComponent;
-    var decode = decodeURIComponent;
+define(function(require) {
+    var encode = encodeURIComponent,
+        decode = decodeURIComponent;
+
     /**
      * Cookie操作
      *
@@ -19,16 +21,18 @@ define(function (require) {
     var cookie = {};
 
     /**
-     * 获取 cookie值。options参数可选。
-     * @param {String} name The name of the cookie to get.
-     * @param {Object} options
-     * @return {String}
+     * 获取 cookie值
      *
+     * @param {String} name 名称
+     * @param {Object} [options] 选项
+     * @return {String} 值
      */
-    cookie.get = function (name, options) {
+    cookie.get = function(name, options) {
         validateCookieName(name);
-        if(isFunction(options)) {
-            options = {converter: options};
+        if (isFunction(options)) {
+            options = {
+                converter: options
+            };
         } else {
             options = options || {};
         }
@@ -38,11 +42,12 @@ define(function (require) {
     };
 
     /**
-     * 设置cookie值。参数options可选。
-     * @param {String} name
-     * @param {*} value
-     * @param {Object} options
-     * @return {String} The created cookie string
+     * 设置cookie值
+     *
+     * @param {String} name 名称
+     * @param {*} value 值
+     * @param {Object} [options] 选项
+     * @return {String} cookie字符串
      */
     cookie.set = function(name, value, options) {
         validateCookieName(name);
@@ -52,7 +57,7 @@ define(function (require) {
         var domain = options.domain;
         var path = options.path;
 
-        if(!options.raw) {
+        if (!options.raw) {
             value = encode(String(value));
         }
 
@@ -60,26 +65,26 @@ define(function (require) {
 
         //expires
         var date = expires;
-        if(typeof date === 'number') {
+        if (typeof date === 'number') {
             date = new Date();
             date.setDate(date.getDate() + expires);
         }
-        if(date instanceof Date) {
+        if (date instanceof Date) {
             str += '; expires=' + date.toUTCString();
         }
 
         //domain
-        if(isNonEmptyString(domain)) {
+        if (isNonEmptyString(domain)) {
             str += '; domain=' + domain;
         }
 
         //path
-        if(isNonEmptyString(path)) {
+        if (isNonEmptyString(path)) {
             str += '; path=' + path;
         }
 
         //secure
-        if(options.secure) {
+        if (options.secure) {
             str += '; secure';
         }
 
@@ -88,21 +93,22 @@ define(function (require) {
     };
 
     /**
-     * 移除指定的cookie。
-     * @param {String} name The name of the cookie to remove.
+     * 移除指定的cookie
+     *
+     * @param {String} name 名称
+     * @param {Object} [options] 选项
+     * @return {String} cookie字符串
      */
-
     cookie.remove = function(name, options) {
         options = options || {};
         options.expires = new Date(0);
         return this.set(name, '', options);
     };
 
-    /**
-     * 解析 cookie `str`
-     * @param {String} str
-     * @return {Object}
+    /*
+     * Helpers
      */
+
     function parse(str, shouldDecode) {
         var obj = {};
         if (isString(str) && str.length > 0) {
@@ -112,14 +118,14 @@ define(function (require) {
             var cookieValue;
             var cookieNameValue;
 
-            for(var i = 0, len = cookieParts.length; i < len; i++) {
+            for (var i = 0, len = cookieParts.length; i < len; i++) {
                 //check for normally-formatted cookie (name-value)
                 cookieNameValue = cookieParts[i].match(/([^=]+)=/i);
-                if(cookieNameValue instanceof Array) {
+                if (cookieNameValue instanceof Array) {
                     try {
                         cookieName = decode(cookieNameValue[1]);
                         cookieValue = decodeValue(cookieParts[i]
-                                .substring(cookieNameValue[1].length + 1));
+                            .substring(cookieNameValue[1].length + 1));
                     } catch (e) {
                         //intentionally ignore the cookie
                         //the encoding is wrong.
@@ -130,19 +136,13 @@ define(function (require) {
                     cookieValue = '';
                 }
 
-                if(cookieName) {
+                if (cookieName) {
                     obj[cookieName] = cookieValue;
                 }
             }
         }
         return obj;
     }
-
-    return cookie;
-
-    /*
-     * Helpers
-     */
 
     function isFunction(o) {
         return typeof o === 'function';
@@ -157,7 +157,7 @@ define(function (require) {
     }
 
     function validateCookieName(name) {
-        if(!isNonEmptyString(name)) {
+        if (!isNonEmptyString(name)) {
             throw new TypeError('Cookie name must be a non-empty string');
         }
     }
@@ -166,5 +166,5 @@ define(function (require) {
         return s;
     }
 
-
+    return cookie;
 });

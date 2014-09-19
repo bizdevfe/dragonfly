@@ -4,7 +4,7 @@
  * @ignore
  * @author Ricky
  */
-define(function (require) {
+define(function(require) {
     var _ = require('underscore').noConflict();
 
     /**
@@ -102,7 +102,7 @@ define(function (require) {
 
     /**
      * 添加事件
-     * https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.addEventListener
+     *
      * @param {HTMLElement} element DOM元素
      * @param {String} type 事件类型
      * @param {Function} listener 事件处理函数
@@ -110,7 +110,7 @@ define(function (require) {
      * @return {Function} listener
      * @static
      */
-    Event.on = function (element, type, listener, capture) {
+    Event.on = function(element, type, listener, capture) {
         if (element.addEventListener) {
             element.addEventListener(type, listener, capture || false);
         } else if (element.attachEvent) {
@@ -121,6 +121,7 @@ define(function (require) {
 
     /**
      * 移除事件
+     *
      * @param {HTMLElement} element DOM元素
      * @param {String} type 事件类型
      * @param {Function} listener 事件处理函数
@@ -128,7 +129,7 @@ define(function (require) {
      * @return {Function} listener
      * @static
      */
-    Event.off = function (element, type, listener, capture) {
+    Event.off = function(element, type, listener, capture) {
         if (element.addEventListener) {
             element.removeEventListener(type, listener, capture || false);
         } else if (element.attachEvent) {

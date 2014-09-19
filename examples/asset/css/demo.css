@@ -1,6 +1,6 @@
 body {
     font-family: Verdana;
-    margin: 30px;
+    margin: 30px
 }
 h1 {
     color: #666
@@ -8,10 +8,10 @@ h1 {
 .logo {
     width: 187px;
     height: 131px;
-    background: url(../img/logo.png);
+    background: url(../img/logo.png)
 }
 .list {
-    margin-top: 20px;
+    margin-top: 20px
 }
 a {
     color: #06c
@@ -21,11 +21,11 @@ pre {
     font-family: Consolas;
     background: #f7f7f7;
     border-radius: 3px;
-    border:1px #ccc solid;
+    border:1px #ccc solid
 }
 #container {
     width: 300px;
     height: 100px;
     border: 1px #ccc solid;
-    background: #efefef;
+    background: #efefef
 }

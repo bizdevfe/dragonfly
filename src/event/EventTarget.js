@@ -4,7 +4,7 @@
  * @ignore
  * @author Ricky
  */
-define(function (require) {
+define(function(require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
         Event = require('event/Event'),
@@ -29,9 +29,6 @@ define(function (require) {
          * @return {EventTarget} 控件实例
          */
         on: function(type, handler, once) {
-            if (!_.isFunction(handler)) {
-                throw new Error('add listener only take instances of function');
-            }
             if (!this.eventQueue) {
                 this.eventQueue = {};
             }
@@ -65,26 +62,22 @@ define(function (require) {
          * @return {EventTarget} 控件实例
          */
         off: function(type, handler) {
-            var cache;
-            //没有事件
-            if (!(cache = this.eventQueue)) {
-                return this;
-            }
-            //移除所有事件
             if (arguments.length === 0) {
-                _.each(cache, function(queue) {
-                    queue.destroy();
-                });
-                delete this.eventQueue;
-                return this;
-            }
-            if (_.isString(type)) {
+                //移除所有事件
+                if (this.eventQueue) {
+                    _.each(this.eventQueue, function(queue) {
+                        queue.destroy();
+                    });
+                    delete this.eventQueue;
+                }
+            } else if (_.isString(type)) {
                 //移除指定类型事件
-                if (cache[type]) {
-                    var queue = cache[type];
+                if (this.eventQueue && this.eventQueue[type]) {
+                    var queue = this.eventQueue[type];
                     queue.remove(handler);
                 }
             }
+
             return this;
         },
 

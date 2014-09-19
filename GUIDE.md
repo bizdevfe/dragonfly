@@ -1,26 +1,37 @@
 #开发规范（内部版）
 
-##代码风格
-控件库的各模块应该保持代码风格的一致性，请参见内部的[《前端编码规范》](http://biztech.sogou-inc.com/wiki/index.php/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83)，着重说明几点：
+##命名规范
+1. *.js：类模块文件名与类名一致，如 `Button.js`；单例模块文件名与单例名一致，如 `browser.js`
+3. *.css：小写
+4. css前缀：`df-`
+3. 文件夹：小写
 
-1. 左括号的左边需要有空白（函数声明和调用除外），右括号的右边需要有空白
-2. 为保证在各种编辑器下的显示效果，缩进一律使用 `4个空格`
-3. if、while、for、do语句，总用{ }将执行体包围
-4. 常量命名全大写，变量与函数使用 `camel` 命名，类名使用 `pascal` 命名
-5. 字符串用单引号
-5. css前缀 `df-`
-
-##文件命名与目录规范
-
-1. `类模块`的文件名与类名一致
-2. `单例模块`的文件名与单例命名一致
-3. `./examples`：例子
-4. `./output`：编译输出目录，不用修改
+##目录结构规范
+3. `./examples`：示例
+4. `./output`：编译输出
 5. `./src`：源码
+6. `./src/asset`：静态资源
+7. `./src/base`：基础类库
+8. `./src/dep`：依赖类库
+9. `./src/event`：事件类
+10. `./src/extesion`：扩展类
+11. `./src/loader`：加载器
+12. `./src/ui`：控件类
+13. `./src/util`：工具类
 6. `./test`：单元测试
-7. `./tool`：编译工具，一般不用修改
+7. `./tool`：编译工具
 
-##控件开发流程
+##开发流程
+
+###前期准备：
+
+1. 安装 [NodeJs](http://nodejs.org/download/)
+2. 安装 [JSDuck](https://github.com/senchalabs/jsduck/releases)，配置环境变量
+3. 安装 RequireJS：`npm install -g requirejs`，将 `r.js` 拷贝到 `./tool` 下
+3. 安装 JS Beautifier：`$ npm install -g js-beautify`
+4. 安装 JSHint：`$ npm install -g jshint`
+
+###1) 开发控件
 
 1. 继承 `Widget` 基类
 2. 重写 `createMain`：创建主元素
@@ -31,61 +42,50 @@
 7. 重写 `removeElements`：移除其他元素
 8. 重写 `destroyEvents`：解绑事件
 9. 新增方法，如 `getXXX`、`setXXX`
-10. 生成 API 文档，检查并修改
-11. 编写例子
-12. 编写单元测试
 
-##文档生成
-文档生成要紧随开发脚步，这样能够时刻关注继承关系、数据类型、输入输出等重要信息，有利于时刻规范自己的代码，减少错误，并留下良好的注释。
+###2) 编写示例
+以开发 `Button` 控件为例，开发的同时在 `./example` 目录下新建 `Button.html`，`require Button.js` 即可。
 
-请在 clone dragonfly项目的同时，clone [api项目](https://github.com/bizdevfe/api/tree/gh-pages)，并保证它们在同一目录下。
+示例中应该包含该控件的如下几个生命周期过程：创建、渲染、方法调用、销毁。
 
-下载JSDuck [Windows版](https://github.com/senchalabs/jsduck/releases)，配置环境变量。
+最后在 `index.html` 中增加 `Button` 的索引。
+
+###3) 生成API文档
+Clone [bizdevfe/api](https://github.com/bizdevfe/api/tree/gh-pages)，并保证它与 dragonfly 在同一目录下。
 
     $ cd api
     $ jsduck --config dragonfly-conf.json
 
-JSDuck注释语法：[JSDuck Wiki](https://github.com/senchalabs/jsduck/wiki)
+> JSDuck注释语法参见 [JSDuck Wiki](https://github.com/senchalabs/jsduck/wiki)
 
-> 提交文档前，先删除 `api/dragonfly` 文件夹，commit一次，再生成，再commit一次，最后提交。不然Github上有的页面会找不到（本地没问题，可能是Github缓存问题）。
+###4) 编写单测
+以 `Button` 控件为例，在 `./test/spec` 下新建一个 `Button.js`，并在 `SpecRunner.html` 中增加控件容器，同时 `require test/spec/Button.js`。
 
-##编写例子
-开发一个控件时，在 `./example` 目录下新建同名html，require该控件的模块即可进入开发调试模式。例子中应该包含该控件的如下几个过程：
+> 代码覆盖率至少为80%
 
-1. 创建
-2. 渲染
-3. 方法调用
-4. 销毁
+###5) 格式化源码
+以 `Button` 控件为例：
 
-最后在 `index.html` 中增加这个例子的索引。
+    $ js-beautify -r src/ui/Button.js
+    $ css-beautify -r asset/default/button.css
 
-##编写单元测试
-编写一个控件的一组case时，在 `./test/spec` 下新建一个同名js，并在 `SpecRunner.html` 中增加控件容器，同时require这个spec模块。
+> 代码风格参见[《前端编码规范》](http://biztech.sogou-inc.com/wiki/index.php/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83)
 
-case应基本覆盖例子中的功能。
+###6) 代码检查
+提交代码前，必须在本地做代码检查，保证无错误后再提交。
 
-##代码检查
-提交代码前，必须在本地做代码检查，保证无错误后再提交：
-
-    $ npm install -g jshint
     $ jshint src
 
-Github项目已经关联了 [code climate](https://codeclimate.com/github/bizdevfe/dragonfly) ，它会在每次提交后自动做代码检查，并给出 GPA 评分。请确认分值为绿色，并且每个文件的分数均为A。
+> 注意：字符串用单引号
 
-##编译
+> 提交后请确认 [code climate](https://codeclimate.com/github/bizdevfe/dragonfly) 分值为绿色，并且每个文件的分数均为A。
+
+###7) [编译]
+编译代码仅在主干提交，分支不提交。
 
     $ cd tool
     $ node r.js -o build-js.js
     $ node r.js -o build-css.js
-
-注意：编译的代码不提交。
-
-##工作流
-1. Fork Dragonfly
-2. Clone in Desktop
-3. **Commit x N (coding with API docs, examples and specs)**
-4. **Push (after jshint and build)**
-5. Pull Request
 
 ##附件
 

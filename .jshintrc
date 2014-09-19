@@ -2,5 +2,6 @@
   "-W100": true,
   "globals": {
     "define": true
-  }
+  },
+  "curly": true
 }
