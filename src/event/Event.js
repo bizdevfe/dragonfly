@@ -68,7 +68,7 @@ define(function(require) {
          * @property {Number} pageY 文档Y坐标
          * @readonly
          */
-        var doc = domEvent.target.ownerDocument || document,
+        var doc = this.target.ownerDocument || document,
             root = document.compatMode === 'BackCompat' ? doc.body : doc.documentElement;
         this.pageX = domEvent.pageX || domEvent.clientX + (root && root.scrollLeft || 0) - (root && root.clientLeft || 0);
         this.pageY = domEvent.pageY || domEvent.clientY + (root && root.scrollTop || 0) - (root && root.clientTop || 0);

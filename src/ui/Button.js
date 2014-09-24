@@ -17,10 +17,12 @@ define(function(require) {
      * @param {Object} [options] 初始化参数
      *
      *     @example
-     *     //默认参数
+     *     //默认值
      *     {
      *         content: '',     //按钮文字
-     *         disabled: false  //是否禁用
+     *         disabled: false, //是否禁用
+     *         hidden: false,   //是否隐藏
+     *         skin: 'default'  //皮肤：'spring', 'dark'
      *     }
      */
     function Button(options) {
@@ -28,18 +30,6 @@ define(function(require) {
     }
 
     Button.prototype = {
-        /**
-         * 创建主元素
-         *
-         * @protected
-         * @override
-         */
-        createMain: function() {
-            var div = document.createElement('div');
-            div.innerHTML = '<button type="button"></button>';
-            return div.firstChild;
-        },
-
         /**
          * 初始化参数
          *
@@ -50,8 +40,22 @@ define(function(require) {
         initOptions: function(options) {
             this.options = _.extend({
                 content: '',
-                disabled: false
+                disabled: false,
+                hidden: false,
+                skin: 'default'
             }, options || {});
+        },
+
+        /**
+         * 创建主元素
+         *
+         * @protected
+         * @override
+         */
+        createMain: function() {
+            var div = document.createElement('div');
+            div.innerHTML = '<button type="button" class="df-widget df-button df-button-' + this.options.skin + '"></button>';
+            return div.firstChild;
         },
 
         /**
@@ -67,6 +71,11 @@ define(function(require) {
                 },
                 disabled: function(disabled) {
                     this.main.disabled = disabled;
+                    if (disabled) {
+                        base.addClass(this.main, 'df-button-disable');
+                    } else {
+                        base.removeClass(this.main, 'df-button-disable');
+                    }
                 },
                 content: function(content) {
                     this.main.innerHTML = content;
@@ -86,6 +95,23 @@ define(function(require) {
              * @event click
              */
             this.addFiredDOMEvent(this.main, 'click');
+            
+            this.addDOMEvent(this.main, 'mouseover', function() {
+                base.addClass(this.main, 'df-button-' + this.options.skin + '-hover');
+            });
+            
+            this.addDOMEvent(this.main, 'mouseout', function() {
+                base.removeClass(this.main, 'df-button-' + this.options.skin + '-hover');
+                base.removeClass(this.main, 'df-button-' + this.options.skin + '-active');
+            });
+            
+            this.addDOMEvent(this.main, 'mousedown', function() {
+                base.addClass(this.main, 'df-button-' + this.options.skin + '-active');
+            });
+            
+            this.addDOMEvent(this.main, 'mouseup', function() {
+                base.removeClass(this.main, 'df-button-' + this.options.skin + '-active');
+            });
         },
 
         /**
