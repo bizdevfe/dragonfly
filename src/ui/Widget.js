@@ -23,14 +23,14 @@ define(function(require) {
         this.rendered = false;
         this.destroyed = false;
 
-        //主元素
-        this.main = this.createMain();
-
         //初始化状态
         this.initStates(options);
 
         //初始化参数
         this.initOptions(options);
+
+        //主元素
+        this.main = this.createMain();
 
         //初始化绘制函数
         this.initPainters();
@@ -39,15 +39,6 @@ define(function(require) {
     }
 
     Widget.prototype = {
-        /**
-         * 创建主元素（子类重写）
-         *
-         * @protected
-         */
-        createMain: function() {
-            return document.createElement('div');
-        },
-
         /**
          * 初始化控件状态
          *
@@ -72,6 +63,15 @@ define(function(require) {
          */
         initOptions: function(options) {
             this.options = _.extend({}, options || {});
+        },
+
+        /**
+         * 创建主元素（子类重写）
+         *
+         * @protected
+         */
+        createMain: function() {
+            return document.createElement('div');
         },
 
         /**

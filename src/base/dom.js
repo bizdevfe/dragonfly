@@ -2,6 +2,7 @@
  * DOM操作
  *
  * @ignore
+ * @author Ricky
  */
 define(function(require) {
     var _ = require('underscore').noConflict();
@@ -28,7 +29,7 @@ define(function(require) {
     /**
      * 获取元素
      *
-     * @param {HTMLElement|String} DOM元素或其id
+     * @param {HTMLElement|String} id DOM元素或其id
      * @return {HTMLElement|null} 获取的元素
      */
     dom.$ = function(id) {
@@ -41,7 +42,7 @@ define(function(require) {
     /**
      * 移除元素
      *
-     * @param {HTMLElement|String} DOM元素或其id
+     * @param {HTMLElement|String} element DOM元素或其id
      */
     dom.remove = function(element) {
         var parent = dom.$(element).parentNode;

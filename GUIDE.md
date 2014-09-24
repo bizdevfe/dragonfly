@@ -67,7 +67,7 @@ Clone [bizdevfe/api](https://github.com/bizdevfe/api/tree/gh-pages)，并保证�
 以 `Button` 控件为例：
 
     $ js-beautify -r src/ui/Button.js
-    $ css-beautify -r asset/default/button.css
+    $ css-beautify -r src/asset/default/button.css
 
 > 代码风格参见[《前端编码规范》](http://biztech.sogou-inc.com/wiki/index.php/%E5%89%8D%E7%AB%AF%E7%BC%96%E7%A0%81%E8%A7%84%E8%8C%83)
 
