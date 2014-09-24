@@ -95,20 +95,20 @@ define(function(require) {
              * @event click
              */
             this.addFiredDOMEvent(this.main, 'click');
-            
+
             this.addDOMEvent(this.main, 'mouseover', function() {
                 base.addClass(this.main, 'df-button-' + this.options.skin + '-hover');
             });
-            
+
             this.addDOMEvent(this.main, 'mouseout', function() {
                 base.removeClass(this.main, 'df-button-' + this.options.skin + '-hover');
                 base.removeClass(this.main, 'df-button-' + this.options.skin + '-active');
             });
-            
+
             this.addDOMEvent(this.main, 'mousedown', function() {
                 base.addClass(this.main, 'df-button-' + this.options.skin + '-active');
             });
-            
+
             this.addDOMEvent(this.main, 'mouseup', function() {
                 base.removeClass(this.main, 'df-button-' + this.options.skin + '-active');
             });

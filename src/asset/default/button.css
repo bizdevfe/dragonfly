@@ -14,9 +14,8 @@
     cursor: pointer;
     text-align: center;
     overflow: visible; /*remove IE7- extra width*/
-    outline: none  /*remove Chrome focus*/
+    outline: none /*remove Chrome focus*/
 }
-
 .df-button-default {
     background: #007aff
 }
@@ -26,7 +25,6 @@
 .df-button-default-active {
     background: #006de2
 }
-
 .df-button-spring {
     background: #4bd865
 }
@@ -36,7 +34,6 @@
 .df-button-spring-active {
     background: #38c950
 }
-
 .df-button-dark {
     background: #707070
 }
@@ -46,7 +43,6 @@
 .df-button-dark-active {
     background: #3a3a3a
 }
-
 .df-button-disable {
     background: #dedede;
     color: #c2c2c2;

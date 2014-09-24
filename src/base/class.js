@@ -20,7 +20,7 @@ define(function(require) {
     function getClassList(element) {
         return element.className ? element.className.split(/\s+/) : [];
     }
-    
+
     /**
      * 是否有指定class
      *
@@ -30,18 +30,18 @@ define(function(require) {
      */
     clazz.hasClass = function(element, className) {
         element = dom.$(element);
-        
+
         if (!element || !className) {
             return false;
         }
-        
+
         if (element.classList) { //for HTML5
             return element.classList.contains(className);
         }
-        
+
         return _.contains(getClassList(element), className);
     };
-    
+
     /**
      * 添加class
      *
@@ -51,11 +51,11 @@ define(function(require) {
      */
     clazz.addClass = function(element, className) {
         element = dom.$(element);
-        
+
         if (!element || !className) {
             return element;
         }
-        
+
         if (element.classList) { //for HTML5
             element.classList.add(className);
             return element;
@@ -71,7 +71,7 @@ define(function(require) {
 
         return element;
     };
-    
+
     /**
      * 移除class
      *
@@ -85,7 +85,7 @@ define(function(require) {
         if (!element || !className) {
             return element;
         }
-        
+
         if (element.classList) { //for HTML5
             element.classList.remove(className);
             return element;
@@ -96,7 +96,7 @@ define(function(require) {
 
         return element;
     };
-    
+
     /**
      * 切换class
      *
@@ -110,12 +110,12 @@ define(function(require) {
         if (!element || !className) {
             return element;
         }
-        
+
         if (element.classList) { //for HTML5
             element.classList.toggle(className);
             return element;
         }
-        
+
         if (clazz.hasClass(element, className)) {
             return clazz.removeClass(element, className);
         } else {
