@@ -54,7 +54,7 @@ define(function(require) {
          */
         createMain: function() {
             var div = document.createElement('div');
-            div.innerHTML = '<button type="button" class="df-widget df-button df-button-' + this.options.skin + '"></button>';
+            div.innerHTML = '<button type="button"></button>';
             return div.firstChild;
         },
 
@@ -81,6 +81,17 @@ define(function(require) {
                     this.main.innerHTML = content;
                 }
             };
+        },
+
+        /**
+         * 创建其他元素
+         *
+         * @protected
+         * @override
+         */
+        initElements: function() {
+            base.addClass(this.main, 'df-button');
+            base.addClass(this.main, 'df-button-' + this.options.skin);
         },
 
         /**
