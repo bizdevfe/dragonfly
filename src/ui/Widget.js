@@ -101,7 +101,7 @@ define(function(require) {
 
                 //将主元素插入文档
                 this.appendMain(target);
-                //创建其他元素（子类实现）
+                //初始化元素（子类实现）
                 this.initElements();
                 //绑定事件（子类实现）
                 this.initEvents();
@@ -129,10 +129,12 @@ define(function(require) {
         appendMain: function(target) {
             var container = base.$(target) || document.body;
             container.appendChild(this.main);
+            //添加通用class
+            base.addClass(this.main, 'df-widget');
         },
 
         /**
-         * 创建其他元素（子类实现）
+         * 初始化元素（子类实现）
          *
          * @protected
          * @abstract
