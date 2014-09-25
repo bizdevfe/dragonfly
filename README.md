@@ -5,7 +5,7 @@
 
 <img src="examples/asset/img/logo.png" />
 
-Dragonfly is a flexible and light ui framework.
+Dragonfly is a flexible flat ui framework.
 
 ##Features
 

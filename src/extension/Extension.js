@@ -19,7 +19,7 @@ define(function(require) {
 
     Extension.prototype = {
         /**
-         * @property {Widget} main 控件实例
+         * @property {Widget} target 控件实例
          */
         target: null,
 
