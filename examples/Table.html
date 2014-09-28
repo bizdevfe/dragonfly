@@ -9,12 +9,62 @@
 
 <body>
 <h1>Table</h1>
+<div id="container1"></div>
 <script type="text/javascript" src="asset/js/require.js"></script>
 <script type="text/javascript" src="asset/js/config.js"></script>
 <script type="text/javascript">
 require(['ui/Table'], function(Table) {
-    var table = new Table();
-    console.log(table);
+    //只完成初始化，不负责渲染
+    var table = new Table({
+        marker : true,
+        refresh : false,
+        switchTags : false,
+        tags:{
+            id:"ID",
+            name:"名称",
+            city:"城市",
+            operate:{
+                title:"操作",
+                render:function(){
+                    return '<a href="#">编辑<a>';
+                }
+            }
+        },
+        beforeRender:function(){},
+        afterRender:function(){}
+    });
+    //手动渲染
+    table.render('container1');
+
+    //相当于设置this.states['hidden'] = false; 同时触发执行hidden:function(){}
+    table.show();
+
+    /*
+    table.on('beforerender', function() {
+        console.log('beforerender');
+    })
+    .on('afterrender', function() {
+        console.log('afterrender');
+    })
+    .on('beforeshow', function() {
+        console.log('beforeshow');
+    })
+    .on('aftershow', function() {
+        console.log('aftershow');
+    })
+    .on('beforehide', function() {
+        console.log('beforehide');
+    })
+    .on('afterhide', function() {
+        console.log('afterhide');
+    })
+    .on('click', function(e) {
+        console.log('click', e, this);
+    })
+    .once('click', function(e) {
+        console.log('click once', e, this);
+    });
+    console.log(table);*/
 });
 </script>
 </body>

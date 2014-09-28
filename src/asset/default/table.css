@@ -1,3 +1,21 @@
 /**
- * 按钮样式
+ * 表格样式
  */
+/*ui_table_style*/
+.classic_01{ overflow:hidden; line-height:1.36}
+.classic_01 tr th{background:#666; color:#fff; padding:0 5px; font-weight:400; height:36px;}
+.classic_01 tr td{ color:#707070; font-size:13px; padding:8px 5px; line-height:1.4}
+.classic_01 tr:hover,.classic_01 tr.tr_bg_f8:hover{ background:#f6f9fe;}
+.classic_01 tr.top_conclusion{ background:#fffbe5;}
+.classic_01 tr.top_conclusion td{ color:#000;}
+.classic_01 tr.tr_bg_f8{ background:#f8f8f8;}
+.classic_01 .tr_style tr:hover{ background:none}
+.classic_01 .tr_style td{ color:#fff}
+.editor_01{ margin:-8px -3px; padding:5px 0; padding-left:3px;border:1px solid none;}
+.editor_01 .box_ui_i{ display:none}
+.classic_01 tr:hover .editor_01,.classic_01 tr.tr_bg_f8:hover .editor_01{ border:1px solid #d4e2f8; padding-left:2px;}
+.classic_01 td:hover .editor_01,.classic_01 tr.tr_bg_f8 td:hover .editor_01{border:1px solid #ffbc06;padding-left:2px;}
+.classic_01 td:hover .editor_01 .box_ui_i{ display:block; vertical-align:auto}
+.table_creative{ color:#261cdc;font: small/normal arial; font-size:13px; text-align:left; width:295px; line-height:22px; cursor:pointer;}
+.table_creative em{ font-style:normal; background-color:#ffff00;}
+.editor{ border:1px solid #ffbc06; margin:0 -3px; padding-left:3px;}
