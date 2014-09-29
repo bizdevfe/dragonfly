@@ -2,8 +2,8 @@ define(function (require) {
     var SidePanel = require('ui/SidePanel');
     
     var sidepanel = new SidePanel({
-            title: 'Hello'
-        });
+        title: 'Hello'
+    });
     
     describe('SidePanel', function () {
         it('should be inited', function () {

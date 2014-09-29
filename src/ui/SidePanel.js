@@ -7,7 +7,8 @@
 define(function(require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
-        Widget = require('ui/Widget');
+        Widget = require('ui/Widget'),
+        Button = require('ui/Button');
 
     var tpl = [
         '<div class="df-mask"></div>',
@@ -16,7 +17,7 @@ define(function(require) {
         '<div class="df-sidepanel-body">',
         '<h1><%= title %></h1>',
         '<div class="df-sidepanel-content"><%= content %></div>',
-        '<div class="bottom"></div>',
+        '<div class="df-sidepanel-bottom"></div>',
         '</div>',
         '</div>'
     ].join('');
@@ -33,7 +34,12 @@ define(function(require) {
      *     {
      *         title: '',      //标题
      *         content: '',    //内容
-     *         hidden: false   //渲染后是否隐藏
+     *         hidden: false,  //渲染后是否隐藏
+     *         buttons: [      //按钮组
+                   {content: 'OK', handler: this.hide},
+                   {content: 'Cancel', skin: 'dark', handler: this.hide}
+               ],
+               duration: 300
      *     }
      */
     function SidePanel(options) {
@@ -52,7 +58,16 @@ define(function(require) {
             this.options = _.extend({
                 title: '',
                 content: '',
-                hidden: false
+                hidden: false,
+                buttons: [{
+                    content: 'OK',
+                    handler: this.hide
+                }, {
+                    content: 'Cancel',
+                    skin: 'dark',
+                    handler: this.hide
+                }],
+                duration: 300
             }, options || {});
         },
 
@@ -68,6 +83,28 @@ define(function(require) {
                 title: this.options.title,
                 content: this.options.content
             });
+
+            //内部元素
+            this.mask = base.children(this.main, '.df-mask')[0];
+            this.panel = base.children(this.main, '.df-sidepanel')[0];
+            this.panelBody = base.children(this.main, '.df-sidepanel-body')[0];
+            this.panelBottom = base.children(this.main, '.df-sidepanel-bottom')[0];
+
+            //创建按钮组
+            this.buttons = [];
+            _.each(this.options.buttons, function(item) {
+                var panel = this;
+                var button = new Button({
+                    content: item.content,
+                    skin: item.skin || 'default'
+                });
+                button.on('click', function(e) {
+                    item.handler.call(panel, e);
+                });
+                button.render(this.panelBottom);
+
+                this.buttons.push(button);
+            }, this);
         },
 
         /**
@@ -79,34 +116,83 @@ define(function(require) {
         initPainters: function() {
             this.painters = {
                 hidden: function(hidden) {
-                    var mask = this.main.firstChild;
-                    panel = this.main.lastChild;
-                    panelBody = panel.lastChild;
+                    var htmlElement = base.parent(document.body),
+                        panel = this;
+
                     if (!hidden) {
                         if (base.badie) {
-                            document.body.parentNode.style.overflow = 'visible';
+                            base.css(htmlElement, {
+                                overflow: 'visible'
+                            });
                         }
-                        document.body.style.overflow = 'hidden';
+                        base.css(document.body, {
+                            overflow: 'hidden'
+                        });
 
                         var scrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-                        mask.style.top = panel.style.top = scrollTop + 'px';
+                        base.css(this.mask, {
+                            top: scrollTop + 'px'
+                        });
+                        base.css(this.panel, {
+                            top: scrollTop + 'px'
+                        });
 
-                        this.main.style.display = 'block';
-                        panel.style.left = 0; //TODO:动画
-
-                        if (!base.badie) {
-                            panelBody.scrollTop = 0;
-                        }
+                        base.css(this.main, {
+                            display: 'block'
+                        });
+                        base.transform(this.panel, {
+                            left: 0
+                        }, this.options.duration, function() {
+                            if (!base.badie) {
+                                panel.panelBody.scrollTop = 0;
+                            }
+                        });
                     } else {
-                        panel.style.left = '100%'; //TODO:动画
-                        this.main.style.display = 'none';
-                        document.body.style.overflow = 'visible';
-                        if (base.badie) {
-                            document.body.parentNode.style.overflow = 'auto';
-                        }
+                        var pageWidth = Math.max(document.body.offsetWidth, document.documentElement.offsetWidth);
+                        base.transform(this.panel, {
+                            left: pageWidth
+                        }, this.options.duration, function() {
+                            base.css(panel.main, {
+                                display: 'none'
+                            });
+                            base.css(document.body, {
+                                overflow: 'visible'
+                            });
+                            if (base.badie) {
+                                base.css(htmlElement, {
+                                    overflow: 'auto'
+                                });
+                            }
+                        });
                     }
                 }
             };
+        },
+
+        /**
+         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            _.each(this.buttons, function(button) {
+                button.destroy();
+            });
+        },
+
+        /**
+         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            this.mask = null;
+            this.panel = null;
+            this.panelBody = null;
+            this.panelBottom = null;
+            this.buttons = null;
         }
     };
 

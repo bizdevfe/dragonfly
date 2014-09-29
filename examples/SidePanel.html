@@ -9,12 +9,10 @@
 
 <body style="margin:10px; height:500px; border: 10px #ccc solid">
 <h1>SidePanel</h1>
-<button type="button" id="view">view instance</button>
+<button type="button" id="print">print instance</button>
 <h3>Methods:</h3>
 <button type="button" id="render">render</button>
-<button type="button" id="hide">hide</button>
 <button type="button" id="show">show</button>
-<button type="button" id="toggle">toggle</button>
 <button type="button" id="destroy">destroy</button>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script type="text/javascript" src="asset/js/require.js"></script>
@@ -23,34 +21,32 @@
 require(['ui/SidePanel'], function(SidePanel) {
     var sidepanel = new SidePanel({
         title: 'Hello World',
-        content: '<ul><li>item1</li><li>item2</li><li>item3</li></ul><button type="button" id="close">close</button>'
+        content: '<ul><li>1</li><li>2</li><li>3</li></ul>',
+        buttons: [
+            {content: 'Create an account', handler: function() {
+                if (prompt("Please enter an account name", "")) {
+                    this.hide();
+                }
+            }},
+            {content: 'Cancel', skin: 'dark', handler: function() {
+                this.hide();
+            }}
+        ]
     });
     
     $('#render').click(function() {
         sidepanel.render();
     });
     
-    $('#hide').click(function() {
-        sidepanel.hide();
-    });
-    
     $('#show').click(function() {
         sidepanel.show();
-    });
-    
-    $('#toggle').click(function() {
-        sidepanel.toggle();
     });
     
     $('#destroy').click(function() {
         sidepanel.destroy();
     });
     
-    $('body').delegate('#close', 'click', function() {
-        sidepanel.hide();
-    });
-    
-    $('#view').click(function() {
+    $('#print').click(function() {
         console.log(sidepanel);
     });
 });
