@@ -369,11 +369,13 @@ define(function(require) {
                 //移除其他元素（子类实现）
                 this.removeElements();
 
-                //删除属性
-                delete this.options;
-                delete this.states;
-                delete this.painters;
-                delete this.main;
+                //清除属性
+                this.options = null;
+                this.states = null;
+                this.painters = null;
+                this.main = null;
+                //清除其他属性（子类实现）
+                this.removeProp();
 
                 /**
                  * 销毁后
@@ -395,6 +397,14 @@ define(function(require) {
                 this.destroyed = true;
             }
         },
+
+        /**
+         * 解绑事件（子类实现）
+         *
+         * @protected
+         * @abstract
+         */
+        destroyEvents: function() {},
 
         /**
          * 销毁扩展
@@ -427,12 +437,12 @@ define(function(require) {
         removeElements: function() {},
 
         /**
-         * 解绑事件（子类实现）
+         * 清除其他属性（子类实现）
          *
          * @protected
          * @abstract
          */
-        destroyEvents: function() {}
+        removeProp: function() {}
     };
 
     //获得事件处理功能
