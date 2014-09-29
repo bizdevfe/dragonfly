@@ -201,5 +201,15 @@ define(function(require) {
      */
     dom.attr = $dom.attr;
 
+    /**
+     * 动画
+     *
+     * @param {HTMLElement} elm 目标元素
+     * @param {Object} properties css属性
+     * @param {Number} [duration] 时间
+     * @param {Function} [callback] 回调
+     */
+    dom.transform = $dom.transform;
+
     return dom;
 });
