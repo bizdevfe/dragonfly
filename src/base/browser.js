@@ -8,7 +8,7 @@ define(function(require) {
     /**
      * 浏览器检测
      *
-     * @class browser
+     * @class base.browser
      * @extends base
      * @singleton
      */

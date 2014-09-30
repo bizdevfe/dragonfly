@@ -12,7 +12,7 @@ define(function(require) {
     /**
      * DOM操作
      *
-     * @class dom
+     * @class base.dom
      * @extends base
      * @singleton
      */

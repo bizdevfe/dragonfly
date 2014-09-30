@@ -11,7 +11,7 @@ define(function(require) {
     /**
      * classList操作
      *
-     * @class clazz
+     * @class base.clazz
      * @extends base
      * @singleton
      */

@@ -10,7 +10,7 @@ define(function(require) {
     /**
      * 类支持
      *
-     * @class oo
+     * @class base.oo
      * @extends base
      * @singleton
      */
