@@ -127,7 +127,7 @@ define(function(require) {
          * @protected
          */
         appendMain: function(target) {
-            var container = base.$(target) || document.body;
+            var container = base.g(target) || document.body;
             container.appendChild(this.main);
             //添加通用class
             base.addClass(this.main, 'df-widget');

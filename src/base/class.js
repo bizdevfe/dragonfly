@@ -29,7 +29,7 @@ define(function(require) {
      * @return {Boolean} 是否有指定class
      */
     clazz.hasClass = function(element, className) {
-        element = dom.$(element);
+        element = dom.g(element);
 
         if (!element || !className) {
             return false;
@@ -50,7 +50,7 @@ define(function(require) {
      * @return {HTMLElement} 目标元素
      */
     clazz.addClass = function(element, className) {
-        element = dom.$(element);
+        element = dom.g(element);
 
         if (!element || !className) {
             return element;
@@ -80,7 +80,7 @@ define(function(require) {
      * @return {HTMLElement} 目标元素
      */
     clazz.removeClass = function(element, className) {
-        element = dom.$(element);
+        element = dom.g(element);
 
         if (!element || !className) {
             return element;
@@ -105,7 +105,7 @@ define(function(require) {
      * @return {HTMLElement} 目标元素
      */
     clazz.toggleClass = function(element, className) {
-        element = dom.$(element);
+        element = dom.g(element);
 
         if (!element || !className) {
             return element;

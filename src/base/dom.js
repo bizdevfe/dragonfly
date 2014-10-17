@@ -33,7 +33,7 @@ define(function(require) {
      * @param {HTMLElement|String} elm 目标元素或id
      * @return {HTMLElement|null} 目标元素
      */
-    dom.$ = function(elm) {
+    dom.g = function(elm) {
         if (!elm) {
             return null;
         }
@@ -46,7 +46,7 @@ define(function(require) {
      * @param {HTMLElement|String} elm 目标元素或id
      */
     dom.remove = function(elm) {
-        var parent = dom.$(elm).parentNode;
+        var parent = dom.g(elm).parentNode;
         if (parent) {
             parent.removeChild(elm);
         }
@@ -76,15 +76,15 @@ define(function(require) {
      * @return {HTMLElement[]} 元素集合
      *
      *     @example
-     *     dom.get();
-     *     dom.get('#a');
-     *     dom.get('#a.b');
-     *     dom.get('div p');
-     *     dom.get('div > p');
-     *     dom.get('div ~ p');
-     *     dom.get('div + p');
+     *     dom.$();
+     *     dom.$('#a');
+     *     dom.$('#a.b');
+     *     dom.$('div p');
+     *     dom.$('div > p');
+     *     dom.$('div ~ p');
+     *     dom.$('div + p');
      */
-    dom.get = $dom.get;
+    dom.$ = $dom.get;
 
     /**
      * 获取紧邻的祖先结点
