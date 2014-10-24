@@ -47,3 +47,7 @@
 .df-sidepanel-content {
     padding: 25px 0
 }
+.df-sidepanel-bottom{
+    padding: 0 0 60px 60px;
+    height: 30px
+}

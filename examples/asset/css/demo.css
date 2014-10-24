@@ -24,8 +24,8 @@ pre {
     border:1px #ccc solid
 }
 #container {
-    width: 300px;
     height: 100px;
+    padding: 10px;
     border: 1px #ccc solid;
     background: #efefef
 }

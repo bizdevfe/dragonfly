@@ -1,25 +1,29 @@
 #Dragonfly
 
 [![Build Status](https://travis-ci.org/bizdevfe/dragonfly.svg?branch=master)](https://travis-ci.org/bizdevfe/dragonfly)
-[![Code Climate](https://codeclimate.com/github/bizdevfe/dragonfly/badges/gpa.svg?v=4.0)](https://codeclimate.com/github/bizdevfe/dragonfly)
+[![Code Climate](https://codeclimate.com/github/bizdevfe/dragonfly/badges/gpa.svg)](https://codeclimate.com/github/bizdevfe/dragonfly)
 
 <img src="examples/asset/img/logo.png" />
 
-Dragonfly is a flexible and light ui framework.
+Dragonfly is a Flat UI framework designed for modern web applications. It's flexible, modular and supports for extensions.
 
-##Features
+#####Compatibility:
+<img src="examples/asset/img/ie.png" title="7+" />
+<img src="examples/asset/img/chrome.png" title="8+" />
+<img src="examples/asset/img/firefox.png" title="4+" />
+<img src="examples/asset/img/safari.png" title="5+" />
+<img src="examples/asset/img/opera.png" title="9+" />
 
-##Browser Support
+#####API Documentation:
+[http://bizdevfe.github.io/api/dragonfly](http://bizdevfe.github.io/api/dragonfly)
 
-##API Documentation
+#####Demos:
+<img src="examples/asset/img/ui.png" />
 
-see: [Dragonfly API Documentation](http://bizdevfe.github.io/api/dragonfly)
-
-##Modular Development
+##About Modular Development
 
 ###Dynamic Loading
-
-Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) specification, you can use any js file as a AMD module and load it with a AMD loader, for example:
+Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.md) specification, you can use any single js file as a AMD module and load it with a AMD loader, for example:
 
     require(['Button'], function(Button) {
         var button = new Button();
@@ -27,7 +31,6 @@ Dragonfly follows the [AMD](https://github.com/amdjs/amdjs-api/blob/master/AMD.m
     });
 
 ###Optimization
-
 If you want to optimize all the modules into one file, follow the steps below:
 
 step1. install [RequireJS](http://requirejs.org/)

@@ -8,7 +8,7 @@ define(function(require) {
     /**
      * 浏览器检测
      *
-     * @class browser
+     * @class base.browser
      * @extends base
      * @singleton
      */
@@ -17,44 +17,32 @@ define(function(require) {
     var ua = navigator.userAgent;
 
     /**
-     * 是否为Quirks模式
-     *
-     * @property {Boolean} isQuirks
+     * @property {Boolean} isQuirks 是否为Quirks模式
      */
     browser.isQuirks = document.compatMode === 'BackCompat';
 
     /**
-     * 是否为Gecko内核
-     *
-     * @property {Boolean} isGecko
+     * @property {Boolean} isGecko 是否为Gecko内核
      */
     browser.isGecko = /gecko/i.test(ua) && !/like gecko/i.test(ua);
 
     /**
-     * 是否为Webkit内核
-     *
-     * @property {Boolean} isWebkit
+     * @property {Boolean} isWebkit 是否为Webkit内核
      */
     browser.isWebkit = /webkit/i.test(ua);
 
     /**
-     * IE版本
-     *
-     * @property {Number|undefined} ie
+     * @property {Number|undefined} ie IE版本
      */
     browser.ie = document.documentMode;
 
     /**
-     * IE6/7
-     *
-     * @property {Boolean} badie
+     * @property {Boolean} badie IE6/7
      */
     browser.badie = browser.ie === 6 || browser.ie === 7;
 
     /**
-     * Chrome版本
-     *
-     * @property {Number|undefined} chrome
+     * @property {Number|undefined} chrome Chrome版本
      */
     browser.chrome = /chrome\/(\d+\.\d+)/i.test(ua) ? +RegExp.$1 : undefined;
 
@@ -66,16 +54,12 @@ define(function(require) {
     browser.firefox = /firefox\/(\d+\.\d+)/i.test(ua) ? +RegExp.$1 : undefined;
 
     /**
-     * Safari版本
-     *
-     * @property {Number|undefined} safari
+     * @property {Number|undefined} safari Safari版本
      */
     browser.safari = /(\d+\.\d+)(\.\d)?\ssafari/i.test(ua) ? +RegExp.$1 : undefined;
 
     /**
-     * Opera版本
-     *
-     * @property {Number|undefined} opera
+     * @property {Number|undefined} opera Opera版本
      */
     browser.opera = /opr\/(\d+\.\d+)/i.test(ua) ? +RegExp.$1 : undefined;
 

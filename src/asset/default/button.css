@@ -1,3 +1,50 @@
 /**
- * 表格样式
+ * 按钮样式
+ * @author Ricky
  */
+.df-button {
+    display: inline-block;
+    line-height: normal;
+    margin: 0 10px 0 0;
+    padding: 5px 15px;
+    border: 0;
+    border-radius: 2px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    overflow: visible; /*remove IE7- extra width*/
+    outline: none /*remove Chrome focus*/
+}
+.df-button-default {
+    background: #007aff
+}
+.df-button-default-hover {
+    background: #4ca1fe
+}
+.df-button-default-active {
+    background: #006de2
+}
+.df-button-spring {
+    background: #4bd865
+}
+.df-button-spring-hover {
+    background: #61e97a
+}
+.df-button-spring-active {
+    background: #38c950
+}
+.df-button-dark {
+    background: #707070
+}
+.df-button-dark-hover {
+    background: #8b8b8b
+}
+.df-button-dark-active {
+    background: #3a3a3a
+}
+.df-button-disable {
+    background: #dedede;
+    color: #c2c2c2;
+    cursor: default
+}

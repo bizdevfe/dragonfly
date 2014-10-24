@@ -14,7 +14,7 @@ define(function(require) {
      * @constructor
      */
     function Table() {
-
+        Widget.call(this, options);
     }
 
     base.inherit(Table, Widget);

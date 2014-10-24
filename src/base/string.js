@@ -8,7 +8,7 @@ define(function(require) {
     /**
      * 字符串扩展
      *
-     * @class string
+     * @class base.string
      * @extends base
      * @singleton
      */

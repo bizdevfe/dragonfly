@@ -160,6 +160,23 @@ define(function(require) {
         },
 
         /**
+         * 添加代理DOM事件
+         *
+         * @param {HTMLElement} element DOM元素
+         * @param {String} type 事件类型
+         * @param {String} selector 选择器
+         * @param {Function} handler 事件处理函数
+         * @protected
+         */
+        delegateDOMEvent: function(element, type, selector, handler) {
+            this.addDOMEvent(element, type, function(e) {
+                if (_.contains(base.children(element, selector), e.target)) {
+                    handler.call(this, e);
+                }
+            });
+        },
+
+        /**
          * 移除DOM事件
          *
          * @param {HTMLElement} element DOM元素

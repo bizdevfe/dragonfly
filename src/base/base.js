@@ -20,7 +20,8 @@ define(function(require) {
         require('base/string'),
         require('base/browser'),
         require('base/oo'),
-        require('base/dom')
+        require('base/dom'),
+        require('base/class')
     );
 
     return base;

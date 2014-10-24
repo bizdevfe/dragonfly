@@ -14,7 +14,7 @@ define(function(require) {
     /**
      * Cookie操作
      *
-     * @class cookie
+     * @class util.cookie
      * @extends util
      * @singleton
      */
