@@ -38,7 +38,6 @@ local.properties
 .classpath
 .settings/
 .loadpath
-tool/r.js
 
 # External tool builders
 .externalToolBuilders/
