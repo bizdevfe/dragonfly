@@ -177,6 +177,7 @@ define(function(require) {
 
             _.each(extensions, function(extension) {
                 extension.target = this;
+                extension.main = this.main;
                 extension.init();
             }, this);
         },
@@ -188,15 +189,17 @@ define(function(require) {
          * @protected
          */
         setOptions: function(options) {
-            var changes = {};
-            _.each(options, function(value, key) {
-                if (value !== this.options[key]) {
-                    changes[key] = this.options[key] = value;
-                }
-            }, this);
+            if (this.options) {
+                var changes = {};
+                _.each(options, function(value, key) {
+                    if (value !== this.options[key]) {
+                        changes[key] = this.options[key] = value;
+                    }
+                }, this);
 
-            if (!_.isEmpty(changes)) {
-                this.repaint(changes);
+                if (!_.isEmpty(changes)) {
+                    this.repaint(changes);
+                }
             }
         },
 
@@ -207,7 +210,7 @@ define(function(require) {
          * @return {Mixed}
          */
         get: function(name) {
-            return this.options[name];
+            return this.options ? this.options[name] : null;
         },
 
         /**
@@ -230,7 +233,7 @@ define(function(require) {
          * @protected
          */
         hasState: function(state) {
-            return !!this.states[state];
+            return this.states ? !!this.states[state] : false;
         },
 
         /**
@@ -267,14 +270,18 @@ define(function(require) {
          * 启用控件
          */
         enable: function() {
-            this.removeState('disabled');
+            if (this.states) {
+                this.removeState('disabled');
+            }
         },
 
         /**
          * 禁用控件
          */
         disable: function() {
-            this.addState('disabled');
+            if (this.states) {
+                this.addState('disabled');
+            }
         },
 
         /**
@@ -293,19 +300,21 @@ define(function(require) {
          * @fires aftershow
          */
         show: function() {
-            /**
-             * 显示前
-             * @event beforeshow
-             */
-            this.fire('beforeshow');
+            if (this.states) {
+                /**
+                 * 显示前
+                 * @event beforeshow
+                 */
+                this.fire('beforeshow');
 
-            this.removeState('hidden');
+                this.removeState('hidden');
 
-            /**
-             * 显示后
-             * @event aftershow
-             */
-            this.fire('aftershow');
+                /**
+                 * 显示后
+                 * @event aftershow
+                 */
+                this.fire('aftershow');
+            }
         },
 
         /**
@@ -315,19 +324,21 @@ define(function(require) {
          * @fires afterhide
          */
         hide: function() {
-            /**
-             * 隐藏前
-             * @event beforehide
-             */
-            this.fire('beforehide');
+            if (this.states) {
+                /**
+                 * 隐藏前
+                 * @event beforehide
+                 */
+                this.fire('beforehide');
 
-            this.addState('hidden');
+                this.addState('hidden');
 
-            /**
-             * 隐藏后
-             * @event afterhide
-             */
-            this.fire('afterhide');
+                /**
+                 * 隐藏后
+                 * @event afterhide
+                 */
+                this.fire('afterhide');
+            }
         },
 
         /**
@@ -388,7 +399,7 @@ define(function(require) {
 
                 //清除直接挂载的事件
                 _.each(this, function(value, key) {
-                    if (_.isFunction(value)) {
+                    if (_.isFunction(value) && key.indexOf('on') === 0) {
                         this[key] = null;
                         delete this[key];
                     }

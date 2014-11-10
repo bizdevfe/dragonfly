@@ -89,11 +89,3 @@ Clone [bizdevfe/api](https://github.com/bizdevfe/api/tree/gh-pages)，并保证�
     $ node r.js -o build-css.js
 
 > 编译代码不提交，最后根据分支代码统一生成。
-
-##附件
-
-###控件生命周期
-<img src="examples/asset/img/life.png" />
-
-###事件队列
-<img src="examples/asset/img/event.png" />

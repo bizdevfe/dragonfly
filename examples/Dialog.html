@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>SidePanel</title>
+    <title>Dialog</title>
     <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
     <link rel="stylesheet" type="text/css" href="../src/asset/default/main.css" />
     <link rel="shortcut icon" href="asset/img/favicon.ico"/>
@@ -12,54 +12,59 @@
 </head>
 
 <body>
-<h1>SidePanel</h1>
+<h1>Dialog</h1>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
     <button type="button" id="show">show</button>
     <button type="button" id="getContent">getContent</button><br />
+    <button type="button" id="alert">Dialog.alert</button>
+    <button type="button" id="confirm">Dialog.confirm</button><br />
     <button type="button" id="destroy">destroy</button>
 </div>
 
 <script type="text/javascript">
-require(['ui/SidePanel'], function(SidePanel) {
-    var sidepanel = new SidePanel({
+require(['ui/Dialog'], function(Dialog) {
+    var dialog = new Dialog({
         hidden: true,
         title: 'Title',
-        content: 'content',
-        buttons: [
-            {
-                content: 'Create Account',
-                handler: function() {
-                    if (prompt("Account Name", "")) {
-                        this.hide();
-                    }
-                }
-            },
-            {
-                content: 'Cancel',
-                skin: 'dark',
-                handler: function() {
-                    this.hide();
-                }
-            }
-        ]
+        content: 'Content'
     });
-    sidepanel.render();
+    dialog.render();
     
     $('#console').click(function() {
-        console.log(sidepanel);
+        console.log(dialog);
     });
     
     $('#show').click(function() {
-        sidepanel.show();
+        dialog.show();
     });
     
     $('#getContent').click(function() {
-        alert(sidepanel.getContent());
+        alert(dialog.getContent());
     });
     
     $('#destroy').click(function() {
-        sidepanel.destroy();
+        dialog.destroy();
+    });
+    
+    $('#alert').click(function() {
+        Dialog.alert({
+            title: 'Wanning',
+            content: 'Earth is dangerous!',
+            okText: 'Got it'
+        });
+    });
+    
+    $('#confirm').click(function() {
+        Dialog.confirm({
+            title: 'Confirmation',
+            content: 'Go to Mars?',
+            okText: 'Yes',
+            cancelText: 'No',
+            onOK: function() {
+                alert('Good luck!');
+            }
+        });
     });
 });
 </script>

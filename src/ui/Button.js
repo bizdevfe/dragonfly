@@ -19,9 +19,9 @@ define(function(require) {
      *     @example
      *     //默认值
      *     {
-     *         content: '',     //按钮文字
      *         disabled: false, //是否禁用
      *         hidden: false,   //是否隐藏
+     *         content: '',     //按钮文字
      *         skin: 'default'  //皮肤：'spring', 'dark'
      *     }
      */
@@ -39,9 +39,9 @@ define(function(require) {
          */
         initOptions: function(options) {
             this.options = _.extend({
-                content: '',
                 disabled: false,
                 hidden: false,
+                content: '',
                 skin: 'default'
             }, options || {});
         },
@@ -67,7 +67,7 @@ define(function(require) {
         initPainters: function() {
             this.painters = {
                 hidden: function(hidden) {
-                    this.main.style.display = hidden ? 'none' : '';
+                    base.css(this.main, {display: hidden ? 'none' : ''});
                 },
                 disabled: function(disabled) {
                     this.main.disabled = disabled;

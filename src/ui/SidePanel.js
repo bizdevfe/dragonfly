@@ -7,6 +7,7 @@
 define(function(require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
+        lang = require('lang/zh-CN'),
         Widget = require('ui/Widget'),
         Button = require('ui/Button');
 
@@ -15,7 +16,7 @@ define(function(require) {
         '<div class="df-sidepanel">',
         '<div class="df-sidepanel-margin"></div>',
         '<div class="df-sidepanel-body">',
-        '<h1><%= title %></h1>',
+        '<h1 class="df-sidepanel-title"><%= title %></h1>',
         '<div class="df-sidepanel-content"><%= content %></div>',
         '<div class="df-sidepanel-bottom"></div>',
         '</div>',
@@ -32,14 +33,16 @@ define(function(require) {
      *     @example
      *     //默认参数
      *     {
-     *         title: '',      //标题
-     *         content: '',    //内容
-     *         hidden: false,  //渲染后是否隐藏
-     *         buttons: [      //按钮组
-                   {content: 'OK', handler: this.hide},
-                   {content: 'Cancel', skin: 'dark', handler: this.hide}
-               ],
-               duration: 300
+     *         hidden: false,   //渲染后是否隐藏
+     *         title: '',       //标题
+     *         content: '',     //内容
+     *         buttons: [       //按钮组
+     *             {content: lang.OKButtonText, handler: this.hide},
+     *             {content: lang.CancelButtonText, handler: this.hide, skin: 'dark'}
+     *         ],
+     *         'z-index': 1000, //层叠级别
+     *         padding: 0,      //内容左右padding
+     *         duration: 300    //动画时间
      *     }
      */
     function SidePanel(options) {
@@ -56,17 +59,19 @@ define(function(require) {
          */
         initOptions: function(options) {
             this.options = _.extend({
+                hidden: false,
                 title: '',
                 content: '',
-                hidden: false,
                 buttons: [{
-                    content: 'OK',
+                    content: lang.OKButtonText,
                     handler: this.hide
                 }, {
-                    content: 'Cancel',
+                    content: lang.CancelButtonText,
+                    handler: this.hide,
                     skin: 'dark',
-                    handler: this.hide
                 }],
+                'z-index': 1000,
+                padding: 60,
                 duration: 300
             }, options || {});
         },
@@ -78,7 +83,9 @@ define(function(require) {
          * @override
          */
         initElements: function() {
-            this.main.style.display = 'none';
+            base.css(this.main, {
+                display: 'none'
+            });
             this.main.innerHTML = _.template(tpl)({
                 title: this.options.title,
                 content: this.options.content
@@ -88,16 +95,17 @@ define(function(require) {
             this.mask = base.children(this.main, '.df-mask')[0];
             this.panel = base.children(this.main, '.df-sidepanel')[0];
             this.panelBody = base.children(this.main, '.df-sidepanel-body')[0];
+            this.panelContent = base.children(this.main, '.df-sidepanel-content')[0];
             this.panelBottom = base.children(this.main, '.df-sidepanel-bottom')[0];
 
             //创建按钮组
             this.buttons = [];
             _.each(this.options.buttons, function(item) {
-                var panel = this;
-                var button = new Button({
-                    content: item.content,
-                    skin: item.skin || 'default'
-                });
+                var panel = this,
+                    button = new Button({
+                        content: item.content,
+                        skin: item.skin || 'default'
+                    });
                 button.on('click', function(e) {
                     item.handler.call(panel, e);
                 });
@@ -105,6 +113,18 @@ define(function(require) {
 
                 this.buttons.push(button);
             }, this);
+
+            //设置样式
+            base.css(this.mask, {
+                'z-index': this.options['z-index']
+            });
+            base.css(this.panel, {
+                'z-index': this.options['z-index'] + 1
+            });
+            base.css(this.panelContent, {
+                'padding-left': this.options.padding + 'px',
+                'padding-right': this.options.padding + 'px'
+            });
         },
 
         /**
@@ -129,7 +149,10 @@ define(function(require) {
                             overflow: 'hidden'
                         });
 
-                        var scrollTop = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+                        var scrollTop = Math.max(
+                            document.body.scrollTop,
+                            document.documentElement.scrollTop
+                        );
                         base.css(this.mask, {
                             top: scrollTop + 'px'
                         });
@@ -148,7 +171,10 @@ define(function(require) {
                             }
                         });
                     } else {
-                        var pageWidth = Math.max(document.body.offsetWidth, document.documentElement.offsetWidth);
+                        var pageWidth = Math.max(
+                            document.body.offsetWidth,
+                            document.documentElement.offsetWidth
+                        );
                         base.transform(this.panel, {
                             left: pageWidth
                         }, this.options.duration, function() {
@@ -191,8 +217,18 @@ define(function(require) {
             this.mask = null;
             this.panel = null;
             this.panelBody = null;
+            this.panelContent = null;
             this.panelBottom = null;
             this.buttons = null;
+        },
+
+        /**
+         * 获取内容容器
+         *
+         * @return {HTMLElement} 内容容器
+         */
+        getContent: function() {
+            return this.panelContent;
         }
     };
 

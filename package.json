@@ -1,7 +1,7 @@
 {
     "name": "Dragonfly",
     "version": "0.1.0",
-    "description": "A flexible and light ui framework",
+    "description": "Dragonfly is a Flat UI framework designed for modern web applications",
     "main": "main",
     "maintainers": [
         {

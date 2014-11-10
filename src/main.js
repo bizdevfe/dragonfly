@@ -46,16 +46,34 @@ define(function(require) {
         Button: require('ui/Button'),
 
         /**
-         * Table构造器，参见{@link Table}
-         * @method Table
+         * Input构造器，参见{@link Input}
+         * @method Input
          */
-        Table: require('ui/Table'),
+        Input: require('ui/Input'),
 
         /**
-         * DropdownButton构造器，参见{@link DropdownButton}
-         * @method DropdownButton
+         * Textarea构造器，参见{@link Textarea}
+         * @method Textarea
          */
-        DropdownButton: require('extension/DropdownButton')
+        Textarea: require('ui/Textarea'),
+
+        /**
+         * TextLine构造器，参见{@link TextLine}
+         * @method TextLine
+         */
+        TextLine: require('extension/TextLine'),
+
+        /**
+         * Dialog构造器，参见{@link Dialog}
+         * @method Dialog
+         */
+        Dialog: require('ui/Dialog'),
+
+        /**
+         * SidePanel构造器，参见{@link SidePanel}
+         * @method SidePanel
+         */
+        SidePanel: require('ui/SidePanel')
     });
 
     return main;

@@ -2,39 +2,75 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Examples</title>
+    <title>Dragonfly</title>
     <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
+    <link rel="shortcut icon" href="asset/img/favicon.ico"/>
 </head>
 
 <body>
-    <h1>Examples</h1>
-    <div class="logo"></div>
-    <h3>Modular Development</h3>
-    <table class="list">
-        <tr>
-            <th>UI</th>
-            <th>Plugin</th>
-        </tr>
-        <tr>
-            <td>
-                <ul>
-                    <li><a href="Button.html">Button</a></li>
-                    <li><a href="SidePanel.html">SidePanel</a></li>
-                    <li><a href="Table.html">Table</a></li>
-                </ul>
-            </td>
-            <td>
-                <ul>
-                    <li>TableSort</li>
-                    <li>TableEdit</li>
-                </ul>
-            </td>
-        </tr>
-    </table>
-    <h3>Optimized</h3>
-    <ul>
-        <li><a href="optimized-amd.html">Use dargonfly as one AMD module</a></li>
-        <li><a href="optimized.html">Use dargonfly via a global API</a></li>
-    </ul>
+<h1><div class="logo">Dragonfly</div></h1>
+<div class="nav">
+    <a href="#Introduction">Introduction</a>
+    <a href="#Demos">Demos</a>
+    <a href="#Guides">Guides</a>
+    <a href="http://bizdevfe.github.io/api/dragonfly/" target="_blank">API</a>
+    <a href="https://github.com/bizdevfe/dragonfly/archive/master.zip">Download</a>
+    <a href="https://github.com/bizdevfe/dragonfly" target="_blank">GitHub</a>
+</div>
+<div class="main">
+<a name="Introduction"></a><h2>Introduction</h2>
+<p>Dragonfly is a Flat UI framework designed for modern web applications. It's flexible, modular and supports for extensions.</p>
+<a name="Demos"></a><h2>Demos</h2>
+<ul>
+    <li><a target="_blank" href="Button.html">Button</a></li>
+    <li><a target="_blank" href="Input.html">Input</a></li>
+    <li>
+        <a target="_blank" href="Textarea.html">Textarea</a>
+        <div class="ext">Extensions:</div>
+        <ul>
+            <li><a target="_blank" href="TextLine.html">TextLine</a></li>
+        </ul>
+    </li>
+    <li><a target="_blank" href="Dialog.html">Dialog</a></li>
+    <li><a target="_blank" href="SidePanel.html">SidePanel</a></li>
+</ul>
+
+<a name="Guides"></a><h2>Guides</h2>
+<h3>Dynamic Loading</h3>
+<p>Dragonfly follows the <a target="_blank" href="https://github.com/amdjs/amdjs-api/blob/master/AMD.md">AMD specification</a>, you can use any single js file as a AMD module and load it with a AMD loader, for example:</p>
+<pre class="code">
+require(['Button'], function(Button) {
+    var button = new Button();
+    button.render();
+});
+</pre>
+
+<h3>Optimization</h3>
+<p>If you want to optimize all the modules into one file (alse as one AMD module), follow the steps below:</p>
+<pre class="code">
+npm install -g requirejs
+cd tools
+node r.js -o build-js.js
+node r.js -o build-css.js
+</pre>
+<p>The optimized files will be created in the ./output folder. For more settings about optimization, see: <a target="_blank" href="https://github.com/jrburke/r.js/blob/master/build/example.build.js">example.build.js</a>.</p>
+
+<h3>Namespace</h3>
+<p>If you don't have an AMD loader like RequireJS, Dragonfly will export a global API entry called "D". Modify the ./src/loader/start.frag or call the D.noConflic() method if you want to define your own namespace:</p>
+<pre class="code">
+//modify start.frag
+root.D = factory();
+
+//call method
+var myD = D.noConflict();
+</pre>
+<h2>Compatibility</h2>
+<img src="asset/img/ie.png" /><span>7+</span>
+<img src="asset/img/firefox.png" /><span>8+</span>
+<img src="asset/img/chrome.png" /><span>4+</span>
+<img src="asset/img/safari.png" /><span>5+</span>
+<img src="asset/img/opera.png" /><span>9+</span>
+</div>
+<div class="footer">&copy; 2014 Sogou BizdevFE</div>
 </body>
 </html>

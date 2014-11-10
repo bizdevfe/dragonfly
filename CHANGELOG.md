@@ -1,3 +1,4 @@
 0.1.0
 ---
-* modular framework
+* Support for Button, Input, Textarea, Dialog and SidePanel
+* Add extension: TextLine

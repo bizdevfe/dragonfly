@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>TextLine</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../src/asset/default/main.css" />
+    <link rel="shortcut icon" href="asset/img/favicon.ico"/>
+    <script type="text/javascript" src="asset/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="asset/js/require.js"></script>
+    <script type="text/javascript" src="asset/js/config.js"></script>
+</head>
+
+<body>
+<h1>TextLine</h1>
+<div id="container"></div>
+<a id="console" href="javascript:void(0)">print instance</a>
+<div class="operation">
+    <button type="button" id="disable">disable</button>
+    <button type="button" id="enable">enable</button><br />
+    <button type="button" id="getValue">getValue</button>
+    <button type="button" id="setValue">setValue</button><input type="text" id="value" />
+    <button type="button" id="empty">empty</button><br />
+    <button type="button" id="getLength">getLength</button>
+    <button type="button" id="getValueArray">getValueArray</button><br />
+    <button type="button" id="destroy">destroy</button>
+</div>
+
+<script type="text/javascript">
+var textline;
+require(['ui/Textarea', 'extension/TextLine'], function(Textarea, TextLine) {
+    textline = new Textarea({
+        value: 'first\nsecond',
+        extensions: [
+            new TextLine()
+        ]
+    });
+    textline.render('container');
+    
+    $('#console').click(function() {
+        console.log(textline);
+    });
+    
+    $('#disable').click(function() {
+        textline.disable();
+    });
+    
+    $('#enable').click(function() {
+        textline.enable();
+    });
+    
+    $('#getValue').click(function() {
+        alert(textline.getValue());
+    });
+    
+    $('#setValue').click(function() {
+        textline.setValue($('#value').val());
+    });
+    
+    $('#empty').click(function() {
+        textline.empty();
+    });
+    
+    $('#getLength').click(function() {
+        alert(textline.getLength());
+    });
+    
+    $('#getValueArray').click(function() {
+        console.log(textline.getValueArray());
+    });
+    
+    $('#destroy').click(function() {
+        textline.destroy();
+    });
+});
+</script>
+</body>
+</html>

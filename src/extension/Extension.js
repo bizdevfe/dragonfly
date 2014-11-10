@@ -20,8 +20,15 @@ define(function(require) {
     Extension.prototype = {
         /**
          * @property {Widget} target 控件实例
+         * @protected
          */
         target: null,
+
+        /**
+         * @property {HTMLElement} main 控件主元素
+         * @protected
+         */
+        main: null,
 
         /**
          * 初始化扩展

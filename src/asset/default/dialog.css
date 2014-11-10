@@ -1,0 +1,44 @@
+/**
+ * 对话框样式
+ * @author Ricky
+ */
+.df-dialog {
+    top: 50%;
+    left: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0 0 8px #888;
+    box-shadow: 0 0 8px #888
+}
+.df-dialog-title {
+    margin: 0;
+    padding: 0 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #fff;
+    background: #707070;
+    position: relative;
+}
+.df-dialog-title .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 11px;
+    height: 11px;
+    background: url(img/close.png);
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .5s ease-in-out
+}
+.df-dialog-title .close:hover {
+    -webkit-transform: rotate(90deg)
+}
+.df-dialog-content {
+    padding: 20px;
+    overflow: auto
+}
+.df-dialog-bottom {
+    padding: 20px 0;
+    height: 30px;
+    text-align: center
+}

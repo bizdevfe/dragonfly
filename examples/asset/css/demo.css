@@ -1,31 +1,136 @@
 body {
     font-family: Verdana;
-    margin: 30px
+    margin: 0
 }
 h1 {
-    color: #666
+    margin: 0;
+    padding: 10px 30px;
+    color: #fff;
+    background: #3498db
+}
+#container {
+    padding: 30px;
+    border-bottom: 1px #ccc solid;
+    background: #efefef
+}
+.operation {
+    padding: 30px
+}
+.operation button {
+    display: inline-block;
+    line-height: normal;
+    margin: 0 10px 10px 0;
+    padding: 5px 15px;
+    border: 1px #ccc solid;
+    border-radius: 2px;
+    color: #666;
+    font-size: 14px;
+    font-family: Verdana;
+    background: #eee;
+    cursor: pointer;
+    text-align: center;
+    overflow: visible;
+    outline: none
+}
+.operation button:hover {
+    background: #fff
+}
+.operation input {
+    height: 15px;
+    line-height: 15px;
+    margin: 0 10px 10px 0;
+    padding: 5px;
+    border: 1px #ccc solid;
+    border-radius: 2px;
+    font-family: Verdana;
+    outline: none
+}
+#console {
+    display: block;
+    padding-left: 25px;
+    margin-left: 30px;
+    width: 90px;
+    height: 20px;
+    line-height: 20px;
+    border: 1px #ccc solid;
+    border-top: 0;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background:#eee url(../img/console.png) 5px center no-repeat;
+    color: #666;
+    font-size: 12px;
+    text-decoration: none
+}
+#console:hover {
+    background-color: #fff;
+}
+
+/*index*/
+.nav {
+    height: 40px;
+    line-height: 40px;
+    background: #2980b9;
+    text-align: center
+}
+.nav a {
+    display: inline-block;
+    height: 40px;
+    padding: 0 30px;
+    color: #fff;
+    text-decoration: none
+}
+.nav a:hover {
+    background: #3498db
 }
 .logo {
-    width: 187px;
-    height: 131px;
-    background: url(../img/logo.png)
+    margin: 0 auto;
+    width: 580px;
+    padding-left: 220px;
+    height: 160px;
+    line-height: 160px;
+    background:url(../img/logo.png) left center no-repeat;
 }
-.list {
-    margin-top: 20px
+.main {
+    margin: 20px auto;
+    width: 800px;
+    color: #666
 }
-a {
-    color: #06c
+.main h2 {
+    color: #333;
+    font-size: 20px
 }
-pre {
+.main h3 {
+    color: #333;
+    font-size: 16px
+}
+.main a {
+    color: #2980b9
+}
+.main ul {
+    margin-left: 0;
+    padding-left: 0;
+    list-style: none
+}
+.main li {
+    margin-bottom: 5px;
+    padding-left: 20px;
+    background: url(../img/li.png) left 8px no-repeat
+}
+.main .ext {
+    margin: 5px 0
+}
+.footer {
+    padding: 50px 0;
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    border-top: 1px #efefef solid
+}
+pre.code {
+    margin: 0;
     padding: 20px;
     font-family: Consolas;
     background: #f7f7f7;
-    border-radius: 3px;
-    border:1px #ccc solid
-}
-#container {
-    height: 100px;
-    padding: 10px;
-    border: 1px #ccc solid;
-    background: #efefef
+    border:1px #efefef solid;
+    border-radius: 5px
 }

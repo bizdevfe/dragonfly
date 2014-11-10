@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Textarea</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../src/asset/default/main.css" />
+    <link rel="shortcut icon" href="asset/img/favicon.ico"/>
+    <script type="text/javascript" src="asset/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="asset/js/require.js"></script>
+    <script type="text/javascript" src="asset/js/config.js"></script>
+</head>
+
+<body>
+<h1>Textarea</h1>
+<div id="container"></div>
+<a id="console" href="javascript:void(0)">print instance</a>
+<div class="operation">
+    <button type="button" id="disable">disable</button>
+    <button type="button" id="enable">enable</button><br />
+    <button type="button" id="getValue">getValue</button>
+    <button type="button" id="setValue">setValue</button><input type="text" id="value" />
+    <button type="button" id="empty">empty</button><br />
+    <button type="button" id="getLength">getLength</button><br />
+    <button type="button" id="destroy">destroy</button>
+</div>
+
+<script type="text/javascript">
+require(['ui/Textarea'], function(Textarea) {
+    var textarea = new Textarea();
+    textarea.on('focus', function() {
+        console.log('onfocus');
+    });
+    textarea.on('blur', function() {
+        console.log('onblur');
+    });
+    textarea.render('container');
+    
+    $('#console').click(function() {
+        console.log(textarea);
+    });
+    
+    $('#disable').click(function() {
+        textarea.disable();
+    });
+    
+    $('#enable').click(function() {
+        textarea.enable();
+    });
+    
+    $('#getValue').click(function() {
+        alert(textarea.getValue());
+    });
+    
+    $('#setValue').click(function() {
+        textarea.setValue($('#value').val());
+    });
+    
+    $('#empty').click(function() {
+        textarea.empty();
+    });
+    
+    $('#getLength').click(function() {
+        alert(textarea.getLength());
+    });
+    
+    $('#destroy').click(function() {
+        textarea.destroy();
+    });
+});
+</script>
+</body>
+</html>

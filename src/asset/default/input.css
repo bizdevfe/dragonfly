@@ -1,0 +1,44 @@
+/**
+ * 输入框/文本框
+ * @author Ricky
+ */
+.df-input, .df-textarea {
+    padding: 5px;
+    color: #333;
+    border: 1px #e2e2e2 solid;
+    border-radius: 2px;
+    font-size: 14px;
+    outline: none
+}
+.df-textarea {
+    line-height: 20px;
+    resize: none
+}
+.df-input-hover, .df-textarea-hover {
+    border-color: #ccc
+}
+.df-input-focus, .df-textarea-focus {
+    border-color: #007aff
+}
+.df-input-disable, .df-textarea-disable {
+    background: #f1f1f1;
+    color: #b6b6b6
+}
+.df-textarea-line {
+    position: absolute;
+    padding: 5px;
+    width: 15px;
+    background: #007aff;
+    overflow: hidden
+}
+.df-textarea-line pre, .df-textarea-line .pre {
+    position: absolute;
+    top: 5px;
+    margin: 0;
+    width: 15px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px
+}
