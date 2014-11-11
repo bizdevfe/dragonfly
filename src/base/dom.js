@@ -53,6 +53,28 @@ define(function(require) {
     };
 
     /**
+     * 获取元素绝对位置
+     *
+     * @param {HTMLElement|String} elm 目标元素或id
+     * @return {Object} 绝对位置
+     */
+    dom.offset = function(elm) {
+        elm = dom.g(elm);
+        var actualLeft = elm.offsetLeft,
+            actualTop = elm.offsetTop,
+            current = elm.offsetParent;
+        while (current !== null) {
+            actualLeft += current.offsetLeft;
+            actualTop += current.offsetTop;
+            current = current.offsetParent;
+        }
+        return {
+            left: actualLeft,
+            top: actualTop
+        };
+    };
+
+    /**
      * 创建元素
      *
      * @param {String} selector 选择器

@@ -29,11 +29,11 @@
     padding: 5px;
     width: 15px;
     background: #007aff;
+    border: 1px #007aff solid;
     overflow: hidden
 }
 .df-textarea-line pre, .df-textarea-line .pre {
     position: absolute;
-    top: 5px;
     margin: 0;
     width: 15px;
     color: #fff;

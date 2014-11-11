@@ -30,6 +30,7 @@ define(function(require) {
             base.css(this.main, {
                 'padding-left': 30 + 'px'
             });
+            var offset = base.offset(this.main);
 
             //创建行号容器
             this.line = document.createElement('div');
@@ -37,8 +38,8 @@ define(function(require) {
             base.addClass(this.line, 'df-textarea-line');
             base.css(this.line, {
                 height: this.target.options.height + 'px',
-                top: base.ie && base.ie <= 7 ? 91 : 90 + 'px', //???
-                left: 31 + 'px'
+                top: offset.top + 'px',
+                left: offset.left + 'px'
             });
 
             //创建行号
