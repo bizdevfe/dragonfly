@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h1><div class="logo">Dragonfly</div></h1>
+<h1><div class="logo">Dragonfly<br><span>A Flat UI framework for modern web applications</span></div></h1>
 <div class="nav">
     <a href="#Introduction">Introduction</a>
     <a href="#Demos">Demos</a>
@@ -21,6 +21,7 @@
 <a name="Introduction"></a><h2>Introduction</h2>
 <p>Dragonfly is a Flat UI framework designed for modern web applications. It's flexible, modular and supports for extensions.</p>
 <a name="Demos"></a><h2>Demos</h2>
+<img src="asset/img/ui.png" class="ui" />
 <ul>
     <li><a target="_blank" href="Button.html">Button</a></li>
     <li><a target="_blank" href="Input.html">Input</a></li>
@@ -31,8 +32,17 @@
             <li><a target="_blank" href="TextLine.html">TextLine</a></li>
         </ul>
     </li>
+    <li><a target="_blank" href="Radio.html">Radio</a></li>
+    <li><a target="_blank" href="Checkbox.html">Checkbox</a></li>
+    <li><a target="_blank" href="Select.html">Select</a></li>
+    <li><a target="_blank" href="Tooltip.html">Tooltip</a></li>
+    <li><a target="_blank" href="Tab.html">Tab</a></li>
     <li><a target="_blank" href="Dialog.html">Dialog</a></li>
     <li><a target="_blank" href="SidePanel.html">SidePanel</a></li>
+    <li><a target="_blank" href="Table.html">Table</a></li>
+    <li><a target="_blank" href="Page.html">Page</a></li>
+    <li><a target="_blank" href="Tree.html">Tree</a></li>
+    <li><a target="_blank" href="Calendar.html">Calendar</a></li>
 </ul>
 
 <a name="Guides"></a><h2>Guides</h2>
@@ -46,7 +56,7 @@ require(['Button'], function(Button) {
 </pre>
 
 <h3>Optimization</h3>
-<p>If you want to optimize all the modules into one file (alse as one AMD module), follow the steps below:</p>
+<p>If you want to optimize all the modules into one file (also as one AMD module), follow the steps below:</p>
 <pre class="code">
 npm install -g requirejs
 cd tools
@@ -56,7 +66,7 @@ node r.js -o build-css.js
 <p>The optimized files will be created in the ./output folder. For more settings about optimization, see: <a target="_blank" href="https://github.com/jrburke/r.js/blob/master/build/example.build.js">example.build.js</a>.</p>
 
 <h3>Namespace</h3>
-<p>If you don't have an AMD loader like RequireJS, Dragonfly will export a global API entry called "D". Modify the ./src/loader/start.frag or call the D.noConflic() method if you want to define your own namespace:</p>
+<p>If you don't have an AMD loader like RequireJS, Dragonfly will export a global API entry called "D". Modify the <i>./src/loader/start.frag</i> or call the <i>D.noConflic()</i> method if you want to define your own namespace:</p>
 <pre class="code">
 //modify start.frag
 root.D = factory();
@@ -71,6 +81,6 @@ var myD = D.noConflict();
 <img src="asset/img/safari.png" /><span>5+</span>
 <img src="asset/img/opera.png" /><span>9+</span>
 </div>
-<div class="footer">&copy; 2014 Sogou BizdevFE</div>
+<div class="footer">&copy; 2014 Dragonfly Team</div>
 </body>
 </html>

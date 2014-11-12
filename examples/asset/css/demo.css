@@ -1,12 +1,12 @@
 body {
-    font-family: Verdana;
+    font-family: Helvetica, Arial;
     margin: 0
 }
 h1 {
     margin: 0;
     padding: 10px 30px;
     color: #fff;
-    background: #3498db
+    background: url(../img/bg.png)
 }
 #container {
     padding: 30px;
@@ -25,7 +25,7 @@ h1 {
     border-radius: 2px;
     color: #666;
     font-size: 14px;
-    font-family: Verdana;
+    font-family: Helvetica, Arial;
     background: #eee;
     cursor: pointer;
     text-align: center;
@@ -42,7 +42,7 @@ h1 {
     padding: 5px;
     border: 1px #ccc solid;
     border-radius: 2px;
-    font-family: Verdana;
+    font-family: Helvetica, Arial;
     outline: none
 }
 #console {
@@ -56,7 +56,7 @@ h1 {
     border-top: 0;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
-    background:#eee url(../img/console.png) 5px center no-repeat;
+    background: #eee url(../img/console.png) 5px center no-repeat;
     color: #666;
     font-size: 12px;
     text-decoration: none
@@ -69,31 +69,43 @@ h1 {
 .nav {
     height: 40px;
     line-height: 40px;
-    background: #2980b9;
+    background: #2185c8;
     text-align: center
 }
 .nav a {
     display: inline-block;
     height: 40px;
     padding: 0 30px;
+    font-size: 18px;
     color: #fff;
     text-decoration: none
 }
 .nav a:hover {
-    background: #3498db
+    background: #40a4e7
 }
 .logo {
     margin: 0 auto;
     width: 580px;
-    padding-left: 220px;
-    height: 160px;
-    line-height: 160px;
-    background:url(../img/logo.png) left center no-repeat;
+    height: 150px;
+    padding: 50px 0 0 220px;
+    font-size: 45px;
+    background: url(../img/logo.png) left center no-repeat
+}
+.logo span {
+    margin-left: 35px;
+    font-size: 20px;
+    font-weight: normal
 }
 .main {
-    margin: 20px auto;
+    margin: 30px auto;
     width: 800px;
-    color: #666
+    color: #666;
+    position: relative
+}
+.ui {
+    position: absolute;
+    top: 150px;
+    left: 165px
 }
 .main h2 {
     color: #333;
@@ -101,6 +113,10 @@ h1 {
 }
 .main h3 {
     color: #333;
+    font-size: 16px
+}
+.main p {
+    line-height: 24px;
     font-size: 16px
 }
 .main a {
@@ -112,25 +128,25 @@ h1 {
     list-style: none
 }
 .main li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     padding-left: 20px;
     background: url(../img/li.png) left 8px no-repeat
 }
 .main .ext {
-    margin: 5px 0
+    margin: 10px 0
 }
 .footer {
     padding: 50px 0;
     text-align: center;
-    color: #666;
-    font-size: 13px;
-    border-top: 1px #efefef solid
+    color: #949da7;
+    font-size: 14px;
+    background: #253237
 }
 pre.code {
     margin: 0;
     padding: 20px;
     font-family: Consolas;
     background: #f7f7f7;
-    border:1px #efefef solid;
+    border: 1px #efefef solid;
     border-radius: 5px
 }
