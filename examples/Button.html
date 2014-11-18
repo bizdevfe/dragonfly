@@ -23,15 +23,15 @@
     <button type="button" id="show">show</button>
     <button type="button" id="toggle">toggle</button>
     <button type="button" id="isHidden">isHidden</button><br />
-    <button type="button" id="getContent">getContent</button>
-    <button type="button" id="setContent">setContent</button><input type="text" id="content" /><br />
+    <button type="button" id="getText">getText</button>
+    <button type="button" id="setText">setText</button><input type="text" id="text" /><br />
     <button type="button" id="destroy">destroy</button>
 </div>
 
 <script type="text/javascript">
 require(['ui/Button'], function(Button) {
     var button1 = new Button({
-        content: 'default'
+        text: 'default'
     });
     button1.on('click', function(e) {
         alert('onclick');
@@ -39,20 +39,20 @@ require(['ui/Button'], function(Button) {
     button1.render('container');
     
     var button2 = new Button({
-        content: 'dark',
+        text: 'dark',
         skin: 'dark'
     });
     button2.render('container');
     
     var button3 = new Button({
-        content: 'spring',
+        text: 'spring',
         skin: 'spring'
     });
     button3.render('container');
     
     var button4 = new Button({
         disabled: true,
-        content: 'disabled'
+        text: 'disabled'
     });
     button4.render('container');
     
@@ -88,12 +88,12 @@ require(['ui/Button'], function(Button) {
         alert(button1.isHidden());
     });
     
-    $('#getContent').click(function() {
-        alert(button1.getContent());
+    $('#getText').click(function() {
+        alert(button1.getText());
     });
     
-    $('#setContent').click(function() {
-        button1.setContent($('#content').val());
+    $('#setText').click(function() {
+        button1.setText($('#text').val());
     });
     
     $('#destroy').click(function() {

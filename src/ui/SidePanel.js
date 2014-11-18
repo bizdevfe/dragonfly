@@ -37,8 +37,8 @@ define(function(require) {
      *         title: '',       //标题
      *         content: '',     //内容
      *         buttons: [       //按钮组
-     *             {content: lang.OKButtonText, handler: this.hide},
-     *             {content: lang.CancelButtonText, handler: this.hide, skin: 'dark'}
+     *             {text: lang.OKButtonText, click: this.hide},
+     *             {text: lang.CancelButtonText, click: this.hide, skin: 'dark'}
      *         ],
      *         'z-index': 1000, //层叠级别
      *         padding: 0,      //内容左右padding
@@ -63,11 +63,11 @@ define(function(require) {
                 title: '',
                 content: '',
                 buttons: [{
-                    content: lang.OKButtonText,
-                    handler: this.hide
+                    text: lang.OKButtonText,
+                    click: this.hide
                 }, {
-                    content: lang.CancelButtonText,
-                    handler: this.hide,
+                    text: lang.CancelButtonText,
+                    click: this.hide,
                     skin: 'dark',
                 }],
                 'z-index': 1000,
@@ -103,11 +103,11 @@ define(function(require) {
             _.each(this.options.buttons, function(item) {
                 var panel = this,
                     button = new Button({
-                        content: item.content,
+                        text: item.text,
                         skin: item.skin || 'default'
                     });
                 button.on('click', function(e) {
-                    item.handler.call(panel, e);
+                    item.click.call(panel, e);
                 });
                 button.render(this.panelBottom);
 
@@ -229,6 +229,42 @@ define(function(require) {
          */
         getContent: function() {
             return this.panelContent;
+        },
+
+        /**
+         * 显示面板
+         *
+         * @fires onopen
+         */
+        open: function() {
+            if (this.states) {
+                this.removeState('hidden');
+
+                /**
+                 * 显示后触发（等同于onaftershow）
+                 * @event onopen
+                 * @param {Event} e 事件对象
+                 */
+                this.fire('onopen');
+            }
+        },
+
+        /**
+         * 关闭面板
+         *
+         * @fires onclose
+         */
+        close: function() {
+            if (this.states) {
+                this.addState('hidden');
+
+                /**
+                 * 隐藏后触发（等同于onafterhdie）
+                 * @event onclose
+                 * @param {Event} e 事件对象
+                 */
+                this.fire('onclose');
+            }
         }
     };
 

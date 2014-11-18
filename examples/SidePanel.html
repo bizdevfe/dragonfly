@@ -15,7 +15,7 @@
 <h1>SidePanel</h1>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
-    <button type="button" id="show">show</button>
+    <button type="button" id="open">open</button>
     <button type="button" id="getContent">getContent</button><br />
     <button type="button" id="destroy">destroy</button>
 </div>
@@ -28,17 +28,17 @@ require(['ui/SidePanel'], function(SidePanel) {
         content: 'content',
         buttons: [
             {
-                content: 'Create Account',
-                handler: function() {
+                text: 'Create Account',
+                click: function() {
                     if (prompt("Account Name", "")) {
                         this.hide();
                     }
                 }
             },
             {
-                content: 'Cancel',
+                text: 'Cancel',
                 skin: 'dark',
-                handler: function() {
+                click: function() {
                     this.hide();
                 }
             }
@@ -50,8 +50,8 @@ require(['ui/SidePanel'], function(SidePanel) {
         console.log(sidepanel);
     });
     
-    $('#show').click(function() {
-        sidepanel.show();
+    $('#open').click(function() {
+        sidepanel.open();
     });
     
     $('#getContent').click(function() {

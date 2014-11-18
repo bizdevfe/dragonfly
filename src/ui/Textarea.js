@@ -51,6 +51,7 @@ define(function(require) {
         /**
          * 创建主元素
          *
+         * @return {HTMLElement} HTML元素
          * @protected
          * @override
          */
@@ -105,8 +106,9 @@ define(function(require) {
          */
         initEvents: function() {
             /**
-             * 获得焦点
-             * @event focus
+             * 获得焦点时触发
+             * @event onfocus
+             * @param {Event} e 事件对象
              */
             this.addDOMEvent(this.main, 'focus', function(e) {
                 base.addClass(this.main, 'df-textarea-focus');
@@ -114,8 +116,9 @@ define(function(require) {
             });
 
             /**
-             * 失去焦点
-             * @event blur
+             * 失去焦点时触发
+             * @event onblur
+             * @param {Event} e 事件对象
              */
             this.addDOMEvent(this.main, 'blur', function(e) {
                 base.removeClass(this.main, 'df-textarea-focus');

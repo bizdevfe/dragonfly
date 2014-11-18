@@ -68,6 +68,7 @@ define(function(require) {
         /**
          * 创建主元素（子类重写）
          *
+         * @return {HTMLElement} HTML元素
          * @protected
          */
         createMain: function() {
@@ -78,7 +79,6 @@ define(function(require) {
          * 初始化绘制函数（子类重写）
          *
          * @protected
-         * @abstract
          */
         initPainters: function() {
             this.painters = {};
@@ -88,14 +88,15 @@ define(function(require) {
          * 渲染
          *
          * @param {HTMLElement|String} [target] HTML元素或其id
-         * @fires beforerender
-         * @fires afterrender
+         * @fires onbeforerender
+         * @fires onafterrender
          */
         render: function(target) {
             if (!this.rendered) {
                 /**
-                 * 初次渲染前
-                 * @event beforerender
+                 * 初次渲染前触发
+                 * @event onbeforerender
+                 * @param {Event} e 事件对象
                  */
                 this.fire('beforerender');
 
@@ -113,8 +114,9 @@ define(function(require) {
                 this.rendered = true;
 
                 /**
-                 * 初次渲染后
-                 * @event afterrender
+                 * 初次渲染后触发
+                 * @event onafterrender
+                 * @param {Event} e 事件对象
                  */
                 this.fire('afterrender');
             }
@@ -207,7 +209,8 @@ define(function(require) {
          * 获取控件参数值
          *
          * @param {String} name 参数名
-         * @return {Mixed}
+         * @return {Mixed} 参数值
+         * @protected
          */
         get: function(name) {
             return this.options ? this.options[name] : null;
@@ -218,6 +221,7 @@ define(function(require) {
          *
          * @param {String} name 参数名
          * @param {Mixed} value 参数值
+         * @protected
          */
         set: function(name, value) {
             var option = {};
@@ -296,22 +300,24 @@ define(function(require) {
         /**
          * 显示控件
          *
-         * @fires beforeshow
-         * @fires aftershow
+         * @fires onbeforeshow
+         * @fires onaftershow
          */
         show: function() {
             if (this.states) {
                 /**
-                 * 显示前
-                 * @event beforeshow
+                 * 显示前触发
+                 * @event onbeforeshow
+                 * @param {Event} e 事件对象
                  */
                 this.fire('beforeshow');
 
                 this.removeState('hidden');
 
                 /**
-                 * 显示后
-                 * @event aftershow
+                 * 显示后触发
+                 * @event onaftershow
+                 * @param {Event} e 事件对象
                  */
                 this.fire('aftershow');
             }
@@ -320,22 +326,24 @@ define(function(require) {
         /**
          * 隐藏控件
          *
-         * @fires beforehide
-         * @fires afterhide
+         * @fires onbeforehide
+         * @fires onafterhide
          */
         hide: function() {
             if (this.states) {
                 /**
-                 * 隐藏前
-                 * @event beforehide
+                 * 隐藏前触发
+                 * @event onbeforehide
+                 * @param {Event} e 事件对象
                  */
                 this.fire('beforehide');
 
                 this.addState('hidden');
 
                 /**
-                 * 隐藏后
-                 * @event afterhide
+                 * 隐藏后触发
+                 * @event onafterhide
+                 * @param {Event} e 事件对象
                  */
                 this.fire('afterhide');
             }
@@ -358,16 +366,17 @@ define(function(require) {
         },
 
         /**
-         * 销毁
+         * 销毁控件
          *
-         * @fires beforedestroy
-         * @fires afterdestroy
+         * @fires onbeforedestroy
+         * @fires onafterdestroy
          */
         destroy: function() {
             if (!this.destroyed) {
                 /**
-                 * 销毁前
-                 * @event beforedestroy
+                 * 销毁前触发
+                 * @event onbeforedestroy
+                 * @param {Event} e 事件对象
                  */
                 this.fire('beforedestroy');
 
@@ -389,8 +398,9 @@ define(function(require) {
                 this.removeProp();
 
                 /**
-                 * 销毁后
-                 * @event afterdestroy
+                 * 销毁后触发
+                 * @event onafterdestroy
+                 * @param {Event} e 事件对象
                  */
                 this.fire('afterdestroy');
 

@@ -35,8 +35,8 @@ define(function(require) {
      *         title: '',       //标题
      *         content: '',     //内容
      *         buttons: [       //按钮组
-     *             {content: lang.OKButtonText, handler: this.hide},
-     *             {content: lang.CancelButtonText, handler: this.hide, skin: 'dark'}
+     *             {text: lang.OKButtonText, click: this.hide},
+     *             {text: lang.CancelButtonText, click: this.hide, skin: 'dark'}
      *         ],
      *         width: 480,      //宽度
      *         height: 240,     //高度
@@ -62,11 +62,11 @@ define(function(require) {
                 title: '',
                 content: '',
                 buttons: [{
-                    content: lang.OKButtonText,
-                    handler: this.hide
+                    text: lang.OKButtonText,
+                    click: this.hide
                 }, {
-                    content: lang.CancelButtonText,
-                    handler: this.hide,
+                    text: lang.CancelButtonText,
+                    click: this.hide,
                     skin: 'dark'
                 }],
                 width: 480,
@@ -102,11 +102,11 @@ define(function(require) {
             _.each(this.options.buttons, function(item) {
                 var panel = this,
                     button = new Button({
-                        content: item.content,
+                        text: item.text,
                         skin: item.skin || 'default'
                     });
                 button.on('click', function(e) {
-                    item.handler.call(panel, e);
+                    item.click.call(panel, e);
                 });
                 button.render(this.dialogBottom);
 
@@ -229,6 +229,42 @@ define(function(require) {
          */
         getContent: function() {
             return this.dialogContent;
+        },
+
+        /**
+         * 显示对话框
+         *
+         * @fires onopen
+         */
+        open: function() {
+            if (this.states) {
+                this.removeState('hidden');
+
+                /**
+                 * 显示后触发（等同于onaftershow）
+                 * @event onopen
+                 * @param {Event} e 事件对象
+                 */
+                this.fire('onopen');
+            }
+        },
+
+        /**
+         * 关闭对话框
+         *
+         * @fires onclose
+         */
+        close: function() {
+            if (this.states) {
+                this.addState('hidden');
+
+                /**
+                 * 隐藏后触发（等同于onafterhdie）
+                 * @event onclose
+                 * @param {Event} e 事件对象
+                 */
+                this.fire('onclose');
+            }
         }
     };
 
@@ -258,8 +294,8 @@ define(function(require) {
             title: options.title || '',
             content: options.content || '',
             buttons: [{
-                content: options.okText || lang.OKButtonText,
-                handler: onHide
+                text: options.okText || lang.OKButtonText,
+                click: onHide
             }],
             width: 360,
             height: 180
@@ -305,11 +341,11 @@ define(function(require) {
             title: options.title || '',
             content: options.content || '',
             buttons: [{
-                content: options.okText || lang.OKButtonText,
-                handler: onOK
+                text: options.okText || lang.OKButtonText,
+                click: onOK
             }, {
-                content: options.cancelText || lang.CancelButtonText,
-                handler: onHide,
+                text: options.cancelText || lang.CancelButtonText,
+                click: onHide,
                 skin: 'dark'
             }],
             width: 360,

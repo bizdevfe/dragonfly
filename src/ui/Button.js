@@ -21,7 +21,7 @@ define(function(require) {
      *     {
      *         disabled: false, //是否禁用
      *         hidden: false,   //是否隐藏
-     *         content: '',     //按钮文字
+     *         text: '',        //按钮文字
      *         skin: 'default'  //皮肤：'spring', 'dark'
      *     }
      */
@@ -41,7 +41,7 @@ define(function(require) {
             this.options = _.extend({
                 disabled: false,
                 hidden: false,
-                content: '',
+                text: '',
                 skin: 'default'
             }, options || {});
         },
@@ -49,6 +49,7 @@ define(function(require) {
         /**
          * 创建主元素
          *
+         * @return {HTMLElement} HTML元素
          * @protected
          * @override
          */
@@ -77,8 +78,8 @@ define(function(require) {
                         base.removeClass(this.main, 'df-button-disable');
                     }
                 },
-                content: function(content) {
-                    this.main.innerHTML = content;
+                text: function(text) {
+                    this.main.innerHTML = text;
                 }
             };
         },
@@ -102,8 +103,9 @@ define(function(require) {
          */
         initEvents: function() {
             /**
-             * 点击
-             * @event click
+             * 点击时触发
+             * @event onclick
+             * @param {Event} e 事件对象
              */
             this.addFiredDOMEvent(this.main, 'click');
 
@@ -138,10 +140,10 @@ define(function(require) {
         /**
          * 设置按钮文字
          *
-         * @param {String} content 按钮文字
+         * @param {String} text 按钮文字
          */
-        setContent: function(content) {
-            this.set('content', content);
+        setText: function(text) {
+            this.set('text', text);
         },
 
         /**
@@ -149,8 +151,8 @@ define(function(require) {
          *
          * @return {String} 按钮文字
          */
-        getContent: function() {
-            return this.get('content');
+        getText: function() {
+            return this.get('text');
         }
     };
 
