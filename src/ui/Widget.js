@@ -32,6 +32,9 @@ define(function(require) {
         //主元素
         this.main = this.createMain();
 
+        //id
+        this.id = base.guid();
+
         //初始化绘制函数
         this.initPainters();
 
@@ -133,6 +136,8 @@ define(function(require) {
             container.appendChild(this.main);
             //添加通用class
             base.addClass(this.main, 'df-widget');
+            //添加id
+            this.main.id = this.id;
         },
 
         /**
@@ -209,7 +214,7 @@ define(function(require) {
          * 获取控件参数值
          *
          * @param {String} name 参数名
-         * @return {Mixed} 参数值
+         * @return {*} 参数值
          * @protected
          */
         get: function(name) {
@@ -220,7 +225,7 @@ define(function(require) {
          * 设置控件参数值
          *
          * @param {String} name 参数名
-         * @param {Mixed} value 参数值
+         * @param {*} value 参数值
          * @protected
          */
         set: function(name, value) {

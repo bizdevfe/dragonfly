@@ -1,6 +1,6 @@
 /*
  * Dragonfly 0.1.0
- * A flexible and light ui framework
+ * A Flat UI framework designed for modern web applications.
  * (c) 2014 Sogou Inc. All rights reserved.
  * https://github.com/bizdevfe/dragonfly
  */

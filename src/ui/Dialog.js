@@ -7,7 +7,7 @@
 define(function(require) {
     var _ = require('underscore').noConflict(),
         base = require('base/base'),
-        lang = require('lang/zh-CN'),
+        lang = require('lang/i18n'),
         Event = require('event/Event'),
         Widget = require('ui/Widget'),
         Button = require('ui/Button');

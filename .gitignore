@@ -1,5 +1,3 @@
-.tmp
-
 ########################
 # node.js / npm
 ########################
@@ -51,6 +49,7 @@ local.properties
 # PDT-specific
 .buildpath
 
+# Build files
 output/
 
 #################
