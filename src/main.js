@@ -73,7 +73,18 @@ define(function(require) {
          * SidePanel构造器，参见{@link SidePanel}
          * @method SidePanel
          */
-        SidePanel: require('ui/SidePanel')
+        SidePanel: require('ui/SidePanel'),
+
+        /**
+         * Checkbox构造器，参见{@link SidePanel}
+         * @method SidePanel
+         */
+        Checkbox: require('ui/Checkbox'),
+        /**
+         * Checkbox构造器，参见{@link SidePanel}
+         * @method SidePanel
+         */
+        RadioButton: require('ui/RadioButton')
     });
 
     return main;
