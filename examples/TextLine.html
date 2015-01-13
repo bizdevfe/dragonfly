@@ -16,8 +16,6 @@
 <div id="container"></div>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
-    <button type="button" id="disable">disable</button>
-    <button type="button" id="enable">enable</button><br />
     <button type="button" id="getValue">getValue</button>
     <button type="button" id="setValue">setValue</button><input type="text" id="value" />
     <button type="button" id="empty">empty</button><br />
@@ -39,14 +37,6 @@ require(['ui/Textarea', 'extension/TextLine'], function(Textarea, TextLine) {
     
     $('#console').click(function() {
         console.log(textline);
-    });
-    
-    $('#disable').click(function() {
-        textline.disable();
-    });
-    
-    $('#enable').click(function() {
-        textline.enable();
     });
     
     $('#getValue').click(function() {

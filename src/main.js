@@ -1,7 +1,7 @@
 /*
  * Dragonfly 0.1.0
  * A Flat UI framework designed for modern web applications.
- * (c) 2014 Sogou Inc. All rights reserved.
+ * (c) 2015 Sogou Inc. All rights reserved.
  * https://github.com/bizdevfe/dragonfly
  */
 
@@ -62,6 +62,12 @@ define(function(require) {
          * @method TextLine
          */
         TextLine: require('extension/TextLine'),
+
+        /**
+         * Tab构造器，参见{@link Tab}
+         * @method Tab
+         */
+        Tab: require('ui/Tab'),
 
         /**
          * Dialog构造器，参见{@link Dialog}

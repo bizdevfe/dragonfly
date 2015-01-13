@@ -23,11 +23,11 @@ define(function(require) {
         this.rendered = false;
         this.destroyed = false;
 
-        //初始化状态
-        this.initStates(options);
-
         //初始化参数
         this.initOptions(options);
+
+        //初始化状态
+        this.initStates();
 
         //主元素
         this.main = this.createMain();
@@ -43,22 +43,6 @@ define(function(require) {
 
     Widget.prototype = {
         /**
-         * 初始化控件状态
-         *
-         * @param {Object} [options] 初始化参数
-         * @protected
-         */
-        initStates: function(options) {
-            this.states = {};
-            if (options && typeof options.disabled !== 'undefined') {
-                this.states.disabled = options.disabled;
-            }
-            if (options && typeof options.hidden !== 'undefined') {
-                this.states.hidden = options.hidden;
-            }
-        },
-
-        /**
          * 初始化参数（子类重写）
          *
          * @param {Object} [options] 初始化参数
@@ -66,6 +50,21 @@ define(function(require) {
          */
         initOptions: function(options) {
             this.options = _.extend({}, options || {});
+        },
+
+        /**
+         * 初始化控件状态
+         *
+         * @protected
+         */
+        initStates: function() {
+            this.states = {};
+            if (typeof this.options.disabled !== 'undefined') {
+                this.states.disabled = this.options.disabled;
+            }
+            if (typeof this.options.hidden !== 'undefined') {
+                this.states.hidden = this.options.hidden;
+            }
         },
 
         /**

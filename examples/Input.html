@@ -16,8 +16,6 @@
 <div id="container"></div>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
-    <button type="button" id="disable">disable</button>
-    <button type="button" id="enable">enable</button><br />
     <button type="button" id="getValue">getValue</button>
     <button type="button" id="setValue">setValue</button><input type="text" id="value" />
     <button type="button" id="empty">empty</button><br />
@@ -53,14 +51,6 @@ require(['ui/Input'], function(Input) {
     
     $('#console').click(function() {
         console.log(input1);
-    });
-    
-    $('#disable').click(function() {
-        input1.disable();
-    });
-    
-    $('#enable').click(function() {
-        input1.enable();
     });
     
     $('#getValue').click(function() {
