@@ -64,6 +64,17 @@ h1 {
 #console:hover {
     background-color: #fff;
 }
+.tooltip-trigger {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: #707070;
+    color: #fff;
+    border-radius: 2px;
+    position: absolute;
+    text-align: center;
+    cursor: pointer
+}
 
 /*index*/
 .nav {

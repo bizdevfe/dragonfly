@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Tooltip</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../src/asset/default/main.css" />
+    <link rel="shortcut icon" href="asset/img/favicon.ico"/>
+    <script type="text/javascript" src="asset/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="asset/js/require.js"></script>
+    <script type="text/javascript" src="asset/js/config.js"></script>
+</head>
+
+<body>
+<h1>Tooltip</h1>
+<div id="container"></div>
+<span class="tooltip-trigger" id="1" style="top:10px; left:10px">1</span>
+<span class="tooltip-trigger" id="2" style="top:10px; left:50%">2</span>
+<span class="tooltip-trigger" id="3" style="top:10px; right:10px">3</span>
+<span class="tooltip-trigger" id="4" style="top:50%; left:10px">4</span>
+<span class="tooltip-trigger" id="5" style="top:50%; left:50%">5</span>
+<span class="tooltip-trigger" id="6" style="top:50%; right:10px">6</span>
+<span class="tooltip-trigger" id="7" style="bottom:10px; left:10px">7</span>
+<span class="tooltip-trigger" id="8" style="bottom:10px; left:50%">8</span>
+<span class="tooltip-trigger" id="9" style="bottom:10px; right:10px">9</span>
+<a id="console" href="javascript:void(0)">print instance</a>
+<div class="operation">
+    <button type="button" id="destroy">destroy</button>
+</div>
+
+<script type="text/javascript">
+require(['ui/Tooltip'], function(Tooltip) {
+    var tooltip1 = new Tooltip({
+        id: '1',
+        content: 'Content'
+    });
+    tooltip1.render();
+    var tooltip2 = new Tooltip({
+        id: '2',
+        title: 'Title',
+        closeBtn: false,
+        content: 'Content'
+    });
+    tooltip2.render();
+    var tooltip3 = new Tooltip({
+        id: '3',
+        content: 'Content'
+    });
+    tooltip3.render();
+    var tooltip4 = new Tooltip({
+        id: '4',
+        content: 'Content'
+    });
+    tooltip4.render();
+    var tooltip5 = new Tooltip({
+        id: '5',
+        title: 'Title',
+        icon: '!',
+        content: 'Content'
+    });
+    tooltip5.render();
+    var tooltip6 = new Tooltip({
+        id: '6',
+        content: 'Content'
+    });
+    tooltip6.render();
+    var tooltip7 = new Tooltip({
+        id: '7',
+        content: 'Content'
+    });
+    tooltip7.render();
+    var tooltip8 = new Tooltip({
+        id: '8',
+        content: 'Content',
+        icon: '?',
+        delay: 0
+    });
+    tooltip8.render();
+    var tooltip9 = new Tooltip({
+        id: '9',
+        content: 'Content'
+    });
+    tooltip9.render();
+    
+    $('#console').click(function() {
+        console.log(tooltip1);
+    });
+    
+    $('#destroy').click(function() {
+        tooltip1.destroy();
+        tooltip2.destroy();
+        tooltip3.destroy();
+        tooltip4.destroy();
+        tooltip5.destroy();
+        tooltip6.destroy();
+        tooltip7.destroy();
+        tooltip8.destroy();
+        tooltip9.destroy();
+    });
+});
+</script>
+</body>
+</html>

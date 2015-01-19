@@ -64,6 +64,12 @@ define(function(require) {
         TextLine: require('extension/TextLine'),
 
         /**
+         * Tooltip构造器，参见{@link Tooltip}
+         * @method Tooltip
+         */
+        Tooltip: require('ui/Tooltip'),
+
+        /**
          * Tab构造器，参见{@link Tab}
          * @method Tab
          */

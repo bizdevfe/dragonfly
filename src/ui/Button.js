@@ -19,10 +19,10 @@ define(function(require) {
      *     @example
      *     //默认值
      *     {
-     *         disabled: false, //是否禁用
-     *         hidden: false,   //是否隐藏
-     *         text: '',        //按钮文字
-     *         skin: 'default'  //皮肤：'spring', 'dark'
+     *         disabled: false, //Boolean, 是否禁用
+     *         hidden: false,   //Boolean, 是否隐藏
+     *         text: '',        //String, 按钮文字
+     *         skin: 'default'  //String, 皮肤：'default', 'spring', 'dark'
      *     }
      */
     function Button(options) {

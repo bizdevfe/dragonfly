@@ -53,25 +53,81 @@ define(function(require) {
     };
 
     /**
-     * 获取元素绝对位置
+     * 获得/设置元素的位置
      *
-     * @param {HTMLElement|String} elm 目标元素或id
-     * @return {Object} 绝对位置
+     * @param {HTMLElement} elm 目标元素
+     * @param {Object} pos 位置数据
+     *
+     *     @example
+     *     dom.offset(element); //get
+     *     dom.offset(element, {top: 10, left: 30}); //set
      */
-    dom.offset = function(elm) {
-        elm = dom.g(elm);
-        var actualLeft = elm.offsetLeft,
-            actualTop = elm.offsetTop,
-            current = elm.offsetParent;
-        while (current !== null) {
-            actualLeft += current.offsetLeft;
-            actualTop += current.offsetTop;
-            current = current.offsetParent;
-        }
-        return {
-            left: actualLeft,
-            top: actualTop
+    dom.offset = function(element, pos) {
+        var offset = {
+            left: 0,
+            top: 0
         };
+        if (!element) {
+            return offset;
+        }
+        //如果传了pos，则认为是需要设置offset
+        if (pos && pos !== void 0) {
+            dom.setOffset(element, pos);
+        }
+        var doc = element.ownerDocument,
+            win,
+            docElem;
+        if (!doc) {
+            return;
+        }
+        docElem = doc.documentElement;
+        if (typeof element.getBoundingClientRect !== 'undefined') {
+            offset = element.getBoundingClientRect();
+        }
+        win = doc.defaultView || doc.parentWindow;
+        return {
+            top: offset.top + (win.pageYOffset || docElem.scrollTop) - (docElem.clientTop || 0),
+            left: offset.left + (win.pageXOffset || docElem.scrollLeft) - (docElem.clientLeft || 0)
+        };
+    };
+
+    /**
+     * 设置元素的位置
+     *
+     * @param {HTMLElement} element 目标元素
+     * @param {Object} pos 位置数据
+     * @protected
+     */
+    dom.setOffset = function(element, pos) {
+        if (!element) {
+            return;
+        }
+        var curPosition, curLeft, curCSSTop, curTop, curOffset, curCSSLeft, calculatePosition,
+            position = dom.css(element, "position"),
+            props = {};
+        if (position === "static") {
+            element.style.position = "relative";
+        }
+        curOffset = dom.offset(element);
+        curCSSTop = dom.css(element, "top");
+        curCSSLeft = dom.css(element, "left");
+        //position是经过计算得到的
+        calculatePosition = (position === "absolute" || position === "fixed") && (_.indexOf([curCSSTop, curCSSLeft], "auto") > -1);
+        if (calculatePosition) {
+            curPosition = dom.position(element);
+            curTop = curPosition.top;
+            curLeft = curPosition.left;
+        } else {
+            curTop = parseFloat(curCSSTop) || 0;
+            curLeft = parseFloat(curCSSLeft) || 0;
+        }
+        if (pos.top !== null) {
+            props.top = ((pos.top - curOffset.top) + curTop) + 'px';
+        }
+        if (pos.left !== null) {
+            props.left = ((pos.left - curOffset.left) + curLeft) + 'px';
+        }
+        dom.css(element, props);
     };
 
     /**

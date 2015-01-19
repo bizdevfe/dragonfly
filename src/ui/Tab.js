@@ -30,14 +30,14 @@ define(function(require) {
      * @param {Object} [options] 初始化参数
      *
      *     @example
-     *     //默认参数
+     *     //默认值
      *     {
-     *         hidden: false,   //是否隐藏
-     *         tabs: [],         //标题和内容数组
-     *         active: 0,        //默认序列号
-     *         width: 400,       //内容宽度
-     *         height: 200,      //内容高度
-     *         event: 'click'    //切换方式：'click', 'mouseover'
+     *         hidden: false,  //Boolean, 是否隐藏
+     *         tabs: [],       //Array, 标题和内容数组：{title: String, content: String}
+     *         active: 0,      //Number, 默认序列号
+     *         width: 400,     //Number, 内容宽度
+     *         height: 200,    //Number, 内容高度
+     *         event: 'click'  //String, 切换方式：'click', 'mouseover'
      *     }
      */
     function Tab(options) {

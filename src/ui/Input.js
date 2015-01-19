@@ -19,11 +19,11 @@ define(function(require) {
      *     @example
      *     //默认值
      *     {
-     *         disabled: false, //是否禁用
-     *         hidden: false,   //是否隐藏
-     *         width: 200,      //宽度
-     *         type: 'text',    //类型
-     *         value: ''        //默认值
+     *         disabled: false, //Boolean, 是否禁用
+     *         hidden: false,   //Boolean, 是否隐藏
+     *         width: 200,      //Number, 宽度
+     *         type: 'text',    //String, 类型
+     *         value: ''        //String, 默认值
      *     }
      */
     function Input(options) {

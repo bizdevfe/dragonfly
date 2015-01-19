@@ -33,16 +33,16 @@ define(function(require) {
      *     @example
      *     //默认参数
      *     {
-     *         hidden: false,   //渲染后是否隐藏
-     *         title: '',       //标题
-     *         content: '',     //内容
-     *         buttons: [       //按钮组
+     *         hidden: false,   //Boolean, 渲染后是否隐藏
+     *         title: '',       //String, 标题
+     *         content: '',     //String, 内容
+     *         buttons: [       //Array, 按钮组：{text: String, click: Function, skin: String}
      *             {text: lang.OKButtonText, click: this.hide},
      *             {text: lang.CancelButtonText, click: this.hide, skin: 'dark'}
      *         ],
-     *         'z-index': 1000, //层叠级别
-     *         padding: 0,      //内容左右padding
-     *         duration: 300    //动画时间
+     *         'z-index': 1000, //Number, 层叠级别
+     *         padding: 60,     //Number, 内容左右padding
+     *         duration: 300    //Number, 动画时间
      *     }
      */
     function SidePanel(options) {

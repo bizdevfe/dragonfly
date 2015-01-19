@@ -19,11 +19,11 @@ define(function(require) {
      *     @example
      *     //默认值
      *     {
-     *         disabled: false, //是否禁用
-     *         hidden: false,   //是否隐藏
-     *         width: 400,      //宽度
-     *         height: 200,     //高度
-     *         value: ''        //默认值
+     *         disabled: false, //Boolean, 是否禁用
+     *         hidden: false,   //Boolean, 是否隐藏
+     *         width: 400,      //Number, 宽度
+     *         height: 200,     //Number, 高度
+     *         value: ''        //String, 默认值
      *     }
      */
     function Textarea(options) {

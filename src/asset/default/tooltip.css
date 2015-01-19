@@ -2,3 +2,46 @@
  * 气泡提示样式
  * @author Ricky
  */
+.df-tooltip {
+    width: 240px;
+    position: absolute;
+}
+.df-tooltip-title {
+    position: relative;
+    margin: 0;
+    padding: 0 10px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #fff;
+    background: #707070;
+    border: 1px #707070 solid
+}
+.df-tooltip-title .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 11px;
+    height: 11px;
+    background: url(img/close.png);
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .5s ease-in-out
+}
+.df-tooltip-title .close:hover {
+    -webkit-transform: rotate(90deg)
+}
+.df-tooltip-content {
+    padding: 10px;
+    font-size: 14px;
+    background: #fff;
+    border: 1px #e2e2e2 solid
+}
+.df-tooltip-alert {
+    padding-left: 40px;
+    background: #fff url(img/alert.png) 10px 10px no-repeat
+}
+.df-tooltip-help {
+    padding-left: 40px;
+    background: #fff url(img/help.png) 10px 10px no-repeat
+}

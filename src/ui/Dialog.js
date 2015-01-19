@@ -31,17 +31,17 @@ define(function(require) {
      *     @example
      *     //默认值
      *     {
-     *         hidden: false,   //渲染后是否隐藏
-     *         title: '',       //标题
-     *         content: '',     //内容
-     *         buttons: [       //按钮组
+     *         hidden: false,   //Boolean, 渲染后是否隐藏
+     *         title: '',       //String, 标题
+     *         content: '',     //String, 内容
+     *         buttons: [       //Array, 按钮组：{text: String, click: Function, skin: String}
      *             {text: lang.OKButtonText, click: this.hide},
      *             {text: lang.CancelButtonText, click: this.hide, skin: 'dark'}
      *         ],
-     *         width: 480,      //宽度
-     *         height: 240,     //高度
-     *         'z-index': 1000, //层叠级别
-     *         fixed: true      //位置是否固定
+     *         width: 480,      //Number, 宽度
+     *         height: 240,     //Number, 高度
+     *         'z-index': 1000, //Number, 层叠级别
+     *         fixed: true      //Boolean, 位置是否固定
      *     }
      */
     function Dialog(options) {
