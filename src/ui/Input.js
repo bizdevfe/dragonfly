@@ -56,7 +56,10 @@ define(function(require) {
          * @override
          */
         createMain: function() {
-            return document.createElement('input');
+            this.ie8 = base.ie && base.ie <= 8;
+            return this.ie8 //IE8以下不允许修改type属性
+                   ? document.createElement('<input type="' + this.options.type + '" />')
+                   : document.createElement('input');
         },
 
         /**
@@ -94,7 +97,9 @@ define(function(require) {
             base.css(this.main, {
                 width: this.options.width + 'px'
             });
-            this.main.type = this.options.type;
+            if (!this.ie8) {
+                this.main.type = this.options.type;
+            }
             this.main.value = this.options.value;
         },
 

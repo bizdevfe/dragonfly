@@ -120,9 +120,12 @@ define(function(require) {
         /**
          * 设置Tooltip位置
          *
+         * @param {Event} evt 原生DOM事件
          * @protected
          */
-        setPosition: function(e) {
+        setPosition: function(evt) {
+            var e = new Event(evt); //此处事件未封装
+            
             var targetPosition = base.offset(e.target),
                 mySize = this.getSize(),
                 left,
