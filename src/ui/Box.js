@@ -138,17 +138,23 @@ define(function(require) {
                 }
             });
 
-            this.addDOMEvent(this.label, 'click', function() {
+            this.addDOMEvent(this.label, 'click', function(e) {
                 if (!this.isDisabled()) {
                     if (this.options.type === 'radio') {
                         this.group.uncheck();
                         this.label.className = 'df-label ' + this.checked + ' ' + this.checkedHover;
                     } else {
-                        if (this.isChecked()) { //label的click先于main的click
+                        if (this.isChecked()) { //label的点击先于input的点击
                             this.label.className = 'df-label ' + this.unchecked + ' ' + this.uncheckedHover;
                         } else {
                             this.label.className = 'df-label ' + this.checked + ' ' + this.checkedHover;
                         }
+                    }
+                    
+                    //IE7label的点击不会触发input的点击, IE8如果input被隐藏也不会触发
+                    if (this.ie8) {
+                        this.main.checked = base.hasClass(this.label, this.checked) ? true : false;
+                        this.fire('click', e);
                     }
                 }
             });
