@@ -60,30 +60,6 @@ define(function(require) {
         },
 
         /**
-         * 初始化绘制函数
-         *
-         * @protected
-         * @override
-         */
-        initPainters: function() {
-            this.painters = {
-                hidden: function(hidden) {
-                    base.css(this.main, {
-                        display: hidden ? 'none' : ''
-                    });
-                },
-                disabled: function(disabled) {
-                    this.main.disabled = disabled;
-                    if (disabled) {
-                        base.addClass(this.main, 'df-textarea-disable');
-                    } else {
-                        base.removeClass(this.main, 'df-textarea-disable');
-                    }
-                }
-            };
-        },
-
-        /**
          * 创建其他元素
          *
          * @protected
@@ -135,13 +111,27 @@ define(function(require) {
         },
 
         /**
-         * 解绑事件
+         * 初始化绘制函数
          *
          * @protected
          * @override
          */
-        destroyEvents: function() {
-            this.removeDOMEvent(this.main);
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                },
+                disabled: function(disabled) {
+                    this.main.disabled = disabled;
+                    if (disabled) {
+                        base.addClass(this.main, 'df-textarea-disable');
+                    } else {
+                        base.removeClass(this.main, 'df-textarea-disable');
+                    }
+                }
+            };
         },
 
         /**
@@ -179,6 +169,16 @@ define(function(require) {
         getLength: function() {
             //IE7,8回车为\r\n
             return this.main ? this.main.value.replace(/\r?\n/g, '').length : null;
+        },
+
+        /**
+         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
         }
     };
 

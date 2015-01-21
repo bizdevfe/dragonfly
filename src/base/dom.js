@@ -131,6 +131,23 @@ define(function(require) {
     };
 
     /**
+     * 将指定元素插入目标元素后面
+     *
+     * @param {HTMLElement} newElement 指定待插入元素
+     * @param {HTMLElement} targetElement 目标元素
+     */
+    dom.insertAfter = function(newElement, targetElement) {
+        var parent = targetElement.parentNode;
+        if (parent.lastChild == targetElement) {
+            // 如果最后的节点是目标元素，则直接添加。因为默认是最后
+            parent.appendChild(newElement);
+        } else {
+            //如果不是，则插入在目标元素的下一个兄弟节点 的前面。也就是目标元素的后面
+            parent.insertBefore(newElement, targetElement.nextSibling);
+        }
+    };
+
+    /**
      * 创建元素
      *
      * @param {String} selector 选择器

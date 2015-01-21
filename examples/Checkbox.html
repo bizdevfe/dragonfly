@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Checkbox</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../src/asset/default/main.css" />
+    <link rel="shortcut icon" href="asset/img/favicon.ico"/>
+    <script type="text/javascript" src="asset/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="asset/js/require.js"></script>
+    <script type="text/javascript" src="asset/js/config.js"></script>
+</head>
+
+<body>
+<h1>Checkbox</h1>
+<div id="container"></div>
+<a id="console" href="javascript:void(0)">print instance</a>
+<div class="operation">
+    <button type="button" id="getValue">getValue</button><br />
+    <button type="button" id="checkGroup">check Group</button>
+    <button type="button" id="checkA">check Apple</button>
+    <button type="button" id="checkB">check Banana</button>
+    <button type="button" id="checkC">check Cherry</button><br />
+    <button type="button" id="uncheckGroup">uncheck Group</button>
+    <button type="button" id="uncheckA">uncheck Apple</button>
+    <button type="button" id="uncheckB">uncheck Banana</button>
+    <button type="button" id="uncheckC">uncheck Cherry</button><br />
+    <button type="button" id="showGroup">show Group</button>
+    <button type="button" id="showA">show Apple</button>
+    <button type="button" id="showB">show Banana</button>
+    <button type="button" id="showC">show Cherry</button><br />
+    <button type="button" id="hideGroup">hide Group</button>
+    <button type="button" id="hideA">hide Apple</button>
+    <button type="button" id="hideB">hide Banana</button>
+    <button type="button" id="hideC">hide Cherry</button><br />
+    <button type="button" id="disableGroup">disable Group</button>
+    <button type="button" id="disableA">disable Apple</button>
+    <button type="button" id="disableB">disable Banana</button>
+    <button type="button" id="disableC">disable Cherry</button><br />
+    <button type="button" id="enableGroup">enable Group</button>
+    <button type="button" id="enableA">enable Apple</button>
+    <button type="button" id="enableB">enable Banana</button>
+    <button type="button" id="enableC">enable Cherry</button><br />
+    <button type="button" id="destroy">destroy</button>
+</div>
+
+<script type="text/javascript">
+require(['ui/Checkbox'], function(Checkbox) {
+    var cg = new Checkbox({
+        name: 'fruit',
+        group: [
+            {
+                id: 1,
+                value: 'a',
+                title: 'Apple',
+                checked: true
+            },
+            {
+                id: 2,
+                value: 'b',
+                title: 'Banana',
+                onclick: function(data) {
+                    console.log(data);
+                }
+            },
+            {
+                id: 3,
+                value: 'c',
+                title: 'Cherry',
+                disabled: true
+            },
+            {
+                id: 4,
+                value: 'd',
+                title: 'Durian ',
+                disabled: true,
+                checked: true
+            }
+        ]
+    });
+    cg.render('container');
+    
+    cg.get(1).on('click', function(e) {
+        console.log('title: ' + this.getTitle() + ', value: ' + this.getValue() + ', checked: ' + this.isChecked());
+    });
+    cg.get(2).on('click', function(e) {
+        console.log('title: ' + this.getTitle() + ', value: ' + this.getValue() + ', checked: ' + this.isChecked());
+    });
+    cg.get(3).on('click', function(e) {
+        console.log('title: ' + this.getTitle() + ', value: ' + this.getValue() + ', checked: ' + this.isChecked());
+    });
+    cg.get(4).on('click', function(e) {
+        console.log('title: ' + this.getTitle() + ', value: ' + this.getValue() + ', checked: ' + this.isChecked());
+    });
+    
+    $('#console').click(function() {
+        console.log(cg.ctrls);
+    });
+    
+    $('#getValue').click(function() {
+        console.log(cg.getValue());
+    });
+    
+    $('#checkGroup').click(function() {
+        cg.check();
+    });
+    $('#checkA').click(function() {
+        cg.get(1).check();
+    });
+    $('#checkB').click(function() {
+        cg.get(2).check();
+    });
+    $('#checkC').click(function() {
+        cg.get(3).check();
+    });
+    
+    $('#uncheckGroup').click(function() {
+        cg.uncheck();
+    });
+    $('#uncheckA').click(function() {
+        cg.get(1).uncheck();
+    });
+    $('#uncheckB').click(function() {
+        cg.get(2).uncheck();
+    });
+    $('#uncheckC').click(function() {
+        cg.get(3).uncheck();
+    });
+    
+    $('#showGroup').click(function() {
+        cg.show();
+    });
+    $('#showA').click(function() {
+        cg.get(1).show();
+    });
+    $('#showB').click(function() {
+        cg.get(2).show();
+    });
+    $('#showC').click(function() {
+        cg.get(3).show();
+    });
+    
+    $('#hideGroup').click(function() {
+        cg.hide();
+    });
+    $('#hideA').click(function() {
+        cg.get(1).hide();
+    });
+    $('#hideB').click(function() {
+        cg.get(2).hide();
+    });
+    $('#hideC').click(function() {
+        cg.get(3).hide();
+    });
+    
+    $('#disableGroup').click(function() {
+        cg.disable();
+    });
+    $('#disableA').click(function() {
+        cg.get(1).disable();
+    });
+    $('#disableB').click(function() {
+        cg.get(2).disable();
+    });
+    $('#disableC').click(function() {
+        cg.get(3).disable();
+    });
+    
+    $('#enableGroup').click(function() {
+        cg.enable();
+    });
+    $('#enableA').click(function() {
+        cg.get(1).enable();
+    });
+    $('#enableB').click(function() {
+        cg.get(2).enable();
+    });
+    $('#enableC').click(function() {
+        cg.get(3).enable();
+    });
+    
+    $('#destroy').click(function() {
+        cg.destroy();
+    });
+});
+</script>
+</body>
+</html>

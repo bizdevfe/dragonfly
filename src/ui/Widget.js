@@ -398,6 +398,12 @@ define(function(require) {
                 this.states = null;
                 this.painters = null;
                 this.main = null;
+                this.id = null;
+                delete this.options;
+                delete this.states;
+                delete this.painters;
+                delete this.main;
+                delete this.id;
                 //清除其他属性（子类实现）
                 this.removeProp();
 

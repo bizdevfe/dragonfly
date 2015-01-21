@@ -2,3 +2,25 @@
  * 复选样式
  * @author Ricky
  */
+.df-checkbox-unchecked {
+    background: url(img/checkbox-unchecked.png) left center no-repeat
+}
+.df-checkbox-unchecked-hover {
+    background: url(img/checkbox-unchecked-hover.png) left center no-repeat
+}
+.df-checkbox-checked {
+    background: url(img/checkbox-checked.png) left center no-repeat
+}
+.df-checkbox-checked-hover {
+    background: url(img/checkbox-checked-hover.png) left center no-repeat
+}
+.df-checkbox-unchecked-disabled {
+    color: #b6b6b6;
+    background: url(img/checkbox-unchecked-disabled.png) left center no-repeat;
+    cursor: default
+}
+.df-checkbox-checked-disabled {
+    color: #b6b6b6;
+    background: url(img/checkbox-checked-disabled.png) left center no-repeat;
+    cursor: default
+}

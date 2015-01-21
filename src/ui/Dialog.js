@@ -144,32 +144,6 @@ define(function(require) {
         },
 
         /**
-         * 获取页面高度
-         *
-         * @protected
-         * @return {Number} 页面高度
-         */
-        getPageHeight: function() {
-            return Math.max(
-                document.body.clientHeight,
-                document.body.offsetHeight,
-                document.documentElement.clientHeight,
-                document.documentElement.offsetHeight
-            );
-        },
-
-        /**
-         * 设置遮罩高度
-         *
-         * @protected
-         */
-        setMaskHeight: function() {
-            base.css(this.mask, {
-                height: this.getPageHeight() + 'px'
-            });
-        },
-
-        /**
          * 初始化绘制函数
          *
          * @protected
@@ -193,33 +167,29 @@ define(function(require) {
         },
 
         /**
-         * 解绑事件
+         * 获取页面高度
          *
+         * @return {Number} 页面高度
          * @protected
-         * @override
          */
-        destroyEvents: function() {
-            this.removeDOMEvent(this.main);
-
-            _.each(this.buttons, function(button) {
-                button.destroy();
-            });
-
-            Event.off(window, 'resize', this.onresie);
+        getPageHeight: function() {
+            return Math.max(
+                document.body.clientHeight,
+                document.body.offsetHeight,
+                document.documentElement.clientHeight,
+                document.documentElement.offsetHeight
+            );
         },
 
         /**
-         * 清除属性
+         * 设置遮罩高度
          *
          * @protected
-         * @override
          */
-        removeProp: function() {
-            this.mask = null;
-            this.dialog = null;
-            this.dialogContent = null;
-            this.dialogBottom = null;
-            this.buttons = null;
+        setMaskHeight: function() {
+            base.css(this.mask, {
+                height: this.getPageHeight() + 'px'
+            });
         },
 
         /**
@@ -265,6 +235,41 @@ define(function(require) {
                  */
                 this.fire('onclose');
             }
+        },
+
+        /**
+         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+
+            _.each(this.buttons, function(button) {
+                button.destroy();
+            });
+
+            Event.off(window, 'resize', this.onresie);
+        },
+
+        /**
+         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            this.mask = null;
+            this.dialog = null;
+            this.dialogContent = null;
+            this.dialogBottom = null;
+            this.buttons = null;
+            delete this.mask;
+            delete this.dialog;
+            delete this.dialogContent;
+            delete this.dialogBottom;
+            delete this.buttons;
         }
     };
 

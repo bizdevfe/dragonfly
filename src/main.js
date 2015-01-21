@@ -70,6 +70,18 @@ define(function(require) {
         Tooltip: require('ui/Tooltip'),
 
         /**
+         * Radio构造器，参见{@link Radio}
+         * @method Radio
+         */
+        Radio: require('ui/Radio'),
+
+        /**
+         * Checkbox构造器，参见{@link Checkbox}
+         * @method Checkbox
+         */
+        Checkbox: require('ui/Checkbox'),
+
+        /**
          * Tab构造器，参见{@link Tab}
          * @method Tab
          */

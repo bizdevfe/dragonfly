@@ -57,33 +57,8 @@ define(function(require) {
          */
         createMain: function() {
             this.ie8 = base.ie && base.ie <= 8;
-            return this.ie8 //IE8以下不允许修改type属性
-                   ? document.createElement('<input type="' + this.options.type + '" />')
-                   : document.createElement('input');
-        },
-
-        /**
-         * 初始化绘制函数
-         *
-         * @protected
-         * @override
-         */
-        initPainters: function() {
-            this.painters = {
-                hidden: function(hidden) {
-                    base.css(this.main, {
-                        display: hidden ? 'none' : ''
-                    });
-                },
-                disabled: function(disabled) {
-                    this.main.disabled = disabled;
-                    if (disabled) {
-                        base.addClass(this.main, 'df-input-disable');
-                    } else {
-                        base.removeClass(this.main, 'df-input-disable');
-                    }
-                }
-            };
+            //IE8以下不允许修改type属性
+            return this.ie8 ? document.createElement('<input type="' + this.options.type + '" />') : document.createElement('input');
         },
 
         /**
@@ -151,13 +126,27 @@ define(function(require) {
         },
 
         /**
-         * 解绑事件
+         * 初始化绘制函数
          *
          * @protected
          * @override
          */
-        destroyEvents: function() {
-            this.removeDOMEvent(this.main);
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                },
+                disabled: function(disabled) {
+                    this.main.disabled = disabled;
+                    if (disabled) {
+                        base.addClass(this.main, 'df-input-disable');
+                    } else {
+                        base.removeClass(this.main, 'df-input-disable');
+                    }
+                }
+            };
         },
 
         /**
@@ -194,6 +183,26 @@ define(function(require) {
          */
         getLength: function() {
             return this.main ? this.main.value.length : null;
+        },
+
+        /**
+         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+        },
+
+        /**
+         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            delete this.ie8;
         }
     };
 

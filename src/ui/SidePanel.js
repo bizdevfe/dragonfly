@@ -196,33 +196,6 @@ define(function(require) {
         },
 
         /**
-         * 解绑事件
-         *
-         * @protected
-         * @override
-         */
-        destroyEvents: function() {
-            _.each(this.buttons, function(button) {
-                button.destroy();
-            });
-        },
-
-        /**
-         * 清除属性
-         *
-         * @protected
-         * @override
-         */
-        removeProp: function() {
-            this.mask = null;
-            this.panel = null;
-            this.panelBody = null;
-            this.panelContent = null;
-            this.panelBottom = null;
-            this.buttons = null;
-        },
-
-        /**
          * 获取内容容器
          *
          * @return {HTMLElement} 内容容器
@@ -265,6 +238,39 @@ define(function(require) {
                  */
                 this.fire('onclose');
             }
+        },
+
+        /**
+         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            _.each(this.buttons, function(button) {
+                button.destroy();
+            });
+        },
+
+        /**
+         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            this.mask = null;
+            this.panel = null;
+            this.panelBody = null;
+            this.panelContent = null;
+            this.panelBottom = null;
+            this.buttons = null;
+            delete this.mask;
+            delete this.panel;
+            delete this.panelBody;
+            delete this.panelContent;
+            delete this.panelBottom;
+            delete this.buttons;
         }
     };
 

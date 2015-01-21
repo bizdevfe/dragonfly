@@ -24,7 +24,7 @@ define(function(require) {
      *
      * @extends Widget
      * @constructor
-     * @param {Object} [options] 初始化参数
+     * @param {Object} options 初始化参数
      *
      *     @example
      *     //默认值
@@ -125,7 +125,7 @@ define(function(require) {
          */
         setPosition: function(evt) {
             var e = new Event(evt); //此处事件未封装
-            
+
             var targetPosition = base.offset(e.target),
                 mySize = this.getSize(),
                 left,
@@ -163,6 +163,11 @@ define(function(require) {
             return size;
         },
 
+        /**
+         * 延时隐藏
+         *
+         * @protected
+         */
         delay: function() {
             this.timer = setTimeout(_.bind(function() {
                 this.hide();
@@ -179,6 +184,21 @@ define(function(require) {
             this.removeDOMEvent(this.main);
             Event.off(this.host, 'mouseover', this.toShow);
             Event.off(this.host, 'mouseout', this.toHide);
+        },
+
+        /**
+         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            this.host = null;
+            this.toShow = null;
+            this.toHide = null;
+            delete this.host;
+            delete this.toShow;
+            delete this.toHide;
         }
     };
 

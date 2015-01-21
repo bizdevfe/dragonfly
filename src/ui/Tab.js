@@ -27,7 +27,7 @@ define(function(require) {
      *
      * @extends Widget
      * @constructor
-     * @param {Object} [options] 初始化参数
+     * @param {Object} options 初始化参数
      *
      *     @example
      *     //默认值

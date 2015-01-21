@@ -3,7 +3,7 @@
  * @author Ricky
  */
 .df-widget {
-    font-family: "微软雅黑", Arial
+    font-family: "Microsoft Yahei", Arial
 }
 .df-mask {
     position: absolute;
@@ -15,4 +15,12 @@
     filter: alpha(opacity=20);
     -moz-opacity: 0.2;
     opacity: 0.2
+}
+.df-label {
+    font-family: "Microsoft Yahei", Arial;
+    font-size: 14px;
+    cursor: pointer;
+    color: #333;
+    padding-left: 20px;
+    margin-right: 10px
 }

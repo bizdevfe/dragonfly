@@ -60,31 +60,6 @@ define(function(require) {
         },
 
         /**
-         * 初始化绘制函数
-         *
-         * @protected
-         * @override
-         */
-        initPainters: function() {
-            this.painters = {
-                hidden: function(hidden) {
-                    base.css(this.main, {display: hidden ? 'none' : ''});
-                },
-                disabled: function(disabled) {
-                    this.main.disabled = disabled;
-                    if (disabled) {
-                        base.addClass(this.main, 'df-button-disable');
-                    } else {
-                        base.removeClass(this.main, 'df-button-disable');
-                    }
-                },
-                text: function(text) {
-                    this.main.innerHTML = text;
-                }
-            };
-        },
-
-        /**
          * 创建其他元素
          *
          * @protected
@@ -128,13 +103,30 @@ define(function(require) {
         },
 
         /**
-         * 解绑事件
+         * 初始化绘制函数
          *
          * @protected
          * @override
          */
-        destroyEvents: function() {
-            this.removeDOMEvent(this.main);
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                },
+                disabled: function(disabled) {
+                    this.main.disabled = disabled;
+                    if (disabled) {
+                        base.addClass(this.main, 'df-button-disable');
+                    } else {
+                        base.removeClass(this.main, 'df-button-disable');
+                    }
+                },
+                text: function(text) {
+                    this.main.innerHTML = text;
+                }
+            };
         },
 
         /**
@@ -153,6 +145,16 @@ define(function(require) {
          */
         getText: function() {
             return this.get('text');
+        },
+
+        /**
+         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
         }
     };
 
