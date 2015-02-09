@@ -15,7 +15,7 @@ define(function(require) {
     var tpl = [
         '<div class="df-mask"></div>',
         '<div class="df-dialog">',
-        '<h1 class="df-dialog-title"><%= title %><span class="close"></span></h1>',
+        '<h1 class="df-dialog-title"><span><%= title %></span><span class="close"></span></h1>',
         '<div class="df-dialog-content"><%= content %></div>',
         '<div class="df-dialog-bottom"></div>',
         '</div>'
@@ -103,11 +103,15 @@ define(function(require) {
                 var panel = this,
                     button = new Button({
                         text: item.text,
-                        skin: item.skin || 'default'
+                        skin: item.skin || 'default',
+                        hidden: typeof item.hidden !== 'undefined' ? item.hidden : false
                     });
-                button.on('click', function(e) {
-                    item.click.call(panel, e);
-                });
+                
+                if (item.click) {
+                    button.on('click', function(e) {
+                        item.click.call(panel, e);
+                    });
+                }
                 button.render(this.dialogBottom);
 
                 this.buttons.push(button);
@@ -137,7 +141,7 @@ define(function(require) {
          * @override
          */
         initEvents: function() {
-            this.delegateDOMEvent(this.main, 'click', '.close', this.hide);
+            this.delegateDOMEvent(this.main, 'click', '.close', this.close);
 
             this.onresie = _.bind(this.setMaskHeight, this);
             Event.on(window, 'resize', this.onresie);
@@ -162,6 +166,9 @@ define(function(require) {
                             display: 'none'
                         });
                     }
+                },
+                title: function(title) {
+                    base.children(this.main, '.df-dialog-title span')[0].innerHTML = title;
                 }
             };
         },
@@ -202,6 +209,15 @@ define(function(require) {
         },
 
         /**
+         * 设置标题
+         *
+         * @param {String} title 标题
+         */
+        setTitle: function(title) {
+            this.set('title', title);
+        },
+
+        /**
          * 显示对话框
          *
          * @fires onopen
@@ -215,7 +231,7 @@ define(function(require) {
                  * @event onopen
                  * @param {Event} e 事件对象
                  */
-                this.fire('onopen');
+                this.fire('open');
             }
         },
 
@@ -229,11 +245,11 @@ define(function(require) {
                 this.addState('hidden');
 
                 /**
-                 * 隐藏后触发（等同于onafterhdie）
+                 * 隐藏后触发（等同于onafterhide）
                  * @event onclose
                  * @param {Event} e 事件对象
                  */
-                this.fire('onclose');
+                this.fire('close');
             }
         },
 
@@ -303,7 +319,8 @@ define(function(require) {
                 click: onHide
             }],
             width: 360,
-            height: 180
+            height: 180,
+            'z-index': 2000
         });
 
         alertDialog.on('afterhide', alertDialog.destroy);
@@ -354,7 +371,8 @@ define(function(require) {
                 skin: 'dark'
             }],
             width: 360,
-            height: 180
+            height: 180,
+            'z-index': 2000
         });
 
         confirmDialog.on('afterhide', confirmDialog.destroy);

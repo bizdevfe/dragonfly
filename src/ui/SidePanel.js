@@ -68,7 +68,7 @@ define(function(require) {
                 }, {
                     text: lang.CancelButtonText,
                     click: this.hide,
-                    skin: 'dark',
+                    skin: 'dark'
                 }],
                 'z-index': 1000,
                 padding: 60,
@@ -104,11 +104,14 @@ define(function(require) {
                 var panel = this,
                     button = new Button({
                         text: item.text,
-                        skin: item.skin || 'default'
+                        skin: item.skin || 'default',
+                        hidden: typeof item.hidden !== 'undefined' ? item.hidden : false
                     });
-                button.on('click', function(e) {
-                    item.click.call(panel, e);
-                });
+                if (item.click) {
+                    button.on('click', function(e) {
+                        item.click.call(panel, e);
+                    });
+                }
                 button.render(this.panelBottom);
 
                 this.buttons.push(button);
@@ -191,6 +194,10 @@ define(function(require) {
                             }
                         });
                     }
+                },
+
+                title: function(title) {
+                    base.children(this.main, '.df-sidepanel-title')[0].innerHTML = title;
                 }
             };
         },
@@ -202,6 +209,15 @@ define(function(require) {
          */
         getContent: function() {
             return this.panelContent;
+        },
+
+        /**
+         * 设置标题
+         *
+         * @param {String} title 标题
+         */
+        setTitle: function(title) {
+            this.set('title', title);
         },
 
         /**
@@ -218,7 +234,7 @@ define(function(require) {
                  * @event onopen
                  * @param {Event} e 事件对象
                  */
-                this.fire('onopen');
+                this.fire('open');
             }
         },
 
@@ -232,11 +248,11 @@ define(function(require) {
                 this.addState('hidden');
 
                 /**
-                 * 隐藏后触发（等同于onafterhdie）
+                 * 隐藏后触发（等同于onafterhide）
                  * @event onclose
                  * @param {Event} e 事件对象
                  */
-                this.fire('onclose');
+                this.fire('close');
             }
         },
 

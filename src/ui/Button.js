@@ -22,7 +22,7 @@ define(function(require) {
      *         disabled: false, //Boolean, 是否禁用
      *         hidden: false,   //Boolean, 是否隐藏
      *         text: '',        //String, 按钮文字
-     *         skin: 'default'  //String, 皮肤：'default', 'spring', 'dark'
+     *         skin: 'default'  //String, 皮肤：'default', 'spring', 'dark', 'coffee'
      *     }
      */
     function Button(options) {

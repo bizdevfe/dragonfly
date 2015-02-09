@@ -22,10 +22,10 @@
 }
 .df-dialog-title .close {
     position: absolute;
-    top: 15px;
-    right: 20px;
-    width: 11px;
-    height: 11px;
+    top: 9px;
+    right: 9px;
+    width: 22px;
+    height: 22px;
     background: url(img/close.png);
     cursor: pointer;
     -webkit-transition: -webkit-transform .5s ease-in-out
@@ -35,6 +35,7 @@
 }
 .df-dialog-content {
     padding: 20px;
+    font-size: 14px;
     overflow: auto
 }
 .df-dialog-bottom {

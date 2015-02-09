@@ -1107,7 +1107,7 @@
           return false;
       }
       return true;
-    }
+    };
   };
 
   // Run a function **n** times.

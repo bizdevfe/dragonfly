@@ -10,6 +10,10 @@
     font-size: 14px;
     outline: none
 }
+.df-input {
+    height: 18px;
+    line-height: 18px
+}
 .df-textarea {
     line-height: 20px;
     resize: none

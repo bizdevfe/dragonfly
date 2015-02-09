@@ -4,6 +4,7 @@
  */
 .df-button {
     display: inline-block;
+    height: 30px;
     line-height: normal;
     margin: 0 10px 0 0;
     padding: 5px 15px;
@@ -42,6 +43,15 @@
 }
 .df-button-dark-active {
     background: #3a3a3a
+}
+.df-button-coffee {
+    background: #531d06
+}
+.df-button-coffee-hover {
+    background: #6e2506
+}
+.df-button-coffee-active {
+    background: #481703
 }
 .df-button-disable {
     background: #dedede;

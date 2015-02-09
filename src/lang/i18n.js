@@ -5,8 +5,8 @@
  * @author Ricky
  */
 define(function(require) {
-    var enUS = require('lang/en-US');
-    //var zhCN = require('lang/zh-CN');
+    //var enUS = require('lang/en-US');
+    var zhCN = require('lang/zh-CN');
 
-    return enUS;
+    return zhCN;
 });
