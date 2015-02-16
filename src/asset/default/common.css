@@ -22,5 +22,10 @@
     cursor: pointer;
     color: #333;
     padding-left: 20px;
-    margin-right: 10px
+    margin-right: 10px;
+    height: 19px;
+    line-height: 19px;
+    display: inline-block;
+    background-image: url(img/dragonfly.png);
+    background-repeat: no-repeat
 }

@@ -3,24 +3,24 @@
  * @author Ricky
  */
 .df-radio-unchecked {
-    background: url(img/radio-unchecked.png) left center no-repeat
+    background-position: 0 -120px
 }
 .df-radio-unchecked-hover {
-    background: url(img/radio-unchecked-hover.png) left center no-repeat
+    background-position: 0 -140px
 }
 .df-radio-checked {
-    background: url(img/radio-checked.png) left center no-repeat
+    background-position: 0 -160px
 }
 .df-radio-checked-hover {
-    background: url(img/radio-checked-hover.png) left center no-repeat
+    background-position: 0 -180px
 }
 .df-radio-unchecked-disabled {
     color: #b6b6b6;
-    background: url(img/radio-unchecked-disabled.png) left center no-repeat;
+    background-position: 0 -200px;
     cursor: default
 }
 .df-radio-checked-disabled {
     color: #b6b6b6;
-    background: url(img/radio-checked-disabled.png) left center no-repeat;
+    background-position: 0 -220px;
     cursor: default
 }

@@ -3,24 +3,24 @@
  * @author Ricky
  */
 .df-checkbox-unchecked {
-    background: url(img/checkbox-unchecked.png) left center no-repeat
+    background-position: 0 0
 }
 .df-checkbox-unchecked-hover {
-    background: url(img/checkbox-unchecked-hover.png) left center no-repeat
+    background-position: 0 -20px
 }
 .df-checkbox-checked {
-    background: url(img/checkbox-checked.png) left center no-repeat
+    background-position: 0 -40px
 }
 .df-checkbox-checked-hover {
-    background: url(img/checkbox-checked-hover.png) left center no-repeat
+    background-position: 0 -60px
 }
 .df-checkbox-unchecked-disabled {
     color: #b6b6b6;
-    background: url(img/checkbox-unchecked-disabled.png) left center no-repeat;
+    background-position: 0 -80px;
     cursor: default
 }
 .df-checkbox-checked-disabled {
     color: #b6b6b6;
-    background: url(img/checkbox-checked-disabled.png) left center no-repeat;
+    background-position: 0 -100px;
     cursor: default
 }
