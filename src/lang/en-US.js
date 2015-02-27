@@ -7,7 +7,14 @@
 define(function(require) {
     var lang = {
         OKButtonText: 'OK',
-        CancelButtonText: 'Cancel'
+        CancelButtonText: 'Cancel',
+        PerPageText: 'per-page',
+        TotalText: 'total',
+        GoText: 'to',
+        PreviousPageText: 'previous page',
+        FirstPageText: 'first page',
+        NextPageText: 'next page',
+        LastPageText: 'last page'
     };
 
     return lang;

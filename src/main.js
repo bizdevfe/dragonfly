@@ -97,7 +97,13 @@ define(function(require) {
          * SidePanel构造器，参见{@link SidePanel}
          * @method SidePanel
          */
-        SidePanel: require('ui/SidePanel')
+        SidePanel: require('ui/SidePanel'),
+
+        /**
+         * Page构造器，参见{@link Page}
+         * @method Page
+         */
+        Page: require('ui/Page')
     });
 
     return main;

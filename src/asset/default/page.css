@@ -2,3 +2,103 @@
  * 翻页样式
  * @author YanYu
  */
+.df-page {
+    height: auto;
+    overflow: hidden;
+    color: #333;
+    font-size: 14px;
+}
+.df-page a {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 5px;
+    padding: 0 15px;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    vertical-align: top;
+    color: #333;
+    background-color: #efefef;
+    background-repeat: no-repeat;
+}
+.df-page a.actived {
+    cursor: default;
+}
+.df-page a.actived, .df-page a.go {
+    color: #fff;
+}
+.df-page a.next {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -460px;
+}
+.df-page a.next-arrow-disabled {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -490px;
+    cursor: default;
+}
+.df-page a.next-arrow-disabled:hover {
+    background-color: #efefef;
+}
+.df-page a.previous {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -400px;
+}
+.df-page a.previous-arrow-disabled {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -430px;
+    cursor: default;
+}
+.df-page a.previous-arrow-disabled:hover {
+    background-color: #efefef;
+}
+.df-page a.prestart {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -280px;
+}
+.df-page a.prestart-arrow-disabled {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -310px;
+    cursor: default;
+}
+.df-page a.prestart-arrow-disabled:hover {
+    background-color: #efefef;
+}
+.df-page a.nextend {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -340px;
+}
+.df-page a.nextend-arrow-disabled {
+    background-image: url(img/dragonfly.png);
+    background-position: 0 -370px;
+    cursor: default;
+}
+.df-page a.nextend-arrow-disabled:hover {
+    background-color: #efefef;
+}
+
+.df-page-default a:hover {
+    background-color: #e5efff;
+}
+.df-page-default a.actived, .df-page-default a.go {
+    background-color: #007aff;
+}
+.df-page-default a.go:hover {
+    background-color: #4ca1fe;
+}
+.df-page-default a.go:active {
+    background-color: #006de2;
+}
+
+.df-page-fire a:hover {
+    background-color: #fdcab6;
+}
+.df-page-fire a.actived, .df-page-fire a.go {
+    background-color: #e25938;
+}
+.df-page-fire a.go:hover {
+    background-color: #ef6b4b;
+}
+.df-page-fire a.go:active {
+    background-color: #d34b2a;
+}

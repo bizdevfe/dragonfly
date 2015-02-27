@@ -11,10 +11,11 @@ h1 {
 #container {
     padding: 30px;
     border-bottom: 1px #ccc solid;
-    background: #efefef
+    background: #fff
 }
 .operation {
-    padding: 30px
+    padding: 30px;
+    font-size:14px
 }
 .operation button {
     display: inline-block;

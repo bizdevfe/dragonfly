@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page</title>
+    <link rel="stylesheet" type="text/css" href="asset/css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="../src/asset/default/main.css" />
+    <link rel="shortcut icon" href="asset/img/favicon.ico"/>
+    <script type="text/javascript" src="asset/js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="asset/js/require.js"></script>
+    <script type="text/javascript" src="asset/js/config.js"></script>
+</head>
+
+<body>
+<h1>Page</h1>
+<div id="container">
+    <div id="page" style="margin-bottom:20px"><div>Full:</div></div>
+    <div id="page-simple"><div>Simple:</div></div>
+</div>
+<a id="console" href="javascript:void(0)">print instance</a>
+<div class="operation">
+<div style="margin-bottom: 15px;">
+    <span>changePageSize: </span>
+    <select id="pageSizeSelect">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+        <option value="200">200</option>
+    </select>
+</div>
+<button type="button" id="pageNoButton">changePageNo</button>
+<input type="text" id="pageNoInput"><br />
+<button type="button" id="recordCountButton">changeRecordCount</button>
+<input type="text" id="recordCountInput"><br />
+<button type="button" id="hide">hide</button>
+<button type="button" id="show">show</button>
+<button type="button" id="destroy">destroy</button>
+</div>
+
+<script type="text/javascript">
+require(['ui/Page'], function(Page) {
+    var page = new Page({
+        pageData: {
+            pageSize: 20,
+            pageNo: 8,
+            recordCount: 200
+        }
+    });
+    page.on('nochange', function(no) {
+        console.log(no);
+    });
+    page.on('sizechange', function(size) {
+        console.log(size);
+    });
+    page.on('recordcountchange', function(recordCount) {
+        console.log(recordCount);
+    });
+    page.render('page');
+
+    var pageSimple = new Page({
+        pageData: {
+            pageSize: 20,
+            pageNo: 1,
+            recordCount: 200
+        },
+        isSimple: true
+    });
+    pageSimple.on('nochange', function(no) {
+        console.log(no);
+    });
+    pageSimple.on('sizechange', function(size) {
+        console.log(size);
+    });
+    pageSimple.on('recordcountchange', function(recordCount) {
+        console.log(recordCount);
+    });
+    pageSimple.render('page-simple');
+
+    $('#console').click(function() {
+        console.log(page, pageSimple);
+    });
+    
+    $('#pageSizeSelect').change(function() {
+        var pageSize = $(this).val() - 0;
+        page.changePageSize(pageSize);
+        pageSimple.changePageSize(pageSize);
+    });
+
+    $('#pageNoButton').click(function() {
+        var pageNo = $('#pageNoInput').val() - 0;
+        page.changePageNo(pageNo);
+        pageSimple.changePageNo(pageNo);
+    });
+    
+    $('#recordCountButton').click(function() {
+        var recordCount = $('#recordCountInput').val() - 0;
+        page.changeRecordCount(recordCount);
+        pageSimple.changeRecordCount(recordCount);
+    });
+
+    $('#hide').click(function() {
+        page.hide();
+        pageSimple.hide();
+    });
+
+    $('#show').click(function() {
+        page.show();
+        pageSimple.show();
+    });
+    
+    $('#destroy').click(function() {
+        page.destroy();
+        pageSimple.destroy();
+    });
+});
+</script>
+</body>
+</html>

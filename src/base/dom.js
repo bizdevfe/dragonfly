@@ -53,6 +53,35 @@ define(function(require) {
     };
 
     /**
+     * 添加子节点
+     *
+     * @param {HTMLElement} element 父元素
+     * @param {HTMLElement} child 子元素
+     */
+    dom.append = function(element, child) {
+        if (!element || !child) {
+            return;
+        }
+        element.appendChild(child);
+    };
+
+    /**
+     * 设置/获取
+     *
+     * @param {HTMLElement} element 元素
+     * @param {String} html HTML
+     */
+    dom.html = function(element, html) {
+        if (element) {
+            if (html == void 0) {
+                return element.innerHTML;
+            } else {
+                element.innerHTML = html;
+            }
+        }
+    };
+
+    /**
      * 获得/设置元素的位置
      *
      * @param {HTMLElement} elm 目标元素
@@ -305,6 +334,90 @@ define(function(require) {
      * @param {Function} [callback] 回调
      */
     dom.transform = $dom.transform;
+
+    /**
+     * Wrap map from jquery.
+     */
+    var map = {
+        legend: [1, '<fieldset>', '</fieldset>'],
+        tr: [2, '<table><tbody>', '</tbody></table>'],
+        col: [2, '<table><tbody></tbody><colgroup>', '</colgroup></table>'],
+        _default: [0, '', '']
+    };
+
+    map.td =
+        map.th = [3, '<table><tbody><tr>', '</tr></tbody></table>'];
+
+    map.option =
+        map.optgroup = [1, '<select multiple="multiple">', '</select>'];
+
+    map.thead =
+        map.tbody =
+        map.colgroup =
+        map.caption =
+        map.tfoot = [1, '<table>', '</table>'];
+
+    map.text =
+        map.circle =
+        map.ellipse =
+        map.line =
+        map.path =
+        map.polygon =
+        map.polyline =
+        map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">', '</svg>'];
+
+    /**
+     * Parse `html` and return the children.
+     *
+     * @param {String} html
+     * @return {Array}
+     */
+    dom.parse = function(html) {
+        if ('string' != typeof html) {
+            throw new TypeError('String expected');
+        }
+
+        // tag name
+        var m = /<([\w:]+)/.exec(html);
+        if (!m) {
+            return document.createTextNode(html);
+        }
+
+        html = html.replace(/^\s+|\s+$/g, ''); // Remove leading/trailing whitespace
+
+        var tag = m[1];
+
+        // body support
+        if (tag == 'body') {
+            var elem = document.createElement('html');
+            elem.innerHTML = html;
+            return elem.removeChild(elem.lastChild);
+        }
+
+        // wrap map
+        var wrap = map[tag] || map._default;
+        var depth = wrap[0];
+        var prefix = wrap[1];
+        var suffix = wrap[2];
+        var el = document.createElement('div');
+        el.innerHTML = prefix + html + suffix;
+        while (depth--) {
+            el = el.lastChild;
+        }
+
+        // one element
+        if (el.firstChild == el.lastChild) {
+            return el.removeChild(el.firstChild);
+        }
+
+        // several elements
+        var fragment = document.createDocumentFragment();
+        while (el.firstChild) {
+            fragment.appendChild(el.removeChild(el.firstChild));
+        }
+
+        return fragment;
+    };
 
     return dom;
 });

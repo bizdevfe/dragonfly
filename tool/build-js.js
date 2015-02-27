@@ -12,5 +12,6 @@
     wrap: {
         startFile: '../src/loader/start.frag',
         endFile: '../src/loader/end.frag'
-    }
+    },
+    optimize: "none"
 })
