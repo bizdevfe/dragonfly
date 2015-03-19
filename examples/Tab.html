@@ -34,7 +34,7 @@ require(['ui/Tab'], function(Tab) {
     tab.on('change', function(data) {
         console.log(data);
     });
-    tab.render('container');
+    tab.appendTo('container');
     
     $('#console').click(function() {
         console.log(tab);

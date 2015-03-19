@@ -186,12 +186,9 @@ define(function(require) {
                     }
                     //跳转至
                     base.append(this.main, base.parse('<span>' + lang.GoText + '</span>'));
-                    var input = base.parse('<span style="margin-right: 3px; margin-left: 3px"></span>');
+                    var input = base.parse('<span style="margin-right: 3px; margin-left: 3px"><input type="text" style="width:40px" /></span>');
                     base.append(this.main, input);
-                    this.pageInput = new Input({
-                        width: 40
-                    });
-                    this.pageInput.render(input);
+                    this.pageInput = new Input(input.firstChild);
                     //go
                     base.append(this.main, base.parse('<a href="javascript:;" title="go" class="go">go</a>'));
                 }
@@ -296,6 +293,9 @@ define(function(require) {
             if (pageNum < 1) {
                 return;
             }
+            
+            this.fire('beforechange');
+            
             this.set('pageData', $.extend(true, {}, this.get('pageData'), {
                 pageNo: pageNum
             }));
@@ -315,6 +315,8 @@ define(function(require) {
          * @fires onsizechange
          */
         changePageSize: function(pageSize) {
+            this.fire('beforechange');
+            
             this.set('pageData', $.extend(true, {}, this.get('pageData'), {
                 pageSize: pageSize,
                 pageNo: 1
@@ -335,6 +337,8 @@ define(function(require) {
          * @fires onrecordcountchange
          */
         changeRecordCount: function(recordCount) {
+            this.fire('beforechange');
+            
             this.set('pageData', $.extend(true, {}, this.get('pageData'), {
                 recordCount: recordCount,
                 pageNo: 1

@@ -32,7 +32,7 @@ require(['ui/Textarea'], function(Textarea) {
     textarea.on('blur', function() {
         console.log('onblur');
     });
-    textarea.render('container');
+    textarea.appendTo('container');
     
     $('#console').click(function() {
         console.log(textarea);

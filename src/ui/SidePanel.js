@@ -112,7 +112,7 @@ define(function(require) {
                         item.click.call(panel, e);
                     });
                 }
-                button.render(this.panelBottom);
+                button.appendTo(this.panelBottom);
 
                 this.buttons.push(button);
             }, this);

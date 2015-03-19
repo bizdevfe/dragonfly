@@ -29,7 +29,7 @@ require(['ui/Dialog'], function(Dialog) {
         title: 'Title',
         content: 'Content'
     });
-    dialog.render();
+    dialog.appendTo();
     
     $('#console').click(function() {
         console.log(dialog);

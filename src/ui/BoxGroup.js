@@ -35,7 +35,7 @@ define(function(require) {
                 option.type = type;
                 option.name = name;
                 var ctrl = new Box(option, this);
-                ctrl.render(target);
+                ctrl.appendTo(target);
                 this.ctrls.push(ctrl);
             }, this);
         },

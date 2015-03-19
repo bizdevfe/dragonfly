@@ -44,7 +44,7 @@ require(['ui/SidePanel'], function(SidePanel) {
             }
         ]
     });
-    sidepanel.render();
+    sidepanel.appendTo();
     
     $('#console').click(function() {
         console.log(sidepanel);

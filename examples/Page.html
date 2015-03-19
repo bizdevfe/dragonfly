@@ -56,7 +56,7 @@ require(['ui/Page'], function(Page) {
     page.on('recordcountchange', function(recordCount) {
         console.log(recordCount);
     });
-    page.render('page');
+    page.appendTo('page');
 
     var pageSimple = new Page({
         pageData: {
@@ -75,7 +75,7 @@ require(['ui/Page'], function(Page) {
     pageSimple.on('recordcountchange', function(recordCount) {
         console.log(recordCount);
     });
-    pageSimple.render('page-simple');
+    pageSimple.appendTo('page-simple');
 
     $('#console').click(function() {
         console.log(page, pageSimple);

@@ -34,53 +34,53 @@ require(['ui/Tooltip'], function(Tooltip) {
         id: '1',
         content: 'Content'
     });
-    tooltip1.render();
+    tooltip1.appendTo();
     var tooltip2 = new Tooltip({
         id: '2',
         title: 'Title',
         closeBtn: false,
         content: 'Content'
     });
-    tooltip2.render();
+    tooltip2.appendTo();
     var tooltip3 = new Tooltip({
         id: '3',
         content: 'Content'
     });
-    tooltip3.render();
+    tooltip3.appendTo();
     var tooltip4 = new Tooltip({
         id: '4',
         content: 'Content'
     });
-    tooltip4.render();
+    tooltip4.appendTo();
     var tooltip5 = new Tooltip({
         id: '5',
         title: 'Title',
         icon: '!',
         content: 'Content'
     });
-    tooltip5.render();
+    tooltip5.appendTo();
     var tooltip6 = new Tooltip({
         id: '6',
         content: 'Content'
     });
-    tooltip6.render();
+    tooltip6.appendTo();
     var tooltip7 = new Tooltip({
         id: '7',
         content: 'Content'
     });
-    tooltip7.render();
+    tooltip7.appendTo();
     var tooltip8 = new Tooltip({
         id: '8',
         content: 'Content',
         icon: '?',
         delay: 0
     });
-    tooltip8.render();
+    tooltip8.appendTo();
     var tooltip9 = new Tooltip({
         id: '9',
         content: 'Content'
     });
-    tooltip9.render();
+    tooltip9.appendTo();
     
     $('#console').click(function() {
         console.log(tooltip1);

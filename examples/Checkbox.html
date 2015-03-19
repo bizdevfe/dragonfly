@@ -78,7 +78,7 @@ require(['ui/Checkbox'], function(Checkbox) {
             }
         ]
     });
-    cg.render('container');
+    cg.appendTo('container');
     
     cg.get(1).on('click', function(e) {
         console.log('title: ' + this.getTitle() + ', value: ' + this.getValue() + ', checked: ' + this.isChecked());

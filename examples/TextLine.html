@@ -33,7 +33,7 @@ require(['ui/Textarea', 'extension/TextLine'], function(Textarea, TextLine) {
             new TextLine()
         ]
     });
-    textline.render('container');
+    textline.appendTo('container');
     
     $('#console').click(function() {
         console.log(textline);

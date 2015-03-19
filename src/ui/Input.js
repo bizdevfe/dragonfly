@@ -14,38 +14,28 @@ define(function(require) {
      *
      * @extends Widget
      * @constructor
-     * @param {Object} [options] 初始化参数
-     *
-     *     @example
-     *     //默认值
-     *     {
-     *         disabled: false, //Boolean, 是否禁用
-     *         hidden: false,   //Boolean, 是否隐藏
-     *         width: 200,      //Number, 宽度
-     *         type: 'text',    //String, 类型
-     *         value: ''        //String, 默认值
-     *     }
+     * @param {HTMLElement|String} target 目标元素
      */
-    function Input(options) {
-        Widget.call(this, options);
+    function Input(target) {
+        this.main = base.g(target);
+        if (this.main) {
+            Widget.call(this, target);
+            this.renderMain();
+        }
     }
 
     Input.prototype = {
         /**
          * 初始化参数
          *
-         * @param {Object} [options] 初始化参数
          * @protected
          * @override
          */
-        initOptions: function(options) {
-            this.options = _.extend({
-                disabled: false,
-                hidden: false,
-                width: 200,
-                type: 'text',
-                value: ''
-            }, options || {});
+        initOptions: function() {
+            this.options = {
+                disabled: this.main.disabled,
+                hidden: this.main.style.display === '' ? false : (this.main.style.display === 'none' ? true : false)
+            };
         },
 
         /**
@@ -56,26 +46,17 @@ define(function(require) {
          * @override
          */
         createMain: function() {
-            this.ie8 = base.ie && base.ie <= 8;
-            //IE8以下不允许修改type属性
-            return this.ie8 ? document.createElement('<input type="' + this.options.type + '" />') : document.createElement('input');
+            return this.main;
         },
 
         /**
-         * 创建其他元素
+         * 初始化元素
          *
          * @protected
          * @override
          */
         initElements: function() {
             base.addClass(this.main, 'df-input');
-            base.css(this.main, {
-                width: this.options.width + 'px'
-            });
-            if (!this.ie8) {
-                this.main.type = this.options.type;
-            }
-            this.main.value = this.options.value;
         },
 
         /**
@@ -177,12 +158,46 @@ define(function(require) {
         },
 
         /**
+         * 获取trim文本
+         *
+         * @return {String} trim文本
+         */
+        getTrimValue: function() {
+            return this.main ? base.trim(this.main.value) : null;
+        },
+
+        /**
          * 获取文本长度
          *
-         * @return {Number} 文本文本长度
+         * @return {Number} 文本长度
          */
         getLength: function() {
             return this.main ? this.main.value.length : null;
+        },
+
+        /**
+         * 获取trim文本长度
+         *
+         * @return {Number} trim文本长度
+         */
+        getTrimLength: function() {
+            return this.main ? base.trim(this.main.value).length : null;
+        },
+
+        /**
+         * 获得焦点
+         *
+         */
+        focus: function() {
+            this.main.focus();
+        },
+
+        /**
+         * 失去焦点
+         *
+         */
+        blur: function() {
+            this.main.blur();
         },
 
         /**
@@ -196,13 +211,15 @@ define(function(require) {
         },
 
         /**
-         * 清除属性
+         * 移除主元素属性
          *
          * @protected
-         * @override
          */
-        removeProp: function() {
-            delete this.ie8;
+        removeMain: function() {
+            base.removeClass(this.main, 'df-widget');
+            base.removeClass(this.main, 'df-input');
+            base.removeClass(this.main, 'df-input-disable');
+            this.main.removeAttribute('did');
         }
     };
 

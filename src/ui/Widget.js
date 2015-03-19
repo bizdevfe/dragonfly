@@ -87,21 +87,35 @@ define(function(require) {
         },
 
         /**
-         * 渲染
+         * 渲染main元素
+         *
+         * @protected
+         */
+        renderMain: function() {
+            if (!this.rendered) {
+                //添加id和class
+                base.attr(this.main, {did: this.id});
+                base.addClass(this.main, 'df-widget');
+                //初始化元素（子类实现）
+                this.initElements();
+                //绑定事件（子类实现）
+                this.initEvents();
+                //渲染
+                this.repaint(this.options);
+                //初始化扩展
+                this.initExtensions();
+
+                this.rendered = true;
+            }
+        },
+
+        /**
+         * 渲染到某元素中
          *
          * @param {HTMLElement|String} [target] HTML元素或其id
-         * @fires onbeforerender
-         * @fires onafterrender
          */
-        render: function(target) {
+        appendTo: function(target) {
             if (!this.rendered) {
-                /**
-                 * 初次渲染前触发
-                 * @event onbeforerender
-                 * @param {Event} e 事件对象
-                 */
-                this.fire('beforerender');
-
                 //将主元素插入文档
                 this.appendMain(target);
                 //初始化元素（子类实现）
@@ -114,13 +128,6 @@ define(function(require) {
                 this.initExtensions();
 
                 this.rendered = true;
-
-                /**
-                 * 初次渲染后触发
-                 * @event onafterrender
-                 * @param {Event} e 事件对象
-                 */
-                this.fire('afterrender');
             }
         },
 
@@ -371,24 +378,14 @@ define(function(require) {
 
         /**
          * 销毁控件
-         *
-         * @fires onbeforedestroy
-         * @fires onafterdestroy
          */
         destroy: function() {
             if (!this.destroyed) {
-                /**
-                 * 销毁前触发
-                 * @event onbeforedestroy
-                 * @param {Event} e 事件对象
-                 */
-                this.fire('beforedestroy');
-
                 //解绑事件（子类实现）
                 this.destroyEvents();
                 //销毁扩展
                 this.destroyExtensions();
-                //移除主元素
+                //移除主元素（子类重写）
                 this.removeMain();
                 //移除其他元素（子类实现）
                 this.removeElements();
@@ -406,13 +403,6 @@ define(function(require) {
                 delete this.id;
                 //清除其他属性（子类实现）
                 this.removeProp();
-
-                /**
-                 * 销毁后触发
-                 * @event onafterdestroy
-                 * @param {Event} e 事件对象
-                 */
-                this.fire('afterdestroy');
 
                 //销毁事件队列
                 this.off();
@@ -451,7 +441,7 @@ define(function(require) {
         },
 
         /**
-         * 移除主元素
+         * 移除主元素（子类重写）
          *
          * @protected
          */

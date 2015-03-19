@@ -36,25 +36,25 @@ require(['ui/Button'], function(Button) {
     button1.on('click', function(e) {
         alert('onclick');
     });
-    button1.render('container');
+    button1.appendTo('container');
     
     var button2 = new Button({
         text: 'dark',
         skin: 'dark'
     });
-    button2.render('container');
+    button2.appendTo('container');
     
     var button3 = new Button({
         text: 'spring',
         skin: 'spring'
     });
-    button3.render('container');
+    button3.appendTo('container');
     
     var button4 = new Button({
         disabled: true,
         text: 'disabled'
     });
-    button4.render('container');
+    button4.appendTo('container');
     
     $('#console').click(function() {
         console.log(button1);

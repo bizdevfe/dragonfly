@@ -13,48 +13,62 @@
 
 <body>
 <h1>Input</h1>
-<div id="container"></div>
+<div id="container">
+    <input type="text" />
+    <input type="text" value="disabled" disabled />
+</div>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
+    <button type="button" id="show">show</button>
+    <button type="button" id="hide">hide</button><br />
+    <button type="button" id="enable">enable</button>
+    <button type="button" id="disable">disable</button><br />
     <button type="button" id="getValue">getValue</button>
-    <button type="button" id="setValue">setValue</button><input type="text" id="value" />
+    <button type="button" id="getTrimValue">getTrimValue</button><br />
+    <button type="button" id="setValue">setValue</button><input type="text" id="value" /><br />
     <button type="button" id="empty">empty</button><br />
-    <button type="button" id="getLength">getLength</button><br />
+    <button type="button" id="getLength">getLength</button>
+    <button type="button" id="getTrimLength">getTrimLength</button><br />
     <button type="button" id="destroy">destroy</button>
 </div>
 
 <script type="text/javascript">
 require(['ui/Input'], function(Input) {
-    var input1 = new Input();
-    input1.on('focus', function() {
-        console.log('onfocus');
-    });
-    input1.on('blur', function() {
-        console.log('onblur');
-    });
-    input1.on('enter', function() {
-        console.log('onenter');
-    });
-    input1.render('container');
+    var input = $('#container input');
     
-    var input2 = new Input({
-        type: 'password',
-        value: 123
-    });
-    input2.render('container');
+    var input1 = new Input(input[0]);
+    input1.on('focus', function() {console.log('onfocus');})
+          .on('blur', function() {console.log('onblur');})
+          .on('enter', function() {console.log('onenter');});
     
-    var input3 = new Input({
-        disabled: true,
-        value: 'disabled'
-    });
-    input3.render('container');
+    var input2 = new Input(input[1]);
     
     $('#console').click(function() {
         console.log(input1);
     });
     
+    $('#show').click(function() {
+        input1.show();
+    });
+    
+    $('#hide').click(function() {
+        input1.hide();
+    });
+    
+    $('#enable').click(function() {
+        input1.enable();
+    });
+    
+    $('#disable').click(function() {
+        input1.disable();
+    });
+    
     $('#getValue').click(function() {
         alert(input1.getValue());
+    });
+    
+    $('#getTrimValue').click(function() {
+        alert(input1.getTrimValue());
     });
     
     $('#setValue').click(function() {
@@ -67,6 +81,10 @@ require(['ui/Input'], function(Input) {
     
     $('#getLength').click(function() {
         alert(input1.getLength());
+    });
+    
+    $('#getTrimLength').click(function() {
+        alert(input1.getTrimLength());
     });
     
     $('#destroy').click(function() {

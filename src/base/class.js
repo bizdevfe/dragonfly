@@ -57,7 +57,10 @@ define(function(require) {
         }
 
         if (element.classList) { //for HTML5
-            element.classList.add(className);
+            _.each(className.split(' '), function(item, index) {
+                element.classList.add(item);
+            });
+
             return element;
         }
 

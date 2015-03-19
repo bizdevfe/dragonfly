@@ -112,7 +112,7 @@ define(function(require) {
                         item.click.call(panel, e);
                     });
                 }
-                button.render(this.dialogBottom);
+                button.appendTo(this.dialogBottom);
 
                 this.buttons.push(button);
             }, this);
@@ -325,7 +325,7 @@ define(function(require) {
 
         alertDialog.on('afterhide', alertDialog.destroy);
 
-        alertDialog.render();
+        alertDialog.appendTo();
     };
 
     /**
@@ -377,7 +377,7 @@ define(function(require) {
 
         confirmDialog.on('afterhide', confirmDialog.destroy);
 
-        confirmDialog.render();
+        confirmDialog.appendTo();
     };
 
     base.inherit(Dialog, Widget);
