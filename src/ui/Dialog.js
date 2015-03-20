@@ -17,7 +17,11 @@ define(function(require) {
         '<div class="df-dialog">',
         '<h1 class="df-dialog-title"><span><%= title %></span><span class="close"></span></h1>',
         '<div class="df-dialog-content"><%= content %></div>',
-        '<div class="df-dialog-bottom"></div>',
+        '<div class="df-dialog-bottom">',
+        '<% _.each(buttons, function(button, index) { %>',
+        '<button><%= button.text %></button>',
+        '<% }); %>',
+        '</div>',
         '</div>'
     ].join('');
 
@@ -88,7 +92,8 @@ define(function(require) {
             });
             this.main.innerHTML = _.template(tpl)({
                 title: this.options.title,
-                content: this.options.content
+                content: this.options.content,
+                buttons: this.options.buttons
             });
 
             //内部元素
@@ -99,12 +104,11 @@ define(function(require) {
 
             //创建按钮组
             this.buttons = [];
-            _.each(this.options.buttons, function(item) {
+            _.each(this.options.buttons, function(item, index) {
                 var panel = this,
                     button = new Button({
-                        text: item.text,
-                        skin: item.skin || 'default',
-                        hidden: typeof item.hidden !== 'undefined' ? item.hidden : false
+                        target: base.children(this.dialogBottom, 'button')[index],
+                        skin: item.skin || 'default'
                     });
                 
                 if (item.click) {
@@ -112,7 +116,6 @@ define(function(require) {
                         item.click.call(panel, e);
                     });
                 }
-                button.appendTo(this.dialogBottom);
 
                 this.buttons.push(button);
             }, this);

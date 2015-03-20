@@ -14,36 +14,30 @@ define(function(require) {
      *
      * @extends Widget
      * @constructor
-     * @param {Object} [options] 初始化参数
-     *
-     *     @example
-     *     //默认值
-     *     {
-     *         disabled: false, //Boolean, 是否禁用
-     *         hidden: false,   //Boolean, 是否隐藏
-     *         text: '',        //String, 按钮文字
-     *         skin: 'default'  //String, 皮肤：'default', 'spring', 'dark', 'coffee'
-     *     }
+     * @param {Object} options 初始化参数
      */
     function Button(options) {
-        Widget.call(this, options);
+        this.main = base.g(options.target);
+        if (this.main) {
+            Widget.call(this, options);
+            this.renderMain();
+        }
     }
 
     Button.prototype = {
         /**
          * 初始化参数
          *
-         * @param {Object} [options] 初始化参数
+         * @param {Object} options 初始化参数
          * @protected
          * @override
          */
         initOptions: function(options) {
             this.options = _.extend({
-                disabled: false,
-                hidden: false,
-                text: '',
+                disabled: this.main.disabled,
+                hidden: this.main.style.display === '' ? false : (this.main.style.display === 'none' ? true : false),
                 skin: 'default'
-            }, options || {});
+            }, options);
         },
 
         /**
@@ -54,9 +48,7 @@ define(function(require) {
          * @override
          */
         createMain: function() {
-            var div = document.createElement('div');
-            div.innerHTML = '<button type="button"></button>';
-            return div.firstChild;
+            return this.main;
         },
 
         /**
@@ -122,9 +114,6 @@ define(function(require) {
                     } else {
                         base.removeClass(this.main, 'df-button-disable');
                     }
-                },
-                text: function(text) {
-                    this.main.innerHTML = text;
                 }
             };
         },
@@ -135,7 +124,7 @@ define(function(require) {
          * @param {String} text 按钮文字
          */
         setText: function(text) {
-            this.set('text', text);
+            this.main.innerHTML = text;
         },
 
         /**
@@ -144,7 +133,7 @@ define(function(require) {
          * @return {String} 按钮文字
          */
         getText: function() {
-            return this.get('text');
+            return this.main.innerHTML;
         },
 
         /**
@@ -155,6 +144,19 @@ define(function(require) {
          */
         destroyEvents: function() {
             this.removeDOMEvent(this.main);
+        },
+
+        /**
+         * 移除主元素属性
+         *
+         * @protected
+         */
+        removeMain: function() {
+            base.removeClass(this.main, 'df-widget');
+            base.removeClass(this.main, 'df-button');
+            base.removeClass(this.main, 'df-button-' + this.options.skin);
+            base.removeClass(this.main, 'df-button-disable');
+            this.main.removeAttribute('did');
         }
     };
 

@@ -13,7 +13,13 @@
 
 <body>
 <h1>Button</h1>
-<div id="container"></div>
+<div id="container">
+    <button>default</button>
+    <button>dark</button>
+    <button>spring</button>
+    <button>coffee</button>
+    <button disabled>disabled</button>
+</div>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
     <button type="button" id="disable">disable</button>
@@ -30,31 +36,33 @@
 
 <script type="text/javascript">
 require(['ui/Button'], function(Button) {
+    var button = $('#container button');
+    
     var button1 = new Button({
-        text: 'default'
+        target: button[0]
     });
     button1.on('click', function(e) {
         alert('onclick');
     });
-    button1.appendTo('container');
     
     var button2 = new Button({
-        text: 'dark',
+        target: button[1],
         skin: 'dark'
     });
-    button2.appendTo('container');
     
     var button3 = new Button({
-        text: 'spring',
+        target: button[2],
         skin: 'spring'
     });
-    button3.appendTo('container');
+    
+    var button3 = new Button({
+        target: button[3],
+        skin: 'coffee'
+    });
     
     var button4 = new Button({
-        disabled: true,
-        text: 'disabled'
+        target: button[4]
     });
-    button4.appendTo('container');
     
     $('#console').click(function() {
         console.log(button1);
