@@ -37,7 +37,7 @@ define(function(require) {
             document.body.appendChild(this.line);
             base.addClass(this.line, 'df-textarea-line');
             base.css(this.line, {
-                height: this.target.options.height + 'px',
+                height: this.main.style.height,
                 top: offset.top + 'px',
                 left: offset.left + 'px'
             });
@@ -138,6 +138,9 @@ define(function(require) {
          */
         destroy: function() {
             base.remove(this.line);
+            base.css(this.main, {
+                'padding-left': 0
+            });
         }
     };
 

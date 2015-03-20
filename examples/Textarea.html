@@ -13,7 +13,9 @@
 
 <body>
 <h1>Textarea</h1>
-<div id="container"></div>
+<div id="container">
+    <textarea style="width:400px;height:200px"></textarea>
+</div>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
     <button type="button" id="getValue">getValue</button>
@@ -25,14 +27,7 @@
 
 <script type="text/javascript">
 require(['ui/Textarea'], function(Textarea) {
-    var textarea = new Textarea();
-    textarea.on('focus', function() {
-        console.log('onfocus');
-    });
-    textarea.on('blur', function() {
-        console.log('onblur');
-    });
-    textarea.appendTo('container');
+    var textarea = new Textarea({target: $('#container textarea')[0]});
     
     $('#console').click(function() {
         console.log(textarea);

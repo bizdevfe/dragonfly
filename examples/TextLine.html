@@ -13,7 +13,9 @@
 
 <body>
 <h1>TextLine</h1>
-<div id="container"></div>
+<div id="container">
+    <textarea style="width:400px;height:200px"></textarea>
+</div>
 <a id="console" href="javascript:void(0)">print instance</a>
 <div class="operation">
     <button type="button" id="getValue">getValue</button>
@@ -25,15 +27,13 @@
 </div>
 
 <script type="text/javascript">
-var textline;
 require(['ui/Textarea', 'extension/TextLine'], function(Textarea, TextLine) {
-    textline = new Textarea({
-        value: 'first\nsecond',
+    var textline = new Textarea({
+        target: $('#container textarea')[0],
         extensions: [
             new TextLine()
         ]
     });
-    textline.appendTo('container');
     
     $('#console').click(function() {
         console.log(textline);

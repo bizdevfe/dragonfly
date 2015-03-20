@@ -14,38 +14,29 @@ define(function(require) {
      *
      * @extends Widget
      * @constructor
-     * @param {Object} [options] 初始化参数
-     *
-     *     @example
-     *     //默认值
-     *     {
-     *         disabled: false, //Boolean, 是否禁用
-     *         hidden: false,   //Boolean, 是否隐藏
-     *         width: 400,      //Number, 宽度
-     *         height: 200,     //Number, 高度
-     *         value: ''        //String, 默认值
-     *     }
+     * @param {Object} options 初始化参数
      */
     function Textarea(options) {
-        Widget.call(this, options);
+        this.main = base.g(options.target);
+        if (this.main) {
+            Widget.call(this, options);
+            this.renderMain();
+        }
     }
 
     Textarea.prototype = {
         /**
          * 初始化参数
          *
-         * @param {Object} [options] 初始化参数
+         * @param {Object} options 初始化参数
          * @protected
          * @override
          */
         initOptions: function(options) {
             this.options = _.extend({
-                disabled: false,
-                hidden: false,
-                width: 400,
-                height: 200,
-                value: ''
-            }, options || {});
+                disabled: this.main.disabled,
+                hidden: this.main.style.display === '' ? false : (this.main.style.display === 'none' ? true : false)
+            }, options);
         },
 
         /**
@@ -56,7 +47,7 @@ define(function(require) {
          * @override
          */
         createMain: function() {
-            return document.createElement('textarea');
+            return this.main;
         },
 
         /**
@@ -67,11 +58,6 @@ define(function(require) {
          */
         initElements: function() {
             base.addClass(this.main, 'df-textarea');
-            base.css(this.main, {
-                width: this.options.width + 'px',
-                height: this.options.height + 'px'
-            });
-            this.main.value = this.options.value;
         },
 
         /**
@@ -172,6 +158,22 @@ define(function(require) {
         },
 
         /**
+         * 获得焦点
+         *
+         */
+        focus: function() {
+            this.main.focus();
+        },
+
+        /**
+         * 失去焦点
+         *
+         */
+        blur: function() {
+            this.main.blur();
+        },
+
+        /**
          * 解绑事件
          *
          * @protected
@@ -179,6 +181,18 @@ define(function(require) {
          */
         destroyEvents: function() {
             this.removeDOMEvent(this.main);
+        },
+
+        /**
+         * 移除主元素属性
+         *
+         * @protected
+         */
+        removeMain: function() {
+            base.removeClass(this.main, 'df-widget');
+            base.removeClass(this.main, 'df-textarea');
+            base.removeClass(this.main, 'df-textarea-disable');
+            this.main.removeAttribute('did');
         }
     };
 
