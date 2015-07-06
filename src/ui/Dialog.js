@@ -322,7 +322,7 @@ define(function(require) {
                 click: onHide
             }],
             width: 360,
-            height: 180,
+            height: 200,
             'z-index': 2000
         });
 
@@ -374,7 +374,7 @@ define(function(require) {
                 skin: 'dark'
             }],
             width: 360,
-            height: 180,
+            height: 200,
             'z-index': 2000
         });
 

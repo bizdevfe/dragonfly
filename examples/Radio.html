@@ -76,7 +76,7 @@ require(['ui/Radio'], function(Radio) {
             }
         ]
     });
-    rg.appendTo('container');
+    rg.render('container');
     
     rg.get(1).on('click', function(e) {
         console.log('title: ' + this.getTitle() + ', value: ' + this.getValue() + ', checked: ' + this.isChecked());
