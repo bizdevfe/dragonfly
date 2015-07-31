@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 侧边面板
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict(),
+        base = require('base/base'),
+        lang = require('lang/i18n'),
+        Widget = require('ui/Widget'),
+        Button = require('ui/Button');
+
+    var tpl = [
+        '&lt;div class=&quot;df-mask&quot;&gt;&lt;/div&gt;',
+        '&lt;div class=&quot;df-sidepanel&quot;&gt;',
+        '&lt;div class=&quot;df-sidepanel-margin&quot;&gt;&lt;/div&gt;',
+        '&lt;div class=&quot;df-sidepanel-body&quot;&gt;',
+        '&lt;h1 class=&quot;df-sidepanel-title&quot;&gt;&lt;%= title %&gt;&lt;/h1&gt;',
+        '&lt;div class=&quot;df-sidepanel-content&quot;&gt;&lt;%= content %&gt;&lt;/div&gt;',
+        '&lt;div class=&quot;df-sidepanel-bottom&quot;&gt;',
+        '&lt;% _.each(buttons, function(button, index) { %&gt;',
+        '&lt;button&gt;&lt;%= button.text %&gt;&lt;/button&gt;',
+        '&lt;% }); %&gt;',
+        '&lt;/div&gt;',
+        '&lt;/div&gt;',
+        '&lt;/div&gt;'
+    ].join('');
+
+<span id='SidePanel-method-constructor'><span id='SidePanel'>    /**
+</span></span>     * 侧边面板
+     *
+     * @extends Widget
+     * @constructor
+     * @param {Object} [options] 初始化参数
+     *
+     *     @example
+     *     //默认参数
+     *     {
+     *         hidden: false,   //Boolean, 渲染后是否隐藏
+     *         title: '',       //String, 标题
+     *         content: '',     //String, 内容
+     *         buttons: [       //Array, 按钮组：{text: String, click: Function, skin: String}
+     *             {text: lang.OKButtonText, click: this.hide},
+     *             {text: lang.CancelButtonText, click: this.hide, skin: 'dark'}
+     *         ],
+     *         'z-index': 1000, //Number, 层叠级别
+     *         padding: 60,     //Number, 内容左右padding
+     *         duration: 300    //Number, 动画时间
+     *     }
+     */
+    function SidePanel(options) {
+        Widget.call(this, options);
+    }
+
+    SidePanel.prototype = {
+<span id='SidePanel-method-initOptions'>        /**
+</span>         * 初始化参数
+         *
+         * @param {Object} [options] 初始化参数
+         * @protected
+         * @override
+         */
+        initOptions: function(options) {
+            this.options = _.extend({
+                hidden: false,
+                title: '',
+                content: '',
+                buttons: [{
+                    text: lang.OKButtonText,
+                    click: this.hide
+                }, {
+                    text: lang.CancelButtonText,
+                    click: this.hide,
+                    skin: 'dark'
+                }],
+                'z-index': 1000,
+                padding: 60,
+                duration: 300
+            }, options || {});
+        },
+
+<span id='SidePanel-method-initElements'>        /**
+</span>         * 创建其他元素
+         *
+         * @protected
+         * @override
+         */
+        initElements: function() {
+            base.css(this.main, {
+                display: 'none'
+            });
+            this.main.innerHTML = _.template(tpl)({
+                title: this.options.title,
+                content: this.options.content,
+                buttons: this.options.buttons
+            });
+
+            //内部元素
+            this.mask = base.children(this.main, '.df-mask')[0];
+            this.panel = base.children(this.main, '.df-sidepanel')[0];
+            this.panelBody = base.children(this.main, '.df-sidepanel-body')[0];
+            this.panelContent = base.children(this.main, '.df-sidepanel-content')[0];
+            this.panelBottom = base.children(this.main, '.df-sidepanel-bottom')[0];
+
+            //创建按钮组
+            this.buttons = [];
+            _.each(this.options.buttons, function(item, index) {
+                var panel = this,
+                    button = new Button({
+                        target: base.children(this.panelBottom, 'button')[index],
+                        skin: item.skin || 'default'
+                    });
+                if (item.click) {
+                    button.on('click', function(e) {
+                        item.click.call(panel, e);
+                    });
+                }
+
+                this.buttons.push(button);
+            }, this);
+
+            //设置样式
+            base.css(this.mask, {
+                'z-index': this.options['z-index']
+            });
+            base.css(this.panel, {
+                'z-index': this.options['z-index'] + 1
+            });
+            base.css(this.panelContent, {
+                'padding-left': this.options.padding + 'px',
+                'padding-right': this.options.padding + 'px'
+            });
+        },
+
+<span id='SidePanel-method-initPainters'>        /**
+</span>         * 初始化绘制函数
+         *
+         * @protected
+         * @override
+         */
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    var htmlElement = base.parent(document.body),
+                        panel = this;
+
+                    if (!hidden) {
+                        if (base.badie) {
+                            base.css(htmlElement, {
+                                overflow: 'visible'
+                            });
+                        }
+                        base.css(document.body, {
+                            overflow: 'hidden'
+                        });
+
+                        var scrollTop = Math.max(
+                            document.body.scrollTop,
+                            document.documentElement.scrollTop
+                        );
+                        base.css(this.mask, {
+                            top: scrollTop + 'px'
+                        });
+                        base.css(this.panel, {
+                            top: scrollTop + 'px'
+                        });
+
+                        base.css(this.main, {
+                            display: 'block'
+                        });
+                        base.transform(this.panel, {
+                            left: 0
+                        }, this.options.duration, function() {
+                            if (!base.badie) {
+                                panel.panelBody.scrollTop = 0;
+                            }
+                        });
+                    } else {
+                        var pageWidth = Math.max(
+                            document.body.offsetWidth,
+                            document.documentElement.offsetWidth
+                        );
+                        base.transform(this.panel, {
+                            left: pageWidth
+                        }, this.options.duration, function() {
+                            base.css(panel.main, {
+                                display: 'none'
+                            });
+                            base.css(document.body, {
+                                overflow: 'visible'
+                            });
+                            if (base.badie) {
+                                base.css(htmlElement, {
+                                    overflow: 'auto'
+                                });
+                            }
+                        });
+                    }
+                },
+
+                title: function(title) {
+                    base.children(this.main, '.df-sidepanel-title')[0].innerHTML = title;
+                }
+            };
+        },
+
+<span id='SidePanel-method-getContent'>        /**
+</span>         * 获取内容容器
+         *
+         * @return {HTMLElement} 内容容器
+         */
+        getContent: function() {
+            return this.panelContent;
+        },
+
+<span id='SidePanel-method-setTitle'>        /**
+</span>         * 设置标题
+         *
+         * @param {String} title 标题
+         */
+        setTitle: function(title) {
+            this.set('title', title);
+        },
+
+<span id='SidePanel-method-open'>        /**
+</span>         * 显示面板
+         *
+         * @fires onopen
+         */
+        open: function() {
+            if (this.states) {
+                this.removeState('hidden');
+
+<span id='SidePanel-event-onopen'>                /**
+</span>                 * 显示后触发（等同于onaftershow）
+                 * @event onopen
+                 * @param {Event} e 事件对象
+                 */
+                this.fire('open');
+            }
+        },
+
+<span id='SidePanel-method-close'>        /**
+</span>         * 关闭面板
+         *
+         * @fires onclose
+         */
+        close: function() {
+            if (this.states) {
+                this.addState('hidden');
+
+<span id='SidePanel-event-onclose'>                /**
+</span>                 * 隐藏后触发（等同于onafterhide）
+                 * @event onclose
+                 * @param {Event} e 事件对象
+                 */
+                this.fire('close');
+            }
+        },
+
+<span id='SidePanel-method-destroyEvents'>        /**
+</span>         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            _.each(this.buttons, function(button) {
+                button.destroy();
+            });
+        },
+
+<span id='SidePanel-method-removeProp'>        /**
+</span>         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            this.mask = null;
+            this.panel = null;
+            this.panelBody = null;
+            this.panelContent = null;
+            this.panelBottom = null;
+            this.buttons = null;
+            delete this.mask;
+            delete this.panel;
+            delete this.panelBody;
+            delete this.panelContent;
+            delete this.panelBottom;
+            delete this.buttons;
+        }
+    };
+
+    base.inherit(SidePanel, Widget);
+
+    return SidePanel;
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 单选
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var base = require('base/base'),
+        BoxGroup = require('ui/BoxGroup');
+
+<span id='Radio-method-constructor'><span id='Radio'>    /**
+</span></span>     * 单选
+     *
+     * @extends BoxGroup
+     * @constructor
+     * @param {Object} options 初始化参数
+     *
+     *     @example
+     *     //默认值
+     *     {
+     *         name: ''  //String, name属性
+     *         group: [  //Array, {@link Box}数组
+     *             {
+     *                 disabled: false, //Boolean, 是否禁用
+     *                 hidden: false,   //Boolean, 是否隐藏
+     *                 checked: false,  //Boolean, 是否选中
+     *                 type: '',        //String, type属性
+     *                 value: '',       //String, value属性
+     *                 title: '',       //String, label文字
+     *                 id: ''           //String, 内部id, 用于get()
+     *             }
+     *         ]
+     *     }
+     */
+    function Radio(options) {
+        BoxGroup.call(this, options);
+        this.options.type = 'radio';
+    }
+
+    base.inherit(Radio, BoxGroup);
+
+    return Radio;
+});
+</pre>
+</body>
+</html>

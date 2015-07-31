@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 事件队列
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict();
+
+<span id='EventQueue-method-constructor'><span id='EventQueue'>    /**
+</span></span>     * 事件队列
+     *
+     * @constructor
+     */
+    function EventQueue() {
+        this.queue = [];
+    }
+
+    EventQueue.prototype = {
+<span id='EventQueue-method-add'>        /**
+</span>         * 添加事件
+         *
+         * @param {Function} handler 事件处理函数
+         * @param {Boolean} once 仅执行一次
+         */
+        add: function(handler, once) {
+            this.queue.push({
+                handler: handler,
+                once: once
+            });
+        },
+
+<span id='EventQueue-method-remove'>        /**
+</span>         * 移除事件
+         *
+         * @param {Function} handler 事件处理函数
+         */
+        remove: function(handler) {
+            if (!handler) {
+                this.queue.length = 0;
+                return;
+            }
+
+            _.each(this.queue, function(element, index) {
+                if (element &amp;&amp; element.handler === handler) {
+                    this.queue[index] = null;
+                }
+            }, this);
+        },
+
+<span id='EventQueue-method-execute'>        /**
+</span>         * 依次执行事件处理函数
+         *
+         * @param {EventTarget} target 控件实例
+         * @param {Event|Object} event 事件对象或事件参数
+         */
+        execute: function(target, event) {
+            _.each(this.queue, function(element, index) {
+                if (element) {
+                    element.handler.call(target, event);
+                    if (element.once) {
+                        this.queue[index] = null;
+                    }
+                }
+            }, this);
+        },
+
+<span id='EventQueue-method-destroy'>        /**
+</span>         * 销毁队列
+         */
+        destroy: function() {
+            this.queue.length = 0;
+            this.queue = null;
+        }
+    };
+
+    return EventQueue;
+});
+</pre>
+</body>
+</html>

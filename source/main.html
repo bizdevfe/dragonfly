@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js">/*
+ * Dragonfly 0.1.0
+ * A Flat UI framework designed for modern web applications.
+ * (c) 2015 Sogou Inc. All rights reserved.
+ * https://github.com/bizdevfe/dragonfly
+ */
+
+<span id='global-property-'>/**
+</span> * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict();
+
+<span id='main'>    /**
+</span>     * 种子模块
+     *
+     * @class main
+     * @singleton
+     */
+    var main = {};
+
+<span id='main-property-version'>    /**
+</span>     * @property {String} version 版本号
+     * @readonly
+     */
+    main.version = '0.1.0';
+
+    var previousD = window.D;
+
+<span id='main-method-noConflict'>    /**
+</span>     * 无冲突处理
+     *
+     * @return {Object} Dragonfly
+     */
+    main.noConflict = function() {
+        window.D = previousD;
+        return this;
+    };
+
+    _.extend(main, {
+<span id='main-method-Button'>        /**
+</span>         * Button构造器，参见{@link Button}
+         * @method Button
+         */
+        Button: require('ui/Button'),
+
+<span id='main-method-Input'>        /**
+</span>         * Input构造器，参见{@link Input}
+         * @method Input
+         */
+        Input: require('ui/Input'),
+
+<span id='main-method-Textarea'>        /**
+</span>         * Textarea构造器，参见{@link Textarea}
+         * @method Textarea
+         */
+        Textarea: require('ui/Textarea'),
+
+<span id='main-method-TextLine'>        /**
+</span>         * TextLine构造器，参见{@link TextLine}
+         * @method TextLine
+         */
+        TextLine: require('extension/TextLine'),
+
+<span id='main-method-Tooltip'>        /**
+</span>         * Tooltip构造器，参见{@link Tooltip}
+         * @method Tooltip
+         */
+        Tooltip: require('ui/Tooltip'),
+
+<span id='main-method-Radio'>        /**
+</span>         * Radio构造器，参见{@link Radio}
+         * @method Radio
+         */
+        Radio: require('ui/Radio'),
+
+<span id='main-method-Checkbox'>        /**
+</span>         * Checkbox构造器，参见{@link Checkbox}
+         * @method Checkbox
+         */
+        Checkbox: require('ui/Checkbox'),
+
+<span id='main-method-Tab'>        /**
+</span>         * Tab构造器，参见{@link Tab}
+         * @method Tab
+         */
+        Tab: require('ui/Tab'),
+
+<span id='main-method-Dialog'>        /**
+</span>         * Dialog构造器，参见{@link Dialog}
+         * @method Dialog
+         */
+        Dialog: require('ui/Dialog'),
+
+<span id='main-method-SidePanel'>        /**
+</span>         * SidePanel构造器，参见{@link SidePanel}
+         * @method SidePanel
+         */
+        SidePanel: require('ui/SidePanel'),
+
+<span id='main-method-Page'>        /**
+</span>         * Page构造器，参见{@link Page}
+         * @method Page
+         */
+        Page: require('ui/Page')
+    });
+
+    return main;
+});
+</pre>
+</body>
+</html>

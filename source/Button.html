@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 按钮
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict(),
+        base = require('base/base'),
+        Widget = require('ui/Widget');
+
+<span id='Button-method-constructor'><span id='Button'>    /**
+</span></span>     * 按钮
+     *
+     * @extends Widget
+     * @constructor
+     * @param {Object} options 初始化参数
+     */
+    function Button(options) {
+        this.main = base.g(options.target);
+        if (this.main) {
+            Widget.call(this, options);
+            this.renderMain();
+        }
+    }
+
+    Button.prototype = {
+<span id='Button-method-initOptions'>        /**
+</span>         * 初始化参数
+         *
+         * @param {Object} options 初始化参数
+         * @protected
+         * @override
+         */
+        initOptions: function(options) {
+            this.options = _.extend({
+                disabled: this.main.disabled,
+                hidden: this.main.style.display === '' ? false : (this.main.style.display === 'none' ? true : false),
+                skin: 'default'
+            }, options);
+        },
+
+<span id='Button-method-createMain'>        /**
+</span>         * 创建主元素
+         *
+         * @return {HTMLElement} HTML元素
+         * @protected
+         * @override
+         */
+        createMain: function() {
+            return this.main;
+        },
+
+<span id='Button-method-initElements'>        /**
+</span>         * 创建其他元素
+         *
+         * @protected
+         * @override
+         */
+        initElements: function() {
+            base.addClass(this.main, 'df-button');
+            base.addClass(this.main, 'df-button-' + this.options.skin);
+        },
+
+<span id='Button-method-initEvents'>        /**
+</span>         * 绑定事件
+         *
+         * @protected
+         * @override
+         */
+        initEvents: function() {
+<span id='Button-event-onclick'>            /**
+</span>             * 点击时触发
+             * @event onclick
+             * @param {Event} e 事件对象
+             */
+            this.addFiredDOMEvent(this.main, 'click');
+
+            this.addDOMEvent(this.main, 'mouseover', function() {
+                base.addClass(this.main, 'df-button-' + this.options.skin + '-hover');
+            });
+
+            this.addDOMEvent(this.main, 'mouseout', function() {
+                base.removeClass(this.main, 'df-button-' + this.options.skin + '-hover');
+                base.removeClass(this.main, 'df-button-' + this.options.skin + '-active');
+            });
+
+            this.addDOMEvent(this.main, 'mousedown', function() {
+                base.addClass(this.main, 'df-button-' + this.options.skin + '-active');
+            });
+
+            this.addDOMEvent(this.main, 'mouseup', function() {
+                base.removeClass(this.main, 'df-button-' + this.options.skin + '-active');
+            });
+        },
+
+<span id='Button-method-initPainters'>        /**
+</span>         * 初始化绘制函数
+         *
+         * @protected
+         * @override
+         */
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                },
+                disabled: function(disabled) {
+                    this.main.disabled = disabled;
+                    if (disabled) {
+                        base.addClass(this.main, 'df-button-disable');
+                    } else {
+                        base.removeClass(this.main, 'df-button-disable');
+                    }
+                }
+            };
+        },
+
+<span id='Button-method-setText'>        /**
+</span>         * 设置按钮文字
+         *
+         * @param {String} text 按钮文字
+         */
+        setText: function(text) {
+            this.main.innerHTML = text;
+        },
+
+<span id='Button-method-getText'>        /**
+</span>         * 获取按钮文字
+         *
+         * @return {String} 按钮文字
+         */
+        getText: function() {
+            return this.main.innerHTML;
+        },
+
+<span id='Button-method-destroyEvents'>        /**
+</span>         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+        },
+
+<span id='Button-method-removeMain'>        /**
+</span>         * 移除主元素属性
+         *
+         * @protected
+         */
+        removeMain: function() {
+            base.removeClass(this.main, 'df-widget');
+            base.removeClass(this.main, 'df-button');
+            base.removeClass(this.main, 'df-button-' + this.options.skin);
+            base.removeClass(this.main, 'df-button-disable');
+            this.main.removeAttribute('did');
+        }
+    };
+
+    base.inherit(Button, Widget);
+
+    return Button;
+});
+</pre>
+</body>
+</html>

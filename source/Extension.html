@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 扩展基类
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict();
+
+<span id='Extension-method-constructor'><span id='Extension'>    /**
+</span></span>     * 扩展基类
+     *
+     * @constructor
+     * @param {Object} [options] 初始化参数
+     */
+    function Extension(options) {
+        this.options = _.extend({}, options || {});
+    }
+
+    Extension.prototype = {
+<span id='Extension-property-target'>        /**
+</span>         * @property {Widget} target 控件实例
+         * @protected
+         */
+        target: null,
+
+<span id='Extension-property-main'>        /**
+</span>         * @property {HTMLElement} main 控件主元素
+         * @protected
+         */
+        main: null,
+
+<span id='Extension-method-init'>        /**
+</span>         * 初始化扩展
+         *
+         * @protected
+         * @abstract
+         */
+        init: function() {},
+
+<span id='Extension-method-destroy'>        /**
+</span>         * 销毁扩展
+         *
+         * @protected
+         * @abstract
+         */
+        destroy: function() {}
+    };
+
+    return Extension;
+});
+</pre>
+</body>
+</html>
