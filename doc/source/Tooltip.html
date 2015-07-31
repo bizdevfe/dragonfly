@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 气泡提示
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict(),
+        base = require('base/base'),
+        Event = require('event/Event'),
+        Widget = require('ui/Widget');
+
+    var tpl = [
+        '&lt;% if (title) { %&gt;',
+        '&lt;h1 class=&quot;df-tooltip-title&quot;&gt;&lt;%= title %&gt;',
+        '&lt;% if (closeBtn) { %&gt;&lt;span class=&quot;close&quot;&gt;&lt;/span&gt;&lt;% } %&gt;',
+        '&lt;/h1&gt;',
+        '&lt;% } %&gt;',
+        '&lt;div class=&quot;df-tooltip-content&lt;%= icon %&gt;&quot;&gt;&lt;%= content %&gt;&lt;/div&gt;'
+    ].join('');
+
+<span id='Tooltip-method-constructor'><span id='Tooltip'>    /**
+</span></span>     * 气泡提示
+     *
+     * @extends Widget
+     * @constructor
+     * @param {Object} options 初始化参数
+     *
+     *     @example
+     *     //默认值
+     *     {
+     *         id: '',            //String, 触发Tooltip的元素id
+     *         content: '',       //String, 内容
+     *         icon: false,       //Boolean|String, 内容图标：'!', '?'
+     *         title: false,      //Boolean|String, 标题
+     *         closeBtn: true,    //Boolean, 是否显示关闭按钮, 有title时生效
+     *         delay: 300         //Number, 消失延时毫秒数
+     *     }
+     */
+    function Tooltip(options) {
+        Widget.call(this, options);
+    }
+
+    Tooltip.prototype = {
+<span id='Tooltip-method-initOptions'>        /**
+</span>         * 初始化参数
+         *
+         * @param {Object} options 初始化参数
+         * @protected
+         * @override
+         */
+        initOptions: function(options) {
+            this.options = _.extend({
+                hidden: true,
+                id: '',
+                content: '',
+                icon: false,
+                title: false,
+                closeBtn: true,
+                delay: 300
+            }, options || {});
+        },
+
+<span id='Tooltip-method-initElements'>        /**
+</span>         * 创建其他元素
+         *
+         * @protected
+         * @override
+         */
+        initElements: function() {
+            base.css(this.main, {
+                display: 'none'
+            });
+            this.main.innerHTML = _.template(tpl)({
+                content: this.options.content,
+                icon: !!this.options.icon ? (this.options.icon == '!' ? ' df-tooltip-alert' : ' df-tooltip-help') : '',
+                title: this.options.title,
+                closeBtn: this.options.closeBtn
+            });
+            base.addClass(this.main, 'df-tooltip');
+        },
+
+<span id='Tooltip-method-initEvents'>        /**
+</span>         * 事件绑定初始化
+         *
+         * @protected
+         * @override
+         */
+        initEvents: function() {
+            this.delegateDOMEvent(this.main, 'click', '.close', this.hide);
+
+            this.host = base.g(this.options.id);
+            this.toShow = _.bind(this.setPosition, this);
+            this.toHide = _.bind(this.delay, this);
+            Event.on(this.host, 'mouseover', this.toShow);
+            Event.on(this.host, 'mouseout', this.toHide);
+
+            this.addDOMEvent(this.main, 'mouseover', function() {
+                clearTimeout(this.timer);
+            });
+            this.addDOMEvent(this.main, 'mouseout', this.delay);
+        },
+
+<span id='Tooltip-method-initPainters'>        /**
+</span>         * 初始化绘制函数
+         *
+         * @protected
+         * @override
+         */
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                }
+            };
+        },
+
+<span id='Tooltip-method-setPosition'>        /**
+</span>         * 设置Tooltip位置
+         *
+         * @param {Event} evt 原生DOM事件
+         * @protected
+         */
+        setPosition: function(evt) {
+            var e = new Event(evt); //此处事件未封装
+
+            var targetPosition = base.offset(e.target),
+                mySize = this.getSize(),
+                left,
+                top;
+
+            if (targetPosition.left + mySize.width &lt;= document.body.clientWidth) {
+                left = targetPosition.left;
+            } else {
+                left = targetPosition.left + e.target.offsetWidth - mySize.width;
+            }
+            if (targetPosition.top + 3 &gt;= mySize.height) {
+                top = targetPosition.top - mySize.height - 3;
+            } else {
+                top = targetPosition.top + e.target.offsetHeight + 3;
+            }
+            base.css(this.main, {
+                left: left + 'px',
+                top: top + 'px'
+            });
+            this.show();
+        },
+
+<span id='Tooltip-method-getSize'>        /**
+</span>         * 获取Tooltip尺寸
+         *
+         * @protected
+         */
+        getSize: function() {
+            this.show();
+            var size = {
+                width: this.main.offsetWidth,
+                height: this.main.offsetHeight
+            };
+            this.hide();
+            return size;
+        },
+
+<span id='Tooltip-method-delay'>        /**
+</span>         * 延时隐藏
+         *
+         * @protected
+         */
+        delay: function() {
+            this.timer = setTimeout(_.bind(function() {
+                this.hide();
+            }, this), this.options.delay);
+        },
+
+<span id='Tooltip-method-destroyEvents'>        /**
+</span>         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+            Event.off(this.host, 'mouseover', this.toShow);
+            Event.off(this.host, 'mouseout', this.toHide);
+        },
+
+<span id='Tooltip-method-removeProp'>        /**
+</span>         * 清除属性
+         *
+         * @protected
+         * @override
+         */
+        removeProp: function() {
+            this.host = null;
+            this.toShow = null;
+            this.toHide = null;
+            delete this.host;
+            delete this.toShow;
+            delete this.toHide;
+        }
+    };
+
+    base.inherit(Tooltip, Widget);
+
+    return Tooltip;
+});
+</pre>
+</body>
+</html>

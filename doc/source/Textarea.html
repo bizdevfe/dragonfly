@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 文本框
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict(),
+        base = require('base/base'),
+        Widget = require('ui/Widget');
+
+<span id='Textarea-method-constructor'><span id='Textarea'>    /**
+</span></span>     * 文本框
+     *
+     * @extends Widget
+     * @constructor
+     * @param {Object} options 初始化参数
+     */
+    function Textarea(options) {
+        this.main = base.g(options.target);
+        if (this.main) {
+            Widget.call(this, options);
+            this.renderMain();
+        }
+    }
+
+    Textarea.prototype = {
+<span id='Textarea-method-initOptions'>        /**
+</span>         * 初始化参数
+         *
+         * @param {Object} options 初始化参数
+         * @protected
+         * @override
+         */
+        initOptions: function(options) {
+            this.options = _.extend({
+                disabled: this.main.disabled,
+                hidden: this.main.style.display === '' ? false : (this.main.style.display === 'none' ? true : false)
+            }, options);
+        },
+
+<span id='Textarea-method-createMain'>        /**
+</span>         * 创建主元素
+         *
+         * @return {HTMLElement} HTML元素
+         * @protected
+         * @override
+         */
+        createMain: function() {
+            return this.main;
+        },
+
+<span id='Textarea-method-initElements'>        /**
+</span>         * 创建其他元素
+         *
+         * @protected
+         * @override
+         */
+        initElements: function() {
+            base.addClass(this.main, 'df-textarea');
+        },
+
+<span id='Textarea-method-initEvents'>        /**
+</span>         * 绑定事件
+         *
+         * @protected
+         * @override
+         */
+        initEvents: function() {
+<span id='Textarea-event-onfocus'>            /**
+</span>             * 获得焦点时触发
+             * @event onfocus
+             * @param {Event} e 事件对象
+             */
+            this.addDOMEvent(this.main, 'focus', function(e) {
+                base.addClass(this.main, 'df-textarea-focus');
+                this.fire('focus', e);
+            });
+
+<span id='Textarea-event-onblur'>            /**
+</span>             * 失去焦点时触发
+             * @event onblur
+             * @param {Event} e 事件对象
+             */
+            this.addDOMEvent(this.main, 'blur', function(e) {
+                base.removeClass(this.main, 'df-textarea-focus');
+                this.fire('blur', e);
+            });
+
+            this.addDOMEvent(this.main, 'mouseover', function() {
+                base.addClass(this.main, 'df-textarea-hover');
+            });
+
+            this.addDOMEvent(this.main, 'mouseout', function() {
+                base.removeClass(this.main, 'df-textarea-hover');
+            });
+        },
+
+<span id='Textarea-method-initPainters'>        /**
+</span>         * 初始化绘制函数
+         *
+         * @protected
+         * @override
+         */
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                },
+                disabled: function(disabled) {
+                    this.main.disabled = disabled;
+                    if (disabled) {
+                        base.addClass(this.main, 'df-textarea-disable');
+                    } else {
+                        base.removeClass(this.main, 'df-textarea-disable');
+                    }
+                }
+            };
+        },
+
+<span id='Textarea-method-setValue'>        /**
+</span>         * 设置文本
+         *
+         * @param {String} value 文本
+         */
+        setValue: function(value) {
+            if (this.main) {
+                this.main.value = value;
+            }
+        },
+
+<span id='Textarea-method-empty'>        /**
+</span>         * 清空文本
+         */
+        empty: function() {
+            this.setValue('');
+        },
+
+<span id='Textarea-method-getValue'>        /**
+</span>         * 获取文本（已trim）
+         *
+         * @return {String} 文本
+         */
+        getValue: function() {
+            return this.main ? base.trim(this.main.value) : null;
+        },
+
+<span id='Textarea-method-getLength'>        /**
+</span>         * 获取文本长度（不计回车）
+         *
+         * @return {Number} 文本文本长度
+         */
+        getLength: function() {
+            //IE7,8回车为\r\n
+            return this.main ? this.main.value.replace(/\r?\n/g, '').length : null;
+        },
+
+<span id='Textarea-method-focus'>        /**
+</span>         * 获得焦点
+         *
+         */
+        focus: function() {
+            this.main.focus();
+        },
+
+<span id='Textarea-method-blur'>        /**
+</span>         * 失去焦点
+         *
+         */
+        blur: function() {
+            this.main.blur();
+        },
+
+<span id='Textarea-method-destroyEvents'>        /**
+</span>         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+        },
+
+<span id='Textarea-method-removeMain'>        /**
+</span>         * 移除主元素属性
+         *
+         * @protected
+         */
+        removeMain: function() {
+            base.removeClass(this.main, 'df-widget');
+            base.removeClass(this.main, 'df-textarea');
+            base.removeClass(this.main, 'df-textarea-disable');
+            this.main.removeAttribute('did');
+        }
+    };
+
+    base.inherit(Textarea, Widget);
+
+    return Textarea;
+});
+</pre>
+</body>
+</html>

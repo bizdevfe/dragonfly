@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 事件对象
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict();
+
+<span id='Event-method-constructor'><span id='Event'>    /**
+</span></span>     * 事件对象
+     *
+     * @constructor
+     * @param {HTMLEvent} domEvent DOM事件对象
+     */
+    function Event(domEvent) {
+        domEvent = domEvent || window.event;
+
+        //复制属性
+        _.each(domEvent, function(value, key) {
+            if (!_.isFunction(value)) {
+                this[key] = value;
+            }
+        }, this);
+
+<span id='Event-property-originalEvent'>        /**
+</span>         * @property {HTMLEvent} originalEvent DOM事件对象
+         * @readonly
+         */
+        this.originalEvent = domEvent;
+
+<span id='Event-property-type'>        /**
+</span>         * @property {String} type 事件类型
+         * @readonly
+         */
+        this.type = domEvent.type;
+
+<span id='Event-property-target'>        /**
+</span>         * @property {HTMLElement} target 当前事件的目标对象
+         * @readonly
+         */
+        var target = domEvent.target || domEvent.srcElement;
+        this.target = target.nodeType === 3 ? target.parentNode : target;
+
+<span id='Event-property-relatedTarget'>        /**
+</span>         * @property {HTMLElement} relatedTarget target关联结点
+         * @readonly
+         */
+        this.relatedTarget = domEvent.relatedTarget || domEvent[(this.type === 'mouseover' ? 'from' : 'to') + 'Element'];
+
+<span id='Event-property-keyCode'>        /**
+</span>         * @property {Number} keyCode 键码
+         * @readonly
+         */
+        this.keyCode = domEvent.keyCode || domEvent.which;
+
+<span id='Event-property-rightClick'>        /**
+</span>         * @property {Boolean} rightClick 鼠标右键是否按下
+         * @readonly
+         */
+        this.rightClick = domEvent.which === 3 || domEvent.button === 2;
+
+<span id='Event-property-pageX'>        /**
+</span>         * @property {Number} pageX 文档X坐标
+         * @readonly
+         */
+<span id='Event-property-pageY'>        /**
+</span>         * @property {Number} pageY 文档Y坐标
+         * @readonly
+         */
+        var doc = this.target.ownerDocument || document,
+            root = document.compatMode === 'BackCompat' ? doc.body : doc.documentElement;
+        this.pageX = domEvent.pageX || domEvent.clientX + (root &amp;&amp; root.scrollLeft || 0) - (root &amp;&amp; root.clientLeft || 0);
+        this.pageY = domEvent.pageY || domEvent.clientY + (root &amp;&amp; root.scrollTop || 0) - (root &amp;&amp; root.clientTop || 0);
+    }
+
+    Event.prototype = {
+<span id='Event-method-preventDefault'>        /**
+</span>         * 阻止默认操作
+         */
+        preventDefault: function() {
+            var e = this.originalEvent;
+            if (e.preventDefault) {
+                e.preventDefault();
+            } else {
+                e.returnValue = false;
+            }
+        },
+
+<span id='Event-method-stopPropagation'>        /**
+</span>         * 阻止冒泡
+         */
+        stopPropagation: function() {
+            var e = this.originalEvent;
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            } else {
+                e.cancelBubble = true;
+            }
+        }
+    };
+
+<span id='Event-static-method-on'>    /**
+</span>     * 添加事件
+     *
+     * @param {HTMLElement} element DOM元素
+     * @param {String} type 事件类型
+     * @param {Function} listener 事件处理函数
+     * @param {Boolean} capture 捕获模式
+     * @return {Function} listener
+     * @static
+     */
+    Event.on = function(element, type, listener, capture) {
+        if (element.addEventListener) {
+            element.addEventListener(type, listener, capture || false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, listener);
+        }
+        return listener;
+    };
+
+<span id='Event-static-method-off'>    /**
+</span>     * 移除事件
+     *
+     * @param {HTMLElement} element DOM元素
+     * @param {String} type 事件类型
+     * @param {Function} listener 事件处理函数
+     * @param {Boolean} capture 捕获模式
+     * @return {Function} listener
+     * @static
+     */
+    Event.off = function(element, type, listener, capture) {
+        if (element.addEventListener) {
+            element.removeEventListener(type, listener, capture || false);
+        } else if (element.attachEvent) {
+            element.detachEvent('on' + type, listener);
+        }
+        return listener;
+    };
+
+    return Event;
+});
+</pre>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 标签
+ *
+ * @ignore
+ * @author ChenZhen
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict(),
+        base = require('base/base'),
+        Widget = require('ui/Widget');
+
+    var tpl = [
+        '&lt;div class=&quot;df-tab-nav&quot;&gt;',
+        '&lt;% _.each(tabs, function(tab, index) { %&gt;',
+        '&lt;li index=&quot;&lt;%= index %&gt;&quot;&gt;&lt;%= tab.title %&gt;&lt;/li&gt;',
+        '&lt;% }); %&gt;',
+        '&lt;/div&gt;',
+        '&lt;div class=&quot;df-tab-content&quot;&gt;',
+        '&lt;% _.each(tabs, function(tab, index) { %&gt;',
+        '&lt;div index=&quot;&lt;%= index %&gt;&quot; style=&quot;display:none&quot;&gt;&lt;%= tab.content %&gt;&lt;/div&gt;',
+        '&lt;% }); %&gt;',
+        '&lt;/div&gt;'
+    ].join('');
+
+<span id='Tab-method-constructor'><span id='Tab'>    /**
+</span></span>     * 标签
+     *
+     * @extends Widget
+     * @constructor
+     * @param {Object} options 初始化参数
+     *
+     *     @example
+     *     //默认值
+     *     {
+     *         hidden: false,  //Boolean, 是否隐藏
+     *         tabs: [],       //Array, 标题和内容数组：{title: String, content: String}
+     *         active: 0,      //Number, 默认序列号
+     *         width: 400,     //Number, 内容宽度
+     *         height: 200,    //Number, 内容高度
+     *         event: 'click'  //String, 切换方式：'click', 'mouseover'
+     *     }
+     */
+    function Tab(options) {
+        Widget.call(this, options);
+    }
+
+    Tab.prototype = {
+<span id='Tab-method-initOptions'>        /**
+</span>         * 初始化参数
+         *
+         * @param {Object} options 初始化参数
+         * @protected
+         * @override
+         */
+        initOptions: function(options) {
+            this.options = _.extend({
+                hidden: false,
+                tabs: [],
+                active: 0,
+                width: 400,
+                height: 200,
+                event: 'click'
+            }, options || {});
+        },
+
+<span id='Tab-method-initElements'>        /**
+</span>         * 创建其他元素
+         *
+         * @protected
+         * @override
+         */
+        initElements: function() {
+            base.addClass(this.main, 'df-tab');
+            base.css(this.main, {
+                width: this.options.width + 'px'
+            });
+            this.main.innerHTML = _.template(tpl)({
+                tabs: this.options.tabs
+            });
+
+            var activeTab = base.children(this.main, '.df-tab-nav li')[this.options.active];
+            base.addClass(activeTab, 'active');
+
+            var activeContent = base.children(this.main, '.df-tab-content div')[this.options.active];
+            base.css(activeContent, {
+                display: ''
+            });
+
+            var content = base.children(this.main, '.df-tab-content')[0];
+            base.css(content, {
+                height: this.options.height + 'px'
+            });
+        },
+
+<span id='Tab-method-initEvents'>        /**
+</span>         * 事件绑定初始化
+         *
+         * @protected
+         * @override
+         */
+        initEvents: function() {
+            this.delegateDOMEvent(this.main, this.options.event, '.df-tab-nav li', function(e) {
+                var elem = e.target;
+                if (!base.hasClass(elem, 'active')) {
+                    this.clearStyle();
+
+                    //tab
+                    base.addClass(elem, 'active');
+
+                    //content
+                    var index = parseInt(base.attr(elem, 'index'), 10),
+                        content = base.children(this.main, '.df-tab-content div')[index];
+                    base.css(content, {
+                        display: ''
+                    });
+
+<span id='Tab-event-onchange'>                    /**
+</span>                     * 切换时触发
+                     * @event onchange
+                     * @param {Event} e 事件对象
+                     */
+                    this.fire('change', {
+                        title: elem.innerHTML,
+                        content: content.innerHTML,
+                        index: index
+                    });
+                }
+            });
+        },
+
+<span id='Tab-method-initPainters'>        /**
+</span>         * 初始化绘制函数
+         *
+         * @protected
+         * @override
+         */
+        initPainters: function() {
+            this.painters = {
+                hidden: function(hidden) {
+                    base.css(this.main, {
+                        display: hidden ? 'none' : ''
+                    });
+                }
+            };
+        },
+
+<span id='Tab-method-clearStyle'>        /**
+</span>         * 清除样式
+         *
+         * @protected
+         */
+        clearStyle: function() {
+            var tabs = base.children(this.main, '.df-tab-nav li');
+            _.each(tabs, function(tab) {
+                base.removeClass(tab, 'active');
+            });
+
+            var contents = base.children(this.main, '.df-tab-content div');
+            _.each(contents, function(content) {
+                base.css(content, {
+                    display: 'none'
+                });
+            });
+        },
+
+<span id='Tab-method-destroyEvents'>        /**
+</span>         * 解绑事件
+         *
+         * @protected
+         * @override
+         */
+        destroyEvents: function() {
+            this.removeDOMEvent(this.main);
+        }
+    };
+
+    base.inherit(Tab, Widget);
+
+    return Tab;
+});
+</pre>
+</body>
+</html>

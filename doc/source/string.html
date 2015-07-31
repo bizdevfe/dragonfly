@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * 字符串扩展
+ *
+ * @ignore
+ * @author heatroom
+ */
+define(function(require) {
+<span id='base-string'>    /**
+</span>     * 字符串扩展
+     *
+     * @class base.string
+     * @extends base
+     * @singleton
+     */
+    var string = {};
+
+<span id='base-string-method-trim'>    /**
+</span>     * 字符串两端去空
+     *
+     * @param {String} str 原字符串
+     * @return {String} 两端去空字符串
+     */
+    string.trim = function(str) {
+        if (str.trim) {
+            return str.trim();
+        }
+        return str.replace(/^\s*|\s*$/, '');
+    };
+
+<span id='base-string-method-trimLeft'>    /**
+</span>     * 字符串左端去空
+     *
+     * @param {String} str 原字符串
+     * @return {String} 左端去空字符串
+     */
+    string.trimLeft = function(str) {
+        if (str.trimLeft) {
+            return str.trimLeft();
+        }
+        return str.replace(/^\s*/, '');
+    };
+
+<span id='base-string-method-trimRight'>    /**
+</span>     * 字符串右端去空
+     *
+     * @param {String} str 原字符串
+     * @return {String} 右端去空字符串
+     */
+    string.trimRight = function(str) {
+        if (str.trimRight) {
+            return str.trimRight();
+        }
+        return str.replace(/\s*$/, '');
+    };
+
+    return string;
+});
+</pre>
+</body>
+</html>

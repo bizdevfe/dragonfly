@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The source code</title>
+  <link href="../resources/prettify/prettify.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript" src="../resources/prettify/prettify.js"></script>
+  <style type="text/css">
+    .highlight { display: block; background-color: #ddd; }
+  </style>
+  <script type="text/javascript">
+    function highlight() {
+      document.getElementById(location.hash.replace(/#/, "")).className = "highlight";
+    }
+  </script>
+</head>
+<body onload="prettyPrint(); highlight();">
+  <pre class="prettyprint lang-js"><span id='global-property-'>/**
+</span> * classList操作
+ *
+ * @ignore
+ * @author Ricky
+ */
+define(function(require) {
+    var _ = require('underscore').noConflict(),
+        dom = require('base/dom');
+
+<span id='base-clazz'>    /**
+</span>     * classList操作
+     *
+     * @class base.clazz
+     * @extends base
+     * @singleton
+     */
+    var clazz = {};
+
+    function getClassList(element) {
+        return element.className ? element.className.split(/\s+/) : [];
+    }
+
+<span id='base-clazz-method-hasClass'>    /**
+</span>     * 是否有指定class
+     *
+     * @param {HTMLElement|String} element DOM元素或其id
+     * @param {String} className 类名
+     * @return {Boolean} 是否有指定class
+     */
+    clazz.hasClass = function(element, className) {
+        element = dom.g(element);
+
+        if (!element || !className) {
+            return false;
+        }
+
+        if (element.classList) { //for HTML5
+            return element.classList.contains(className);
+        }
+
+        return _.contains(getClassList(element), className);
+    };
+
+<span id='base-clazz-method-addClass'>    /**
+</span>     * 添加class
+     *
+     * @param {HTMLElement|String} element DOM元素或其id
+     * @param {String} className 类名
+     * @return {HTMLElement} 目标元素
+     */
+    clazz.addClass = function(element, className) {
+        element = dom.g(element);
+
+        if (!element || !className) {
+            return element;
+        }
+
+        if (element.classList) { //for HTML5
+            _.each(className.split(' '), function(item, index) {
+                element.classList.add(item);
+            });
+
+            return element;
+        }
+
+        var classList = getClassList(element);
+        if (_.contains(classList, className)) {
+            return element;
+        }
+
+        classList.push(className);
+        element.className = classList.join(' ');
+
+        return element;
+    };
+
+<span id='base-clazz-method-removeClass'>    /**
+</span>     * 移除class
+     *
+     * @param {HTMLElement|String} element DOM元素或其id
+     * @param {String} className 类名
+     * @return {HTMLElement} 目标元素
+     */
+    clazz.removeClass = function(element, className) {
+        element = dom.g(element);
+
+        if (!element || !className) {
+            return element;
+        }
+
+        if (element.classList) { //for HTML5
+            element.classList.remove(className);
+            return element;
+        }
+
+        var classList = _.without(getClassList(element), className);
+        element.className = classList.join(' ');
+
+        return element;
+    };
+
+<span id='base-clazz-method-toggleClass'>    /**
+</span>     * 切换class
+     *
+     * @param {HTMLElement|String} element DOM元素或其id
+     * @param {String} className 类名
+     * @return {HTMLElement} 目标元素
+     */
+    clazz.toggleClass = function(element, className) {
+        element = dom.g(element);
+
+        if (!element || !className) {
+            return element;
+        }
+
+        if (element.classList) { //for HTML5
+            element.classList.toggle(className);
+            return element;
+        }
+
+        if (clazz.hasClass(element, className)) {
+            return clazz.removeClass(element, className);
+        } else {
+            return clazz.addClass(element, className);
+        }
+    };
+
+    return clazz;
+});
+</pre>
+</body>
+</html>

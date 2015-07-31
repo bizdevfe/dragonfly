@@ -1,0 +1,60 @@
+[
+    {
+        "name": "Dragonfly",
+        "groups": [
+            {
+                "name": "种子模块",
+                "classes": [
+                    "main"
+                ]
+            },
+            {
+                "name": "基础模块",
+                "classes": [
+                    "base",
+                    "base.*"
+                ]
+            },
+            {
+                "name": "事件模块",
+                "classes": [
+                    "Event",
+                    "EventQueue",
+                    "EventTarget"
+                ]
+            },
+            {
+                "name": "组件",
+                "classes": [
+                    "Widget",
+                    "Button",
+                    "Input",
+                    "Textarea",
+                    "Box",
+                    "BoxGroup",
+                    "Radio",
+                    "Checkbox",
+                    "Tooltip",
+                    "Tab",
+                    "Dialog",
+                    "SidePanel",
+                    "Page"
+                ]
+            },
+            {
+                "name": "扩展组件",
+                "classes": [
+                    "Extension",
+                    "TextLine"
+                ]
+            },
+            {
+                "name": "工具模块",
+                "classes": [
+                    "util",
+                    "util.*"
+                ]
+            }
+        ]
+    }
+]

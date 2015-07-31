@@ -1,0 +1,40 @@
+{
+    "--title": "Dragonfly",
+    "--output": "../doc",
+    "--categories": "doc-cat.json",
+    "--": [
+        "../src/main.js",
+        
+        "../src/base/base.js",
+        "../src/base/browser.js",
+        "../src/base/class.js",
+        "../src/base/dom.js",
+        "../src/base/oo.js",
+        "../src/base/string.js",
+        
+        "../src/event/Event.js",
+        "../src/event/EventQueue.js",
+        "../src/event/EventTarget.js",
+        
+        "../src/ui/Widget.js",
+        "../src/ui/Button.js",
+        "../src/ui/Input.js",
+        "../src/ui/Textarea.js",
+        "../src/ui/Box.js",
+        "../src/ui/BoxGroup.js",
+        "../src/ui/Radio.js",
+        "../src/ui/Checkbox.js",
+        "../src/ui/Tooltip.js",
+        "../src/ui/Tab.js",
+        "../src/ui/Dialog.js",
+        "../src/ui/SidePanel.js",
+        "../src/ui/Page.js",
+        
+        "../src/extension/Extension.js",
+        "../src/extension/TextLine.js",
+        
+        "../src/util/util.js",
+        "../src/util/cookie.js"
+    ],
+    "--external": ["HTMLElement", "HTMLDocument", "HTMLEvent"]
+}
